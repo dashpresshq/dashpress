@@ -1,12 +1,14 @@
+import { msg } from "@lingui/macro";
+import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import type {
   EntityTypesForSelection,
   IColorableSelection,
 } from "shared/types/ui";
-import { uniqBy } from "shared/lib/array/uniq-by";
-import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
+
 import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
+
 import { isUseColorsFlagOn } from "./selection.utils";
 
 export const getEntitySelectionConfig = (

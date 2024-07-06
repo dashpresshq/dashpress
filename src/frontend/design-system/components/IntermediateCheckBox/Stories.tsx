@@ -1,8 +1,9 @@
 /* eslint-disable react/function-component-definition */
-import { useState } from "react";
-import type { Story } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
 import { TestProviders } from "__tests__/_/Provider";
+import { action } from "@storybook/addon-actions";
+import type { Story } from "@storybook/react";
+import { useState } from "react";
+
 import type { IProps } from ".";
 import { IntermediateCheckBox } from ".";
 

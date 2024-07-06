@@ -1,10 +1,10 @@
-import handler from "pages/api/integrations/constants";
 import {
-  setupAllTestData,
-  createAuthenticatedViewerMocks,
   createAuthenticatedCustomRoleMocks,
+  createAuthenticatedViewerMocks,
+  setupAllTestData,
   setupRolesTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/integrations/constants";
 
 describe("/api/integrations/constants", () => {
   beforeAll(async () => {

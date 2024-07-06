@@ -3,8 +3,8 @@ import {
   subHours,
   subMonths,
   subQuarters,
-  subYears,
   subWeeks,
+  subYears,
 } from "date-fns";
 import { DATE_FILTER_VALUE } from "shared/types/data";
 

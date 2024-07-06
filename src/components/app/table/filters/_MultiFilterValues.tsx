@@ -1,4 +1,5 @@
 import { X } from "react-feather";
+
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { IColumnFilterBag } from "@/shared/types/data";

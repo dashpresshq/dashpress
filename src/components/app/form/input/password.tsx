@@ -1,7 +1,8 @@
-import { useToggle } from "frontend/hooks/state/useToggleState";
 import { msg } from "@lingui/macro";
-import type { ISharedFormInput } from "./types";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+
 import { FormInput } from "./text";
+import type { ISharedFormInput } from "./types";
 
 export function FormPasswordInput(formInput: ISharedFormInput) {
   const { rightActions = [] } = formInput;

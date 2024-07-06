@@ -1,6 +1,7 @@
 import type { ErrorInfo, ReactNode } from "react";
 import { Component } from "react";
 import { GitHub } from "react-feather";
+
 import { ErrorAlert } from "./alert";
 
 export class ErrorBoundary extends Component<

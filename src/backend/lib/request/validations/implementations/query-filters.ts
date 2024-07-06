@@ -1,9 +1,10 @@
 import qs from "qs";
-import type { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import type { ValidationImplType } from "./types";
-import { entityValidationImpl } from "./entity";
+import type { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
+
 import { validateEntityFields } from "./_validateEntityField";
+import { entityValidationImpl } from "./entity";
+import type { ValidationImplType } from "./types";
 
 export const queryFilterValidationImpl: ValidationImplType<
   QueryFilterSchema

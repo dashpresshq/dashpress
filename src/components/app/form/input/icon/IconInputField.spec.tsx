@@ -1,11 +1,13 @@
-import * as React from "react";
-import { render, screen } from "@testing-library/react";
-import { Form } from "react-final-form";
-import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { msg } from "@lingui/macro";
-import { TestProviders } from "__tests__/_/Provider";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import * as React from "react";
+import { Form } from "react-final-form";
+
+import { TestProviders } from "@/__tests__/_/Provider";
 import { FormButton } from "@/components/app/button/form";
+
 import { IconInputField } from ".";
 
 function TestComponent({

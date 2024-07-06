@@ -1,11 +1,10 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-
-import UserUpdate from "pages/users/[username]/index";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import UserUpdate from "pages/users/[username]/index";
+
 import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
@@ -54,10 +53,10 @@ describe("pages/users/[username]/index", () => {
       });
 
       expect(
-        screen.getByRole("listbox", {
+        screen.getByRole("combobox", {
           name: "Role",
         })
-      ).toHaveValue("Viewer");
+      ).toHaveTextContent("Viewer");
     });
 
     it("should update user details", async () => {

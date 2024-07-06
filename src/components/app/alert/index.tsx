@@ -1,12 +1,13 @@
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { getBestErrorMessage } from "frontend/lib/toast/utils";
 import { useEffect } from "react";
 import type { Icon } from "react-feather";
-import { AlertTriangle, ThumbsUp, Info as InfoIcon, X } from "react-feather";
-import { getBestErrorMessage } from "frontend/lib/toast/utils";
-import { useToggle } from "frontend/hooks/state/useToggleState";
-import { cn } from "@/lib/utils";
+import { AlertTriangle, Info as InfoIcon, ThumbsUp, X } from "react-feather";
+
+import { Button } from "@/components/ui/button";
 import type { SpectrumColorTypes } from "@/components/ui/spectrum";
 import { spectrumVariants } from "@/components/ui/spectrum";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export enum AlertType {
   Success = "success",

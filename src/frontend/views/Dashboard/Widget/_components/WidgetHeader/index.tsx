@@ -1,15 +1,17 @@
-import { SortableKnob } from "react-easy-sort";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { SortableKnob } from "react-easy-sort";
+
+import { ActionButtons } from "@/components/app/button/action";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import { SoftButton } from "@/components/app/button/soft";
-import { ActionButtons } from "@/components/app/button/action";
-import { GrabIcon } from "@/components/app/system-icons";
 import { DropDownMenu } from "@/components/app/drop-drop-menu";
+import { GrabIcon } from "@/components/app/system-icons";
+
+import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import type { IWidgetSettingProps } from "./types";
-import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
 
 interface IProps {
   setting?: IWidgetSettingProps;

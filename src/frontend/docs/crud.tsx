@@ -1,4 +1,5 @@
 import { InfoAlert } from "@/components/app/alert";
+
 import { DocumentationRoot } from "./_base";
 
 export function CRUDDocumentation() {

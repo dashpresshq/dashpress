@@ -1,12 +1,14 @@
+import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
+import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { render, screen } from "@testing-library/react";
-import type { INavigationMenuItem } from "shared/types/menu";
-import { NavigationMenuItemType, SystemLinks } from "shared/types/menu";
 import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
-import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { TestProviders } from "__tests__/_/Provider";
+import type { INavigationMenuItem } from "shared/types/menu";
+import { NavigationMenuItemType, SystemLinks } from "shared/types/menu";
+
+import { USE_ROUTER_PARAMS } from "@/__tests__/_/constants";
+
 import { SideBar } from "../SideBar";
 
 const server = setupApiHandlers();
@@ -89,7 +91,7 @@ describe("<RenderNavigation />", () => {
       </TestProviders>
     );
 
-    expect(screen.queryByText("Header")).not.toBeVisible();
+    expect(screen.queryByText("Header")).not.toBeInTheDocument();
 
     expect(
       screen.queryByRole("link", { name: "Settings" })

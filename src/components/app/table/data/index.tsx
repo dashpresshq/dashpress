@@ -1,4 +1,5 @@
 import { fakeMessageDescriptor } from "translations/fake";
+
 import type { ITableColumn } from "../types";
 
 export const TABLE_DATA = {

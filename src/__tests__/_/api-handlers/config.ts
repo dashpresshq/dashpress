@@ -1,6 +1,7 @@
 import { rest } from "msw";
 import type { ITableView } from "shared/types/data";
 import { FilterOperators } from "shared/types/data";
+
 import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};

@@ -1,16 +1,13 @@
-/* eslint-disable no-useless-escape */
-
-import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-
-import EntityFormExtensionSettings from "pages/admin/[entity]/config/form";
 import {
   closeAllToasts,
   getToastMessage,
 } from "__tests__/_/utils/closeAllToasts";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { TestProviders } from "__tests__/_/Provider";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import EntityFormExtensionSettings from "pages/admin/[entity]/config/form";
 
 setupApiHandlers();
 

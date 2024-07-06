@@ -1,7 +1,9 @@
+import { msg } from "@lingui/macro";
 import { useEffect } from "react";
 import type { FilterOperators, IColumnFilterBag } from "shared/types/data";
-import { msg } from "@lingui/macro";
+
 import { Select } from "@/components/ui/select";
+
 import { FILTER_OPERATOR_CONFIG } from "./constants";
 
 interface IProps<T> {

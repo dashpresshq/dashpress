@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
-import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
-
+import * as React from "react";
 import { X } from "react-feather";
+
 import { cn } from "@/lib/utils";
 
 const Sheet = SheetPrimitive.Root;
@@ -113,4 +112,4 @@ const SheetTitle = React.forwardRef<
 ));
 SheetTitle.displayName = SheetPrimitive.Title.displayName;
 
-export { SheetContent, Sheet, SheetHeader, SheetTitle };
+export { Sheet, SheetContent, SheetHeader, SheetTitle };

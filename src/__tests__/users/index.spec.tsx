@@ -1,13 +1,12 @@
-import { render, screen, within, waitFor } from "@testing-library/react";
-
-import ListUsers from "pages/users";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import userEvent from "@testing-library/user-event";
-import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { getToastMessage } from "../_/utils/closeAllToasts";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import ListUsers from "pages/users";
+
+import { confirmDelete, getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -34,19 +33,15 @@ describe("pages/users", () => {
   });
 
   it("should link to create user", async () => {
-    const pushMock = jest.fn();
-
-    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
-
     render(
       <TestProviders>
         <ListUsers />
       </TestProviders>
     );
-    await userEvent.click(screen.getByRole("button", { name: "Add New User" }));
-    await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith("/users/create");
-    });
+    expect(screen.getByRole("link", { name: "Add New User" })).toHaveAttribute(
+      "href",
+      "/users/create"
+    );
   });
 
   it("should link to user edit", async () => {
@@ -88,13 +83,7 @@ describe("pages/users", () => {
       })
     );
 
-    const confirmBox = await screen.findByRole("alertdialog", {
-      name: "Confirm Delete",
-    });
-
-    await userEvent.click(
-      await within(confirmBox).findByRole("button", { name: "Confirm" })
-    );
+    await confirmDelete();
 
     expect(await getToastMessage()).toBe("User Deleted Successfully");
 

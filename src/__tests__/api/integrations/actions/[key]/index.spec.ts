@@ -1,13 +1,12 @@
-import handler from "pages/api/integrations/actions/[key]/index";
-import activeHandler from "pages/api/integrations/actions/active";
-import getHandler from "pages/api/form-actions/[key]";
-
-import credentialsHandler from "pages/api/integrations/actions/[key]/credentials";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
 import { setupFormActionsTestData } from "__tests__/api/_test-utils/_form-actions";
+import getHandler from "pages/api/form-actions/[key]";
+import credentialsHandler from "pages/api/integrations/actions/[key]/credentials";
+import handler from "pages/api/integrations/actions/[key]/index";
+import activeHandler from "pages/api/integrations/actions/active";
 import { ActionIntegrations } from "shared/types/actions";
 import { DataEventActions } from "shared/types/data";
 

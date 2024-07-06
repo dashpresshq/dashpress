@@ -1,11 +1,12 @@
-import { useRouter } from "next/router";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { UserPermissions } from "shared/constants/user";
-import type { CrudViewsKeys } from "shared/configurations";
-import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
-import { msg } from "@lingui/macro";
 import type { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
+import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useRouter } from "next/router";
+import type { CrudViewsKeys } from "shared/configurations";
+import { UserPermissions } from "shared/constants/user";
+
 import type { IMenuActionItem } from "@/components/app/button/types";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";

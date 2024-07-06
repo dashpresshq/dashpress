@@ -1,9 +1,9 @@
-import handler from "pages/api/integrations/actions/[key]/credentials";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
   setupCredentialsTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/integrations/actions/[key]/credentials";
 import { ActionIntegrations } from "shared/types/actions";
 
 describe("/api/integrations/actions/[key]/credentials", () => {

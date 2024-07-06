@@ -1,10 +1,12 @@
-import { Form, Field } from "react-final-form";
+import { msg } from "@lingui/macro";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import type { IFormProps } from "frontend/lib/form/types";
 import { composeValidators, required } from "frontend/lib/validations";
-import { msg } from "@lingui/macro";
-import { FormInput } from "@/components/app/form/input/text";
+import { Field, Form } from "react-final-form";
+
 import { FormButton } from "@/components/app/button/form";
+import { FormInput } from "@/components/app/form/input/text";
+
 import { getFieldsOffFormat } from "./utils";
 
 interface IRelationsSettings {

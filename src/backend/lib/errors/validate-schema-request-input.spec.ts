@@ -1,4 +1,5 @@
 import { fakeMessageDescriptor } from "translations/fake";
+
 import { validateSchemaRequestBody } from "./validate-schema-request-input";
 
 describe("validateSchemaRequestBody", () => {

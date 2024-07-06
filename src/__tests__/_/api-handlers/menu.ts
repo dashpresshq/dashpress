@@ -1,6 +1,7 @@
 import { rest } from "msw";
 import type { INavigationMenuItem } from "shared/types/menu";
 import { NavigationMenuItemType } from "shared/types/menu";
+
 import { BASE_TEST_URL } from "./_utils";
 
 const MENU: INavigationMenuItem[] = [

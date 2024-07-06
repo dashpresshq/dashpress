@@ -1,17 +1,19 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import languages from "translations/languages";
 import { msg } from "@lingui/macro";
-import { useRouter } from "next/router";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import languages from "translations/languages";
+
 import { SchemaForm } from "@/components/app/form/schema";
 import { SectionBox } from "@/components/app/section-box";
-import { ACCOUNT_VIEW_KEY } from "../constants";
+
 import { BaseAccountLayout } from "../_Base";
+import { ACCOUNT_VIEW_KEY } from "../constants";
 import { PortalUserPreferences } from "./portal";
 
 export type IUserPreferences = {

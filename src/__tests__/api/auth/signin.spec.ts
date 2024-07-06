@@ -1,6 +1,7 @@
-import handler from "pages/api/auth/signin";
-import { authTokenApiService } from "backend/lib/auth-token/auth-token.service";
 import { setupAllTestData } from "__tests__/api/_test-utils";
+import { authTokenApiService } from "backend/lib/auth-token/auth-token.service";
+import handler from "pages/api/auth/signin";
+
 import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/auth/signin", () => {

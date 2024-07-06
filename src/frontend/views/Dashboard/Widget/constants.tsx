@@ -1,11 +1,13 @@
-import type { IWidgetConfig } from "shared/types/dashboard";
 import { msg } from "@lingui/macro";
+import type { IWidgetConfig } from "shared/types/dashboard";
+
 import { TableSkeleton } from "@/components/app/skeleton/table";
 import { Skeleton } from "@/components/ui/skeleton";
+
+import { SummaryCardWidgetSchema } from "./_render/Summary/types";
+import { TableWidgetSchema } from "./_render/Table/types";
 import { PORTAL_WIDGET_CONFIG } from "./portal";
 import type { IWidgetConfigBag } from "./types";
-import { TableWidgetSchema } from "./_render/Table/types";
-import { SummaryCardWidgetSchema } from "./_render/Summary/types";
 
 export const BASE_WIDGET_CONFIG: Partial<
   Record<IWidgetConfig["_type"], IWidgetConfigBag>

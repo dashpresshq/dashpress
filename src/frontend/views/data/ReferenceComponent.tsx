@@ -1,8 +1,10 @@
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
-import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/router";
+
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import { useDetailsOffCanvasStore } from "./Table/hooks/useDetailsOffCanvas.store";
 
 export type ReferenceDisplayFromTypes = "table" | "details" | "canvas";

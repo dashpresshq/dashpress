@@ -5,6 +5,7 @@ import type {
 } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations/field-types-config";
 import type { FormFieldTypes } from "shared/validations/types";
+
 import { getEntitySelectionConfig } from "./getEntitySelectionConfig";
 
 const FIELD_TYPE_TO_ENTITY_TYPES_MAP: Record<

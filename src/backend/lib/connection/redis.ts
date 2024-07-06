@@ -1,5 +1,6 @@
 import type { RedisClientType } from "redis";
 import { createClient } from "redis";
+
 import { connectionManager } from "./_manager";
 
 const make = (credentials?: string) => {

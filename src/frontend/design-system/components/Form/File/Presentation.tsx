@@ -1,8 +1,10 @@
-import { Upload } from "react-feather";
-import type { DropzoneState } from "react-dropzone";
 import { msg } from "@lingui/macro";
-import { cn } from "@/lib/utils";
+import type { DropzoneState } from "react-dropzone";
+import { Upload } from "react-feather";
+
 import { SoftButton } from "@/components/app/button/soft";
+import { cn } from "@/lib/utils";
+
 import { DELETE_BUTTON_PROPS } from "../../../../../components/app/button/constants";
 
 // const stripes = keyframes`

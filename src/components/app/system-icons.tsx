@@ -1,6 +1,7 @@
+import { forwardRef } from "react";
 import type { SystemIconsKeys } from "shared/constants/Icons";
 import { systemIconToSVG } from "shared/constants/Icons";
-import { forwardRef } from "react";
+
 import { cn } from "@/lib/utils";
 
 interface IProps {

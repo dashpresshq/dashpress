@@ -1,10 +1,11 @@
+import { useLingui } from "@lingui/react";
 import { useIsRestoring, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useLingui } from "@lingui/react";
-import type { IUseApiOptions } from "../types";
-import { ApiRequest } from "../makeRequest";
+
 import { buildApiOptions } from "../_buildOptions";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
+import { ApiRequest } from "../makeRequest";
+import type { IUseApiOptions } from "../types";
 
 export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
   const isRestoring = useIsRestoring();

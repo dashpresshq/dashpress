@@ -3,8 +3,9 @@ import {
   META_USER_PERMISSIONS,
   UserPermissions,
 } from "shared/constants/user";
-import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
 import { replaceGranular } from "shared/constants/user/shared";
+import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
+
 import { portalMetaPermissionCheck } from "./portal";
 
 const doMetaPermissionCheck =

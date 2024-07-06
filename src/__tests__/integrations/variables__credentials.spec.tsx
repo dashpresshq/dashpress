@@ -1,19 +1,18 @@
 /* eslint-disable prettier/prettier */
 
-import { render, screen, waitFor, within } from "@testing-library/react";
-
-import ManageVariables from "pages/admin/settings/variables";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import userEvent from "@testing-library/user-event";
-import { AuthActions } from "frontend/hooks/auth/auth.actions";
-import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import {
   closeAllToasts,
+  confirmDelete,
   getToastMessage,
 } from "__tests__/_/utils/closeAllToasts";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import ManageVariables from "pages/admin/settings/variables";
 
 setupApiHandlers();
 
@@ -430,13 +429,7 @@ describe("pages/integrations/variables => credentials", () => {
         })
       );
 
-      const confirmBox = await screen.findByRole("alertdialog", {
-        name: "Confirm Delete",
-      });
-
-      await userEvent.click(
-        await within(confirmBox).findByRole("button", { name: "Confirm" })
-      );
+      await confirmDelete();
 
       expect(await within(table).findAllByRole("row")).toHaveLength(4);
 

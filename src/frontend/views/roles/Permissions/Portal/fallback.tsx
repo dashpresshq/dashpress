@@ -7,6 +7,7 @@ import {
 } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import { fakeMessageDescriptor } from "translations/fake";
+
 import { MutatePermission } from "../MutatePermission";
 
 export function BaseMutateEntitiesPermissions() {

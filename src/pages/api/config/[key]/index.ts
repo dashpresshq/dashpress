@@ -1,6 +1,6 @@
-import { UserPermissions } from "shared/constants/user";
 import { configurationApiController } from "backend/configuration/configuration.controller";
 import { requestHandler } from "backend/lib/request";
+import { UserPermissions } from "shared/constants/user";
 
 const REQUEST_QUERY_FIELD = "key";
 

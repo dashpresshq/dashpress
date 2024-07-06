@@ -1,12 +1,14 @@
-import { Loader } from "react-feather";
-import type { SystemIconsKeys } from "shared/constants/Icons";
-import React from "react";
 import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import type { VariantProps } from "class-variance-authority";
+import React from "react";
+import { Loader } from "react-feather";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+
 import type { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
 import { SystemIcon } from "../system-icons";
 
 interface IFormButton {

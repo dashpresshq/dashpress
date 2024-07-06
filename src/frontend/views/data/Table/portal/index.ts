@@ -1,9 +1,9 @@
 export {
-  usePluginTableMenuItems,
-  useSyncPaginatedDataState,
-  TableViewComponent,
-  usePortalTableColumns,
-  TableTopComponent,
-  usePortalTableTabs,
   PortalColumnRender,
+  TableTopComponent,
+  TableViewComponent,
+  usePluginTableMenuItems,
+  usePortalTableColumns,
+  usePortalTableTabs,
+  useSyncPaginatedDataState,
 } from "./main";

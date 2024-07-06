@@ -1,13 +1,14 @@
 import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import { BadRequestError } from "backend/lib/errors";
-import { canRoleDoThisAsync } from "shared/logic/permissions";
 import {
   isSystemRole,
   makeRoleId,
   META_USER_PERMISSIONS,
 } from "shared/constants/user";
+import { canRoleDoThisAsync } from "shared/logic/permissions";
 import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
+
 import { isGranularCheck } from "./portal";
 
 export interface IRole {

@@ -1,6 +1,7 @@
 import type { IEntityField } from "shared/types/db";
 import { fakeMessageDescriptor } from "translations/fake";
-import { guessEntityType, getEntitySelections } from "../getEntitySelections";
+
+import { getEntitySelections, guessEntityType } from "../getEntitySelections";
 
 describe("guessEntityType", () => {
   it("should guess `reference` types", () => {

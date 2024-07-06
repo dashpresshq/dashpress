@@ -1,21 +1,23 @@
+import type { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { resetFormValues } from "frontend/lib/form/utils";
 import { Field, Form } from "react-final-form";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 import type {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
-import { runValidationError } from "shared/validations/run";
-import { resetFormValues } from "frontend/lib/form/utils";
-import type { SystemIconsKeys } from "shared/constants/Icons";
-import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import type { MessageDescriptor } from "@lingui/core";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { msg } from "@lingui/macro";
+import { runValidationError } from "shared/validations/run";
+
 import { FormButton } from "@/components/app/button/form";
-import { RenderFormInput } from "./_RenderFormInput";
-import type { IFormExtension } from "./types";
-import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
-import { FormGrid } from "./form-grid";
+
 import { useToast } from "../../toast/use-toast";
+import { RenderFormInput } from "./_RenderFormInput";
+import { FormGrid } from "./form-grid";
+import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
+import type { IFormExtension } from "./types";
 
 const identity = (value: unknown) => value;
 

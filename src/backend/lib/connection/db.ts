@@ -1,6 +1,7 @@
-import type { Knex } from "knex";
 import { makeDbConnection } from "@dashpress/bacteria";
+import type { Knex } from "knex";
 import type { IDataSourceCredentials } from "shared/types/data-sources";
+
 import { connectionManager } from "./_manager";
 
 const verify = async (connection: Knex) => {

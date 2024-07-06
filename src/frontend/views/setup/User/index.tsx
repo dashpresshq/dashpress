@@ -1,16 +1,18 @@
+import { msg } from "@lingui/macro";
 import { AuthLayout } from "frontend/_layouts/guest";
+import type { CustomNextPage } from "frontend/_layouts/types";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import type { ISetupUserForm } from "shared/form-schemas/setup/user";
 import { SETUP_USER_FORM_SCHEMA } from "shared/form-schemas/setup/user";
-import { msg } from "@lingui/macro";
-import type { CustomNextPage } from "frontend/_layouts/types";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+
+import { SchemaForm } from "@/components/app/form/schema";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { SchemaForm } from "@/components/app/form/schema";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { useSetupUserMutation } from "../setup.store";
 
 // eslint-disable-next-line react/function-component-definition

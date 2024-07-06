@@ -1,8 +1,8 @@
-import { DataActionType } from "shared/configurations";
-import type { IAccountProfile } from "shared/types/user";
-import { validateEntityFields } from "backend/lib/request/validations/implementations/_validateEntityField";
 import { dataApiController } from "backend/data/data.controller";
 import { requestHandler } from "backend/lib/request";
+import { validateEntityFields } from "backend/lib/request/validations/implementations/_validateEntityField";
+import { DataActionType } from "shared/configurations";
+import type { IAccountProfile } from "shared/types/user";
 
 export default requestHandler({
   GET: async (getValidatedRequest) => {

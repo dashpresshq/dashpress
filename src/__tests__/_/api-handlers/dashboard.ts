@@ -1,6 +1,7 @@
+import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { rest } from "msw";
 import type { IWidgetConfig } from "shared/types/dashboard";
-import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
+
 import { BASE_TEST_URL } from "./_utils";
 
 let DASHBOARD_WIDGETS: IWidgetConfig[] = [

@@ -1,8 +1,8 @@
-import handler from "pages/api/dashboards/script";
 import {
-  setupAllTestData,
   createAuthenticatedMocks,
+  setupAllTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/dashboards/script";
 
 describe("/api/dashboards/script", () => {
   const OLD_ENV = process.env;

@@ -1,13 +1,15 @@
-import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/constants";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
+
 import { TableSkeleton } from "@/components/app/skeleton/table";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Card } from "@/components/ui/card";
-import { useTableColumns } from "../useTableColumns";
+
+import { useCanUserPerformCrudAction } from "../../hooks/useCanUserPerformCrudAction";
+import { BaseDataTable } from "../DataTable";
 import { TableViewComponent } from "../portal";
 import type { IDataTableProps } from "../types";
-import { BaseDataTable } from "../DataTable";
-import { useCanUserPerformCrudAction } from "../../hooks/useCanUserPerformCrudAction";
+import { useTableColumns } from "../useTableColumns";
 
 interface IProps extends IDataTableProps {
   entity: string;

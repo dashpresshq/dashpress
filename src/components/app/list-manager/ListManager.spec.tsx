@@ -1,8 +1,9 @@
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { fakeMessageDescriptor } from "translations/fake";
-import { TestProviders } from "__tests__/_/Provider";
+
 import { ListManager } from ".";
 
 const defaultProps = {

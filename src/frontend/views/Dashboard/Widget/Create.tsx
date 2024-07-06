@@ -1,9 +1,10 @@
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { nanoid } from "nanoid";
 import { UserPermissions } from "shared/constants/user";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+
 import { useCreateDashboardWidgetMutation } from "../dashboard.store";
 import { BaseManageDashboardWidget } from "./_manage";
 

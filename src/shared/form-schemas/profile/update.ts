@@ -1,4 +1,5 @@
 import { msg } from "@lingui/macro";
+
 import type { IAppliedSchemaFormConfig } from "../types";
 
 export type IUpdateProfileForm = {

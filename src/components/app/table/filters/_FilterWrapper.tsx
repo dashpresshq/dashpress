@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import type { ReactNode } from "react";
-import type { TableFilterType } from "shared/types/data";
-import type { SystemIconsKeys } from "shared/constants/Icons";
 import { msg } from "@lingui/macro";
+import type { ReactNode } from "react";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+import type { TableFilterType } from "shared/types/data";
+
 import { cn } from "@/lib/utils";
+
+import { SoftButton } from "../../button/soft";
 import { Dropdown } from "../../drop-down";
 import { SystemIcon } from "../../system-icons";
-import { SoftButton } from "../../button/soft";
 
 const FILTER_TYPE_CONFIG: Record<
   TableFilterType["_type"],

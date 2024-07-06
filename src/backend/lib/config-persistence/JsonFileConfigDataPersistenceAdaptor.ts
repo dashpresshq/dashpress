@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
-import type { ConfigApiService } from "../config/config.service";
 
+import type { ConfigApiService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import type { ConfigDomain } from "./types";
 

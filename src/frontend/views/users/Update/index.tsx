@@ -1,32 +1,34 @@
+import { msg } from "@lingui/macro";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   useAuthenticatedUserBag,
   useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
-import { UserPermissions } from "shared/constants/user";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { AppLayout } from "frontend/_layouts/app";
-import {
-  RESET_PASSWORD_FORM_SCHEMA,
-  type IResetPasswordForm,
-} from "shared/form-schemas/users/reset-password";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import type { IUpdateUserForm } from "shared/form-schemas/users";
-import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "shared/constants/user";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IUpdateUserForm } from "shared/form-schemas/users";
+import {
+  type IResetPasswordForm,
+  RESET_PASSWORD_FORM_SCHEMA,
+} from "shared/form-schemas/users/reset-password";
+
 import { ContentLayout } from "@/components/app/content-layout";
 import { SchemaForm } from "@/components/app/form/schema";
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { SectionBox } from "@/components/app/section-box";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { useUsernameFromRouteParam } from "../hooks";
 import {
-  useUpdateUserMutation,
   useResetUserPasswordMutation,
+  useUpdateUserMutation,
   useUserDetails,
 } from "../users.store";
 

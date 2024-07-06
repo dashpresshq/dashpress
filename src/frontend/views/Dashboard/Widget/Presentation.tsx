@@ -1,10 +1,11 @@
-import type { IWidgetConfig } from "shared/types/dashboard";
-import { forwardRef } from "react";
 import type { DataStateKeys } from "frontend/lib/data/types";
-import { SummaryWidget, TableWidget } from "./_render";
-import { PortalDashboardWidget } from "./portal";
+import { forwardRef } from "react";
+import type { IWidgetConfig } from "shared/types/dashboard";
+
 import { WidgetFrame } from "./_components/WidgetFrame";
 import type { IWidgetSettingProps } from "./_components/WidgetHeader/types";
+import { SummaryWidget, TableWidget } from "./_render";
+import { PortalDashboardWidget } from "./portal";
 
 export interface IDashboardWidgetPresentationProps {
   config: IWidgetConfig;

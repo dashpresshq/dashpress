@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import * as randomstring from "randomstring";
+
 import { checkNodeVersion } from "./checkNodeVersion";
 
 const replaceRandomCharaters = (envContent: string) => {

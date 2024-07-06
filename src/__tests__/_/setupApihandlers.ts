@@ -1,5 +1,6 @@
-import { setupServer } from "msw/node";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { setupServer } from "msw/node";
+
 import { apiHandlers } from "./api-handlers";
 
 export const server = setupServer(...apiHandlers);

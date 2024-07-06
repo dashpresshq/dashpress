@@ -1,17 +1,18 @@
-import { Form, Field } from "react-final-form";
+import type { ICrudConfig } from "frontend/lib/crud-config";
 import {
-  minLength,
   composeValidators,
   maxLength,
+  minLength,
 } from "frontend/lib/validations";
-import type { ICrudConfig } from "frontend/lib/crud-config";
+import { Field, Form } from "react-final-form";
 import { fakeMessageDescriptor } from "translations/fake";
+
+import { FormButton } from "@/components/app/button/form";
+import { FormInput } from "@/components/app/form/input/text";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { FormInput } from "@/components/app/form/input/text";
-import { FormButton } from "@/components/app/button/form";
 
 interface IProps {
   fields: string[];

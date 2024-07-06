@@ -1,6 +1,6 @@
-import { UserPermissions } from "shared/constants/user";
-import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
+import { requestHandler } from "backend/lib/request";
+import { UserPermissions } from "shared/constants/user";
 
 export default requestHandler(
   {

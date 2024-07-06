@@ -1,9 +1,11 @@
 import { useLingui } from "@lingui/react";
+
 import { Input } from "@/components/ui/input";
+
 import {
-  LabelAndError,
   generateClassNames,
   generateFormArias,
+  LabelAndError,
 } from "./label-and-error";
 import type { ISharedFormInput } from "./types";
 

@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
+
 import {
-  DropdownMenuTrigger,
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 export interface IProps {

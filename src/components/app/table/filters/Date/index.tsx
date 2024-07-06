@@ -1,12 +1,14 @@
+import { msg } from "@lingui/macro";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 import type { IColumnFilterBag } from "shared/types/data";
 import { DATE_FILTER_VALUE } from "shared/types/data";
-import { useToggle } from "frontend/hooks/state/useToggleState";
-import { msg } from "@lingui/macro";
-import { FormSwitch } from "@/components/app/form/input/switch";
+
 import { ControlledFormDateInput } from "@/components/app/form/input/date";
+import { FormSwitch } from "@/components/app/form/input/switch";
+
 import type { IFilterProps } from "../types";
-import { DATE_FILTER_OPTIONS } from "./constants";
 import { DateSelection } from "./_Selection";
+import { DATE_FILTER_OPTIONS } from "./constants";
 
 export function FilterTableByDate({
   column: { filterValue, setFilter },

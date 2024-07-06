@@ -1,10 +1,10 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-
-import { AuthActions } from "frontend/hooks/auth/auth.actions";
-import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
+
 import { AppLayout } from "..";
 import { getAppLayout } from "../getLayout";
 
@@ -57,7 +57,7 @@ describe("AppLayout", () => {
       );
 
       expect(
-        screen.queryByRole("button", { name: "Star us on Github" })
+        screen.queryByRole("link", { name: "Star us on Github" })
       ).not.toBeInTheDocument();
     });
 
@@ -71,13 +71,9 @@ describe("AppLayout", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("button", { name: "Star us on Github" })
-      );
-
-      expect(window.open).toHaveBeenCalledWith(
-        "https://github.com/dashpresshq/dashpress"
-      );
+      expect(
+        await screen.findByRole("link", { name: "Star us on Github" })
+      ).toHaveAttribute("href", "https://github.com/dashpresshq/dashpress");
     });
   });
 
@@ -128,7 +124,7 @@ describe("AppLayout", () => {
       );
 
       await userEvent.click(
-        await screen.findByRole("button", { name: "My Account" })
+        await screen.findByRole("link", { name: "My Account" })
       );
 
       expect(pushMock).toHaveBeenCalledWith("/account/profile");

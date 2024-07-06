@@ -1,6 +1,8 @@
 import { UserPermissions } from "shared/constants/user";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+
 import { InfoAlert } from "@/components/app/alert";
+
 import { DocumentationRoot } from "./_base";
 
 export function RolesDocumentation() {

@@ -1,22 +1,23 @@
+import type { ConfigurationApiService } from "backend/configuration/configuration.service";
+import { configurationApiService } from "backend/configuration/configuration.service";
+import type { EntitiesApiService } from "backend/entities/entities.service";
+import { entitiesApiService } from "backend/entities/entities.service";
+import type { RolesApiService } from "backend/roles/roles.service";
+import { rolesApiService } from "backend/roles/roles.service";
 import { nanoid } from "nanoid";
+import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
+import { sortListByOrder } from "shared/lib/array/sort";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import type { INavigationMenuItem } from "shared/types/menu";
 import {
   HeaderMenuItemType,
   NavigationMenuItemType,
   SystemLinks,
 } from "shared/types/menu";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
-import type { EntitiesApiService } from "backend/entities/entities.service";
-import { entitiesApiService } from "backend/entities/entities.service";
-import type { ConfigurationApiService } from "backend/configuration/configuration.service";
-import { configurationApiService } from "backend/configuration/configuration.service";
-import type { RolesApiService } from "backend/roles/roles.service";
-import { rolesApiService } from "backend/roles/roles.service";
 import type { ILabelValue } from "shared/types/options";
-import { sortListByOrder } from "shared/lib/array/sort";
-import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
+import { GranularEntityPermissions } from "shared/types/user";
+
+import { getPortalMenuItems, portalCheckIfIsMenuAllowed } from "./portal";
 import type { IBaseNavigationMenuApiService } from "./types";
 
 const SYSTEM_LINKS_CONFIG_MAP: Record<

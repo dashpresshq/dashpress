@@ -1,20 +1,22 @@
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import type { IUpdateProfileForm } from "shared/form-schemas/profile/update";
 import { UPDATE_PROFILE_FORM_SCHEMA } from "shared/form-schemas/profile/update";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { useDomainMessages } from "frontend/lib/crud-config";
+
 import { SchemaForm } from "@/components/app/form/schema";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { SectionBox } from "@/components/app/section-box";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
+import { BaseAccountLayout } from "../_Base";
 import { useUpdateProfileMutation } from "../account.store";
 import { ACCOUNT_VIEW_KEY } from "../constants";
-import { BaseAccountLayout } from "../_Base";
 
 export function AccountProfile() {
   const authenticatedUserBag = useAuthenticatedUserBag();

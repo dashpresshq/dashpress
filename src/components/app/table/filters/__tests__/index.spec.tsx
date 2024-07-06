@@ -1,11 +1,12 @@
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import type { IColumnFilterBag, TableFilterType } from "shared/types/data";
 import { FilterOperators } from "shared/types/data";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { fakeMessageDescriptor } from "translations/fake";
-import { TestProviders } from "__tests__/_/Provider";
+
 import { TableFilter } from "..";
 
 const setFilterValueJestFn = jest.fn();

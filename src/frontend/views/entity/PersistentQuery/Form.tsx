@@ -1,25 +1,26 @@
-import type { QueryFilterSchema } from "shared/types/data";
-import { Form, Field, useField } from "react-final-form";
-import arrayMutators from "final-form-arrays";
-import { FieldArray } from "react-final-form-arrays";
-import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { composeValidators, required } from "frontend/lib/validations";
-import type { IFormProps } from "frontend/lib/form/types";
-import { Fragment } from "react";
-import { msg } from "@lingui/macro";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import type { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import arrayMutators from "final-form-arrays";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import type { IFormProps } from "frontend/lib/form/types";
+import { composeValidators, required } from "frontend/lib/validations";
+import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
+import { Fragment } from "react";
+import { Field, Form, useField } from "react-final-form";
+import { FieldArray } from "react-final-form-arrays";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import type { QueryFilterSchema } from "shared/types/data";
+
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import { FormButton } from "@/components/app/button/form";
-import { FormInput } from "@/components/app/form/input/text";
 import { SoftButton } from "@/components/app/button/soft";
-import { Card, CardContent } from "@/components/ui/card";
-import type { ITableColumn } from "@/components/app/table/types";
-import { FILTER_OPERATOR_CONFIG } from "@/components/app/table/filters/constants";
-import { FormGrid } from "@/components/app/form/schema/form-grid";
-import { FormSelectButton } from "@/components/app/form/input/select-button";
 import { FormSelect } from "@/components/app/form/input/select";
+import { FormSelectButton } from "@/components/app/form/input/select-button";
+import { FormInput } from "@/components/app/form/input/text";
+import { FormGrid } from "@/components/app/form/schema/form-grid";
+import { FILTER_OPERATOR_CONFIG } from "@/components/app/table/filters/constants";
+import type { ITableColumn } from "@/components/app/table/types";
+import { Card, CardContent } from "@/components/ui/card";
 
 const OPERATOR_SELECTORS = [
   {

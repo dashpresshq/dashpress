@@ -1,1 +1,1 @@
-export { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./main";
+export { getPortalMenuItems, portalCheckIfIsMenuAllowed } from "./main";

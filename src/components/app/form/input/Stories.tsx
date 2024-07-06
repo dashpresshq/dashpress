@@ -1,26 +1,27 @@
 /* eslint-disable react/function-component-definition */
 
-import type { Story } from "@storybook/react";
-import { Field, Form } from "react-final-form";
-import { action } from "@storybook/addon-actions";
-import { required } from "frontend/lib/validations";
-import { fakeMessageDescriptor } from "translations/fake";
 import { TestProviders } from "__tests__/_/Provider";
-import { FormInput } from "./text";
-import { FormNumberInput } from "./number";
-import { FormRichTextArea } from "./rich-text";
-import { FormTextArea } from "./textarea";
+import { action } from "@storybook/addon-actions";
+import type { Story } from "@storybook/react";
+import { required } from "frontend/lib/validations";
+import { Field, Form } from "react-final-form";
+import { fakeMessageDescriptor } from "translations/fake";
+
 import { FormCodeEditor } from "../../../../frontend/design-system/components/Form/CodeEditor";
-import { FormSwitch } from "./switch";
 import { FormFileInput } from "../../../../frontend/design-system/components/Form/File";
-import { FormSelectButton } from "./select-button";
-import { DELETE_BUTTON_PROPS } from "../../button/constants";
-import { FormPasswordInput } from "./password";
-import { FormButton } from "../../button/form";
 import { ActionButtons } from "../../button/action";
+import { DELETE_BUTTON_PROPS } from "../../button/constants";
+import { FormButton } from "../../button/form";
 import { FormDateInput } from "./date";
-import { AsyncFormSelect } from "./select-async";
+import { FormNumberInput } from "./number";
+import { FormPasswordInput } from "./password";
+import { FormRichTextArea } from "./rich-text";
 import { FormSelect } from "./select";
+import { AsyncFormSelect } from "./select-async";
+import { FormSelectButton } from "./select-button";
+import { FormSwitch } from "./switch";
+import { FormInput } from "./text";
+import { FormTextArea } from "./textarea";
 
 function DemoForm() {
   return (

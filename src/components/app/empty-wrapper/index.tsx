@@ -1,7 +1,8 @@
-import { Frown } from "react-feather";
 import { useLingui } from "@lingui/react";
-import type { IEmptyWrapperProps } from "./types";
+import { Frown } from "react-feather";
+
 import { SoftButton } from "../button/soft";
+import type { IEmptyWrapperProps } from "./types";
 
 export function EmptyWrapper({ text, createNew }: IEmptyWrapperProps) {
   const { _ } = useLingui();

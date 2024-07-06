@@ -1,6 +1,6 @@
-import { UserPermissions } from "shared/constants/user";
 import { entitiesApiController } from "backend/entities/entities.controller";
 import { requestHandler } from "backend/lib/request";
+import { UserPermissions } from "shared/constants/user";
 
 export default requestHandler(
   {

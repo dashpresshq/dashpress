@@ -1,27 +1,29 @@
-import { Form, Field } from "react-final-form";
-import { useMemo, useState } from "react";
+import { msg } from "@lingui/macro";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
-import type {
-  FormFieldTypes,
-  IFieldValidationItem,
-} from "shared/validations/types";
+import {
+  composeValidators,
+  maxLength,
+  minLength,
+} from "frontend/lib/validations";
+import { useMemo, useState } from "react";
+import { Field, Form } from "react-final-form";
+import type { IFormInputRightAction } from "shared/form-schemas/types";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import type {
   EntityTypesForSelection,
   IColorableSelection,
 } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  minLength,
-  composeValidators,
-  maxLength,
-} from "frontend/lib/validations";
-import type { IFormInputRightAction } from "shared/form-schemas/types";
-import { msg } from "@lingui/macro";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import type {
+  FormFieldTypes,
+  IFieldValidationItem,
+} from "shared/validations/types";
+
 import { FormButton } from "@/components/app/button/form";
-import { OffCanvas } from "@/components/app/off-canvas";
 import { FormSelect } from "@/components/app/form/input/select";
+import { OffCanvas } from "@/components/app/off-canvas";
+
 import { FieldSelectionCanvas } from "./FieldsSelection";
 import { FieldValidationCanvas } from "./FieldsValidation";
 

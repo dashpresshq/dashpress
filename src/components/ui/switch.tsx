@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-import * as React from "react";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 

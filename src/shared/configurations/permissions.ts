@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 export const CRUD_HIDDEN_KEY_CONFIG = {
   create: "hidden_entity_create_columns",
   update: "hidden_entity_update_columns",

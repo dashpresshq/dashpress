@@ -1,10 +1,10 @@
-import activeHandler from "pages/api/integrations/storage/active";
-import credentialsHandler from "pages/api/integrations/storage/credentials";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
 import { createKeyValueDomainPersistenceService } from "backend/lib/key-value";
+import activeHandler from "pages/api/integrations/storage/active";
+import credentialsHandler from "pages/api/integrations/storage/credentials";
 
 describe("/api/integrations/actions/[key]/index", () => {
   beforeAll(async () => {

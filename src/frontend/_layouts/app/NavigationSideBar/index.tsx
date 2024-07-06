@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import { SideBar } from "./SideBar";
+
 import { SIDE_BAR_WIDTH_VARIATIONS } from "./constants";
+import { SideBar } from "./SideBar";
 
 export interface IProps {
   children: ReactNode;

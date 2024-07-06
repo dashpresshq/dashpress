@@ -1,24 +1,25 @@
-import { Form, Field } from "react-final-form";
+import { msg } from "@lingui/macro";
+import { isNotEmpty } from "class-validator";
 import arrayMutators from "final-form-arrays";
-import { FieldArray } from "react-final-form-arrays";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { composeValidators, required } from "frontend/lib/validations";
 import { Fragment, useState } from "react";
-import { isNotEmpty } from "class-validator";
+import { Field, Form } from "react-final-form";
+import { FieldArray } from "react-final-form-arrays";
+import { isUseColorsFlagOn } from "shared/logic/entities/selection.utils";
 import type {
   EntityTypesForSelection,
   IColorableSelection,
 } from "shared/types/ui";
-import { isUseColorsFlagOn } from "shared/logic/entities/selection.utils";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { msg } from "@lingui/macro";
-import { FormButton } from "@/components/app/button/form";
+
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
-import { CardContent, Card } from "@/components/ui/card";
-import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
-import { FormInput } from "@/components/app/form/input/text";
+import { FormButton } from "@/components/app/button/form";
 import { SoftButton } from "@/components/app/button/soft";
 import { SpectrumColorInputField } from "@/components/app/form/input/spectrum";
 import { FormSwitch } from "@/components/app/form/input/switch";
+import { FormInput } from "@/components/app/form/input/text";
+import { Card, CardContent } from "@/components/ui/card";
+import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
 
 // Reference is a special case basically only use color
 

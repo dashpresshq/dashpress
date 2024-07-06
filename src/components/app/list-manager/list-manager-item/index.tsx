@@ -1,11 +1,13 @@
+import type { MessageDescriptor } from "@lingui/core";
 import { useId } from "react";
 import { SortableKnob } from "react-easy-sort";
 import type { SystemIconsKeys } from "shared/constants/Icons";
-import type { MessageDescriptor } from "@lingui/core";
+
 import { cn } from "@/lib/utils";
-import { GrabIcon, SystemIcon } from "../../system-icons";
+
 import { FormButton } from "../../button/form";
 import { FormSwitch } from "../../form/input/switch";
+import { GrabIcon, SystemIcon } from "../../system-icons";
 
 export interface IListMangerItemProps {
   label: string;

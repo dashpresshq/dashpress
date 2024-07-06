@@ -1,14 +1,16 @@
-import type { ISelectData } from "shared/types/options";
-import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import type { ISelectData } from "shared/types/options";
+
+import {
+  generateClassNames,
+  generateFormArias,
+  LabelAndError,
+} from "@/components/app/form/input/label-and-error";
 import type { ISelectProps } from "@/components/ui/select";
 import { Select } from "@/components/ui/select";
 import { fakeMessageDescriptor } from "@/translations/fake";
-import {
-  LabelAndError,
-  generateClassNames,
-  generateFormArias,
-} from "@/components/app/form/input/label-and-error";
+
 import type { IBaseFormSelect } from "./types";
 
 interface IFormSelect extends IBaseFormSelect {

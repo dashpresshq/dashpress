@@ -1,8 +1,9 @@
 /* eslint-disable react/function-component-definition */
 
+import { TestProviders } from "__tests__/_/Provider";
 import type { Story } from "@storybook/react";
 import { noop } from "shared/lib/noop";
-import { TestProviders } from "__tests__/_/Provider";
+
 import { EmptyWrapper } from ".";
 import type { IEmptyWrapperProps } from "./types";
 

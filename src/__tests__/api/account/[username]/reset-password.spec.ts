@@ -1,10 +1,10 @@
-import handler from "pages/api/account/[username]/reset-password";
-import signInHandler from "pages/api/auth/signin";
 import {
-  setupAllTestData,
   createAuthenticatedMocks,
+  setupAllTestData,
 } from "__tests__/api/_test-utils";
 import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
+import handler from "pages/api/account/[username]/reset-password";
+import signInHandler from "pages/api/auth/signin";
 
 describe("/api/account/[username]/reset-password", () => {
   const OLD_ENV = process.env;

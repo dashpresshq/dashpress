@@ -1,6 +1,6 @@
 export {
-  usePortalExtendEntityFormConfig,
+  PortalDataComponent,
   PortalEntityFormComponent,
   useExtendRenderFormInputProps,
-  PortalDataComponent,
+  usePortalExtendEntityFormConfig,
 } from "./main";

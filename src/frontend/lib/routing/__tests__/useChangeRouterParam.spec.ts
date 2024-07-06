@@ -1,4 +1,5 @@
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+
 import { upsertRouterPathQueryWithValue } from "../useChangeRouterParam";
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");

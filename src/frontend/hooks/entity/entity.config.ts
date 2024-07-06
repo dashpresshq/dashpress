@@ -1,32 +1,33 @@
+import { useDomainMessages } from "frontend/lib/crud-config";
+import type { DataStateKeys } from "frontend/lib/data/types";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useCallback } from "react";
-import type {
-  FormFieldTypes,
-  IFieldValidationItem,
-} from "shared/validations/types";
-import type { IColorableSelection } from "shared/types/ui";
+import {
+  CRUD_HIDDEN_KEY_CONFIG,
+  ORDER_FIELD_CONFIG,
+} from "shared/configurations/permissions";
+import { sortListByOrder } from "shared/lib/array/sort";
+import { uniqBy } from "shared/lib/array/uniq-by";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import {
   getEntityFieldTypes,
   getEntitySelections,
 } from "shared/logic/entities";
 import type { DataCrudKeys } from "shared/types/data";
-import {
-  CRUD_HIDDEN_KEY_CONFIG,
-  ORDER_FIELD_CONFIG,
-} from "shared/configurations/permissions";
-import type { DataStateKeys } from "frontend/lib/data/types";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { uniqBy } from "shared/lib/array/uniq-by";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import type { IEntityField } from "shared/types/db";
-import { sortListByOrder } from "shared/lib/array/sort";
+import type { IColorableSelection } from "shared/types/ui";
+import type {
+  FormFieldTypes,
+  IFieldValidationItem,
+} from "shared/validations/types";
 import { fakeMessageDescriptor } from "translations/fake";
+
+import { useEntityConfiguration } from "../configuration/configuration.store";
 import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
   guessEntityValidations,
 } from "./guess";
-import { useEntityConfiguration } from "../configuration/configuration.store";
 import { usePortalHiddenEntityColumns } from "./portal";
 
 export function useEntitySlug() {

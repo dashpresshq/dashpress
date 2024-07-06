@@ -1,20 +1,21 @@
-import { usePasswordStore } from "frontend/views/integrations/password.store";
-import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import {
   CRUD_CONFIG_NOT_FOUND,
   useDomainMessages,
 } from "frontend/lib/crud-config";
+import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { reduceStringToNumber } from "shared/lib/strings";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { useApi } from "frontend/lib/data/useApi";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
-import { useApi } from "frontend/lib/data/useApi";
-import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
-import type { IKeyValue } from "shared/types/options";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { objectToQueryParams } from "frontend/lib/routing/queryObjectToQueryString";
+import { usePasswordStore } from "frontend/views/integrations/password.store";
+import { useEffect } from "react";
+import { reduceStringToNumber } from "shared/lib/strings";
+import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import type { IKeyValue } from "shared/types/options";
+
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export const INTEGRATIONS_GROUP_ENDPOINT = (

@@ -1,5 +1,6 @@
-import { RenderCode } from "@/components/app/render-code";
 import { WarningAlert } from "@/components/app/alert";
+import { RenderCode } from "@/components/app/render-code";
+
 import { DocumentationRoot } from "../_base";
 
 export function PresentationScriptDocumentation() {

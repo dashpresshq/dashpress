@@ -1,4 +1,4 @@
-import { ConfigKeys, configApiService } from "../config/config.service";
+import { configApiService, ConfigKeys } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { DatabaseConfigDataPersistenceAdaptor } from "./DatabaseConfigDataPersistenceAdaptor";
 import { JsonFileConfigDataPersistenceAdaptor } from "./JsonFileConfigDataPersistenceAdaptor";

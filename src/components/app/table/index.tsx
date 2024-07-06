@@ -1,24 +1,26 @@
-import * as React from "react";
 import {
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import * as React from "react";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { cn } from "@/lib/utils";
-import { Table as TableRoot } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Table as TableRoot } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+
+import { ErrorAlert } from "../alert";
+import { TableSkeleton } from "../skeleton/table";
+import { TablePagination } from "./_Pagination";
+import { TableBody } from "./Body";
 import { DEFAULT_TABLE_STATE } from "./constants";
+import { TableFoot } from "./Foot";
+import { TableHead } from "./Head";
+import { useInternalColumns, useSyncTableState } from "./hooks";
 import type { ITableProps } from "./types";
 import { getPageCount } from "./utils";
-import { TablePagination } from "./_Pagination";
-import { ErrorAlert } from "../alert";
-import { TableHead } from "./Head";
-import { TableBody } from "./Body";
-import { TableFoot } from "./Foot";
-import { useInternalColumns, useSyncTableState } from "./hooks";
-import { TableSkeleton } from "../skeleton/table";
 
 export { DEFAULT_TABLE_STATE };
 

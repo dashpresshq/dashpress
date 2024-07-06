@@ -1,15 +1,17 @@
-import { useSetupCheck } from "frontend/hooks/setup/setup.store";
-import { AuthLayout } from "frontend/_layouts/guest";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import type { CustomNextPage } from "frontend/_layouts/types";
 import { msg } from "@lingui/macro";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { AuthLayout } from "frontend/_layouts/guest";
+import type { CustomNextPage } from "frontend/_layouts/types";
+import { useSetupCheck } from "frontend/hooks/setup/setup.store";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { CredentialsSetupForm } from "./Form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { useSetupCredentialsMutation } from "../setup.store";
+import { CredentialsSetupForm } from "./Form";
 
 // eslint-disable-next-line react/function-component-definition
 export const CredentialsSetup: CustomNextPage = () => {

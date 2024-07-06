@@ -1,11 +1,13 @@
-import * as React from "react";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { fakeMessageDescriptor } from "translations/fake";
-import { TestProviders } from "__tests__/_/Provider";
+import * as React from "react";
 import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { fakeMessageDescriptor } from "translations/fake";
+
 import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
+
 import { SchemaForm } from ".";
 
 type IAccount = {
@@ -225,7 +227,9 @@ describe("<SchemaForm />", () => {
 
     expect(mockOnSubmit).not.toHaveBeenCalled();
 
-    expect(await getToastMessage()).toBe("A Custom Validation Failed");
+    expect(await getToastMessage()).toBe(
+      "Input ValidationA Custom Validation Failed"
+    );
   });
 
   it("should edit forms", async () => {

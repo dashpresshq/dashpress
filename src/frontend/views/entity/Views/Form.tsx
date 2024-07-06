@@ -1,27 +1,28 @@
-import type { IPaginatedDataState, ITableView } from "shared/types/data";
-import { Form, Field } from "react-final-form";
+import { msg } from "@lingui/macro";
 import arrayMutators from "final-form-arrays";
-import { useFieldArray } from "react-final-form-arrays";
-import { useState } from "react";
-import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
-import { generateRandomString } from "shared/lib/strings/random";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import type { IFormProps } from "frontend/lib/form/types";
 import {
   composeValidators,
   maxLength,
   required,
 } from "frontend/lib/validations";
-import type { IFormProps } from "frontend/lib/form/types";
-import { msg } from "@lingui/macro";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
-import { Tabs } from "@/components/app/tabs";
-import type { ITableColumn } from "@/components/app/table/types";
-import { SoftButton } from "@/components/app/button/soft";
+import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
+import { useState } from "react";
+import { Field, Form } from "react-final-form";
+import { useFieldArray } from "react-final-form-arrays";
+import { generateRandomString } from "shared/lib/strings/random";
+import type { IPaginatedDataState, ITableView } from "shared/types/data";
+
 import { ActionButtons } from "@/components/app/button/action";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import { FormButton } from "@/components/app/button/form";
+import { SoftButton } from "@/components/app/button/soft";
 import { FormInput } from "@/components/app/form/input/text";
 import { Table } from "@/components/app/table";
-import { FormButton } from "@/components/app/button/form";
+import type { ITableColumn } from "@/components/app/table/types";
+import { Tabs } from "@/components/app/tabs";
 
 interface IProps {
   values: ITableView[];

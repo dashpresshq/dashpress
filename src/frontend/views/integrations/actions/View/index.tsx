@@ -1,14 +1,16 @@
+import { msg } from "@lingui/macro";
 import type {
   ActionIntegrations,
   IIntegrationsList,
 } from "shared/types/actions";
-import { msg } from "@lingui/macro";
+
 import { SchemaForm } from "@/components/app/form/schema";
 import { Tabs } from "@/components/app/tabs";
-import { useActivateIntegrationMutation } from "../actions.store";
-import { Deactivate } from "./Deactivate";
-import { Configure } from "./Configure";
+
 import { PasswordMessage } from "../../Password";
+import { useActivateIntegrationMutation } from "../actions.store";
+import { Configure } from "./Configure";
+import { Deactivate } from "./Deactivate";
 
 interface IProps {
   integrationDetail?: IIntegrationsList;

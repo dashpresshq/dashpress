@@ -1,12 +1,13 @@
-import type { ReactNode } from "react";
+import type { MessageDescriptor } from "@lingui/core";
 import type { UseQueryResult } from "@tanstack/react-query";
+import type { HeaderContext } from "@tanstack/react-table";
+import type { ReactNode } from "react";
 import type {
   IPaginatedDataState,
   PaginatedData,
   TableFilterType,
 } from "shared/types/data";
-import type { MessageDescriptor } from "@lingui/core";
-import type { HeaderContext } from "@tanstack/react-table";
+
 import type { IEmptyWrapperProps } from "../empty-wrapper/types";
 
 export interface ITableColumn {

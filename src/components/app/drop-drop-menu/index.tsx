@@ -1,5 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ChevronDown, MoreVertical } from "react-feather";
+
+import { MenuSection } from "@/components/app/menu-section";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,10 +9,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToggle } from "@/frontend/hooks/state/useToggleState";
-import { MenuSection } from "@/components/app/menu-section";
 import { cn } from "@/lib/utils";
-import type { IMenuActionItem } from "../button/types";
+
 import { SoftButton } from "../button/soft";
+import type { IMenuActionItem } from "../button/types";
 
 export interface IProps {
   menuItems: IMenuActionItem[];

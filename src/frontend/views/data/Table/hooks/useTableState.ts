@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import type { IPaginatedDataState } from "shared/types/data";
+
 import { DEFAULT_TABLE_STATE } from "@/components/app/table";
+
 import { useSyncPaginatedDataState } from "../portal";
 import type { IDataTableProps } from "../types";
 import { useCurrentTableStateStore } from "./useCurrentTableState.store";

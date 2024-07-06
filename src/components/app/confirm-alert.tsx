@@ -1,17 +1,19 @@
-import { t } from "@lingui/macro";
-import { createStore } from "frontend/lib/store";
 import type { MessageDescriptor } from "@lingui/core";
+import { t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { createStore } from "frontend/lib/store";
+
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogContent,
   AlertDialogCancel,
+  AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+
 import { NextPortal } from "./next-portal";
 
 interface IConfirmAlertDetails {

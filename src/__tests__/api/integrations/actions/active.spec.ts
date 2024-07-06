@@ -1,8 +1,8 @@
-import handler from "pages/api/integrations/actions/active";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/integrations/actions/active";
 
 describe("/api/integrations/actions/active", () => {
   beforeAll(async () => {

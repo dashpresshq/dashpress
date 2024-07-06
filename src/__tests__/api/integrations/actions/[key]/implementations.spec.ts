@@ -1,5 +1,5 @@
-import handler from "pages/api/integrations/actions/[key]/implementations";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
+import handler from "pages/api/integrations/actions/[key]/implementations";
 
 describe("/api/integrations/actions/[key]/implementations", () => {
   it("should show the integration implementation for http", async () => {

@@ -1,9 +1,11 @@
-import ReactPaginate from "react-paginate";
-import { Trans, msg } from "@lingui/macro";
+import { msg, Trans } from "@lingui/macro";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "react-feather";
-import { Select } from "@/components/ui/select";
+import ReactPaginate from "react-paginate";
+
 import { buttonVariants } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+
 import { TABLE_PAGE_SIZES } from "./constants";
 
 interface IProps {

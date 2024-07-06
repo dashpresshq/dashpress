@@ -1,13 +1,15 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { msg } from "@lingui/macro";
+import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 import { SoftButton } from "@/components/app/button/soft";
 import { OffCanvas } from "@/components/app/off-canvas";
-import { useDetailsOffCanvasStore } from "../hooks";
+
 import { EntityDetailsView } from "../../Details/DetailsView";
 import { PortalDataComponent } from "../../portal";
+import { useDetailsOffCanvasStore } from "../hooks";
 
 export function DetailsCanvas() {
   const router = useRouter();

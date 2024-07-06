@@ -1,15 +1,15 @@
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import {
+  closeAllToasts,
+  confirmDelete,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import EntityFormActionsSettings from "pages/admin/[entity]/config/actions";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { getTableRows } from "__tests__/_/utils/getTableRows";
-import {
-  closeAllToasts,
-  getToastMessage,
-} from "__tests__/_/utils/closeAllToasts";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -267,13 +267,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       })
     );
 
-    const confirmBox = await screen.findByRole("alertdialog", {
-      name: "Confirm Delete",
-    });
-
-    await userEvent.click(
-      await within(confirmBox).findByRole("button", { name: "Confirm" })
-    );
+    await confirmDelete();
 
     expect(await getToastMessage()).toBe("Form Action Deleted Successfully");
 

@@ -1,5 +1,5 @@
-import type { GridHeightSizes } from "shared/types/ui";
 import { msg } from "@lingui/macro";
+import type { GridHeightSizes } from "shared/types/ui";
 
 export const mapToUnitOptions = (values: number[]) => {
   return values.map((value) => {

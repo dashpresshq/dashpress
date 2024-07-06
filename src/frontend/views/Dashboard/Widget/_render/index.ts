@@ -1,2 +1,2 @@
-export { TableWidget } from "./Table";
 export { SummaryWidget } from "./Summary";
+export { TableWidget } from "./Table";

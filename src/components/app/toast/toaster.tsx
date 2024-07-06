@@ -2,6 +2,8 @@ import { useLingui } from "@lingui/react";
 import React from "react";
 import type { Icon as IconType } from "react-feather";
 import { AlertCircle, CheckCircle, XCircle } from "react-feather";
+
+import { spectrumVariants } from "@/components/ui/spectrum";
 import {
   Toast,
   ToastAction,
@@ -11,8 +13,8 @@ import {
   ToastTitle,
   ToastViewport,
 } from "@/components/ui/toast";
-import { spectrumVariants } from "@/components/ui/spectrum";
 import { cn } from "@/lib/utils";
+
 import { useToast } from "./use-toast";
 
 const ToastConfigMap: Record<

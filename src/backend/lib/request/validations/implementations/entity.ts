@@ -1,6 +1,7 @@
-import type { NextApiRequest } from "next";
 import { entitiesApiService } from "backend/entities/entities.service";
 import { NotFoundError } from "backend/lib/errors";
+import type { NextApiRequest } from "next";
+
 import type { ValidationImplType } from "./types";
 
 export const ERROR_MESSAGE = `This resource doesn't exist or is disabled or you dont have access to it`;

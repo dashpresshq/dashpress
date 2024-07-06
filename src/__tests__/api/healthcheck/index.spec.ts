@@ -1,6 +1,7 @@
 import handler from "pages/api/healthcheck";
-import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
+
 import { setupAllTestData } from "../_test-utils";
+import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/healthcheck", () => {
   beforeAll(async () => {

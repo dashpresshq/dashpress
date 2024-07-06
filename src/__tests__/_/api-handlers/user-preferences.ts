@@ -1,4 +1,5 @@
 import { rest } from "msw";
+
 import { BASE_TEST_URL } from "./_utils";
 
 const USER_PREFERENCES = {

@@ -1,6 +1,3 @@
-import { requestHandler } from "backend/lib/request";
-import { DataActionType } from "shared/configurations";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
 import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
@@ -8,6 +5,9 @@ import {
   setupAppConfigTestData,
   setupRolesTestData,
 } from "__tests__/api/_test-utils";
+import { requestHandler } from "backend/lib/request";
+import { DataActionType } from "shared/configurations";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 
 const handler = requestHandler({

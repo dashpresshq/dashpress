@@ -1,12 +1,14 @@
-import type { IColumnFilterBag } from "shared/types/data";
 import { msg } from "@lingui/macro";
-import { useDebounce, useSessionStorage } from "react-use";
 import { useState } from "react";
+import { useDebounce, useSessionStorage } from "react-use";
+import type { IColumnFilterBag } from "shared/types/data";
+
 import { Select } from "@/components/ui/select";
-import type { ILabelValue } from "@/shared/types/options";
 import { useApi } from "@/frontend/lib/data/useApi";
 import { sluggify } from "@/shared/lib/strings";
+import type { ILabelValue } from "@/shared/types/options";
 import { transformLabelValueToSelectData } from "@/translations/fake";
+
 import { MultiFilterValues } from "./_MultiFilterValues";
 import type { IFilterProps } from "./types";
 

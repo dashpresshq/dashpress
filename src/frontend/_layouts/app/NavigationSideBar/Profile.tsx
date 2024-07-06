@@ -1,10 +1,12 @@
+import type { MessageDescriptor } from "@lingui/core";
+import { msg, Trans } from "@lingui/macro";
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import type { SystemIconsKeys } from "shared/constants/Icons";
 import { ellipsis } from "shared/lib/strings";
-import { Trans, msg } from "@lingui/macro";
-import type { MessageDescriptor } from "@lingui/core";
+
 import { DropDownMenu } from "@/components/app/drop-drop-menu";
+
 import { useConstantNavigationMenuItems } from "./portal";
 
 interface IProps {

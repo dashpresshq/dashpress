@@ -1,4 +1,5 @@
 import { RenderCode } from "@/components/app/render-code";
+
 import { DocumentationRoot } from "../_base";
 
 export function WidgetScriptDocumentation() {

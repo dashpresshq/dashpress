@@ -1,13 +1,14 @@
-import type { IWidgetConfig } from "shared/types/dashboard";
 import {
   CRUD_CONFIG_NOT_FOUND,
   useDomainMessages,
 } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
+import { useApi } from "frontend/lib/data/useApi";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
-import { useApi } from "frontend/lib/data/useApi";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import type { IWidgetConfig } from "shared/types/dashboard";
+
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
 
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>

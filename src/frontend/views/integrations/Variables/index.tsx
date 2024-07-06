@@ -4,8 +4,9 @@ import {
   ManageVariablesPageTitle,
 } from "frontend/views/settings/Variables/Base";
 import { UserPermissions } from "shared/constants/user";
-import { ACTIONS_VIEW_KEY } from "../constants";
+
 import { BaseActionsLayout } from "../_Base";
+import { ACTIONS_VIEW_KEY } from "../constants";
 
 export function ManageVariables() {
   useSetPageDetails({

@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-import { LinguiProvider } from "translations/utils";
 import type { Messages } from "@lingui/core";
 import {
   QueryCache,
@@ -7,6 +5,9 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
+import type { ReactNode } from "react";
+import { LinguiProvider } from "translations/utils";
+
 import { ConfirmAlert } from "@/components/app/confirm-alert";
 import { Toaster } from "@/components/app/toast/toaster";
 

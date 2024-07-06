@@ -1,8 +1,9 @@
 import { ForbiddenError, progammingError } from "backend/lib/errors";
 import { rolesApiService } from "backend/roles/roles.service";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { UserPermissions } from "shared/constants/user";
 import { PORTAL_USER_PERMISSIONS } from "shared/constants/portal/user";
+import { UserPermissions } from "shared/constants/user";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+
 import type { ValidationImplType } from "./types";
 
 const ERROR_MESSAGE =

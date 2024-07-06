@@ -1,7 +1,9 @@
+import { msg } from "@lingui/macro";
 import type { IIntegrationsList } from "shared/types/actions";
 import { ActionIntegrations } from "shared/types/actions";
-import { msg } from "@lingui/macro";
+
 import { SchemaForm } from "@/components/app/form/schema";
+
 import { useDeactivateIntegrationMutation } from "../actions.store";
 
 interface IProps {

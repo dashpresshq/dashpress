@@ -1,11 +1,12 @@
+import { msg } from "@lingui/macro";
+import { required } from "frontend/lib/validations";
 import { Field } from "react-final-form";
 import type { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIconsList } from "shared/constants/Icons";
-import { required } from "frontend/lib/validations";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { msg } from "@lingui/macro";
-import { FormTextArea } from "../textarea";
+
 import { FormSelect } from "../select";
+import { FormTextArea } from "../textarea";
 
 export function IconInputField() {
   return (

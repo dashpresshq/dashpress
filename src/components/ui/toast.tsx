@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
-import * as React from "react";
-import { X } from "react-feather";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { X } from "react-feather";
 
 import { cn } from "@/lib/utils";
+
 import { spectrumVariants } from "./spectrum";
 
 const ToastProvider = ToastPrimitives.Provider;
@@ -116,12 +116,12 @@ ToastDescription.displayName = ToastPrimitives.Description.displayName;
 type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;
 
 export {
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastDescription,
   type ToastProps,
   ToastProvider,
-  ToastViewport,
-  Toast,
   ToastTitle,
-  ToastDescription,
-  ToastClose,
-  ToastAction,
+  ToastViewport,
 };

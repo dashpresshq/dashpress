@@ -1,10 +1,12 @@
+import { useLingui } from "@lingui/react";
+import { useApi } from "frontend/lib/data/useApi";
 import { useMemo, useState } from "react";
 import { useDebounce } from "react-use";
 import type { ILabelValue } from "shared/types/options";
-import { useApi } from "frontend/lib/data/useApi";
-import { useLingui } from "@lingui/react";
+
 import { ErrorAlert } from "@/components/app/alert";
 import { transformLabelValueToSelectData } from "@/translations/fake";
+
 import { FormSelect } from "./select";
 import type { IBaseFormSelect } from "./types";
 

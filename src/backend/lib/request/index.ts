@@ -1,13 +1,14 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import * as μs from "microseconds";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
+
 import { handleResponseError } from "../errors";
+import { logger } from "./logging";
 import type { RequestMethod } from "./methods";
 import { RequestMethodResponseCode } from "./methods";
-import type { ValidationKeys } from "./validations/types";
-import { ValidationImpl } from "./validations/implementations";
-import { logger } from "./logging";
 import { requestHook } from "./portal";
+import { ValidationImpl } from "./validations/implementations";
+import type { ValidationKeys } from "./validations/types";
 
 /*
  The function below chooses 

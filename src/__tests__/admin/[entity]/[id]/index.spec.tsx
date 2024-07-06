@@ -1,9 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import EntityDetails from "pages/admin/[entity]/[id]/index";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { render, screen } from "@testing-library/react";
+import EntityDetails from "pages/admin/[entity]/[id]/index";
 
 setupApiHandlers();
 

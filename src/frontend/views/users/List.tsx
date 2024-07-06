@@ -1,27 +1,29 @@
+import { msg } from "@lingui/macro";
 import { AppLayout } from "frontend/_layouts/app";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useApi } from "frontend/lib/data/useApi";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useCallback } from "react";
 import { roleLabel, UserPermissions } from "shared/constants/user";
 import type { IRolesList } from "shared/types/roles";
 import type { IAccountProfile } from "shared/types/user";
-import { useApi } from "frontend/lib/data/useApi";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { useCallback } from "react";
-import { msg } from "@lingui/macro";
 import { transformLabelValueToSelectData } from "translations/fake";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+
+import { ActionButtons } from "@/components/app/button/action";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import type { IMenuActionItem } from "@/components/app/button/types";
 import type {
-  IFETableColumn,
   IFETableCell,
+  IFETableColumn,
 } from "@/components/app/pagination-table";
 import { FEPaginationTable } from "@/components/app/pagination-table";
 import { Card } from "@/components/ui/card";
-import type { IMenuActionItem } from "@/components/app/button/types";
-import { ActionButtons } from "@/components/app/button/action";
-import { USERS_ENDPOINT_CONFIG, useUserDeletionMutation } from "./users.store";
+
 import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
+import { USERS_ENDPOINT_CONFIG, useUserDeletionMutation } from "./users.store";
 
 export function ListUsers() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);

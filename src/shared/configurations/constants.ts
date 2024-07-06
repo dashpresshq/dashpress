@@ -1,10 +1,11 @@
+import { msg } from "@lingui/macro";
+import type { ITableView, QueryFilterSchema } from "shared/types/data";
+import type { IColorableSelection } from "shared/types/ui";
 import type {
   FormFieldTypes,
   IFieldValidationItem,
 } from "shared/validations/types";
-import type { IColorableSelection } from "shared/types/ui";
-import type { ITableView, QueryFilterSchema } from "shared/types/data";
-import { msg } from "@lingui/macro";
+
 import type { BaseAppConfigurationKeys } from "./base-types";
 import type { PortalAppConfigurationKeys } from "./portal";
 import { PORTAL_APP_CONFIGURATION_CONFIG } from "./portal";

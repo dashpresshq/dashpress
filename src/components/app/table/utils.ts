@@ -1,5 +1,6 @@
-import type { IPaginatedDataState } from "shared/types/data";
 import type { TableState } from "@tanstack/react-table";
+import type { IPaginatedDataState } from "shared/types/data";
+
 import { DEFAULT_TABLE_STATE } from "./constants";
 
 export function getPageCount(totalRecords: number, pageSize?: number) {

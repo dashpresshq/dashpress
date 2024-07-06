@@ -1,4 +1,5 @@
 import { msg } from "@lingui/macro";
+
 import { BaseMutateEntitiesPermissions } from "./fallback";
 
 export const usePortalExtendedPermissions = () => {

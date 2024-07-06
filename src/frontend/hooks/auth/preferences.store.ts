@@ -8,6 +8,7 @@ import type {
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
 import { USER_PREFERENCES_CONFIG } from "shared/user-preferences/constants";
+
 import { useIsUserAutenticated } from "./auth.actions";
 
 const userPrefrencesApiPath = (key: UserPreferencesKeys) => {

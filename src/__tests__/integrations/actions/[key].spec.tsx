@@ -1,10 +1,8 @@
-import { render, screen } from "@testing-library/react";
-
-import ActionsIntegrations from "pages/integrations/actions/[key]";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { render, screen } from "@testing-library/react";
+import ActionsIntegrations from "pages/integrations/actions/[key]";
 
 setupApiHandlers();
 
@@ -30,11 +28,11 @@ describe("pages/integrations/actions/[key]", () => {
       );
 
       expect(
-        await screen.findByRole("link", { name: "Slack" })
+        await screen.findByRole("option", { name: "Slack" })
       ).toBeInTheDocument();
-      expect(screen.getByRole("link", { name: "HTTP" })).toBeInTheDocument();
+      expect(screen.getByRole("option", { name: "HTTP" })).toBeInTheDocument();
       expect(
-        screen.getByRole("link", { name: "Non Activated Actions" })
+        screen.getByRole("option", { name: "Non Activated Actions" })
       ).toBeInTheDocument();
     });
   });

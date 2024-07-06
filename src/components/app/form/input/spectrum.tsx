@@ -1,7 +1,9 @@
 import { Check } from "react-feather";
+
 import { Button } from "@/components/ui/button";
 import { SPECTRUM_COLORS, spectrumVariants } from "@/components/ui/spectrum";
 import { cn } from "@/lib/utils";
+
 import { LabelAndError } from "./label-and-error";
 import type { ILabelAndErrorProps } from "./types";
 

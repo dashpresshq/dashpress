@@ -1,19 +1,21 @@
-import { UserPermissions } from "shared/constants/user";
+import { msg } from "@lingui/macro";
+import { AppLayout } from "frontend/_layouts/app";
+import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
-import { AppLayout } from "frontend/_layouts/app";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
-import { msg } from "@lingui/macro";
+import { UserPermissions } from "shared/constants/user";
+
 import { SectionBox } from "@/components/app/section-box";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { EntitiesSelection } from "../Entities/Selection";
 

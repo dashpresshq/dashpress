@@ -1,27 +1,29 @@
+import type { MessageDescriptor } from "@lingui/core";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import {
+  useEntityCrudFields,
   useEntityFieldLabels,
   useEntityFieldSelections,
-  useProcessedEntityFieldTypes,
   useEntityFieldValidations,
-  useEntityCrudFields,
+  useProcessedEntityFieldTypes,
 } from "frontend/hooks/entity/entity.config";
-import { useMemo } from "react";
+import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import type { DataStateKeys } from "frontend/lib/data/types";
 import { DataStates } from "frontend/lib/data/types";
+import { useMemo } from "react";
 import type { SystemIconsKeys } from "shared/constants/Icons";
-import type { MessageDescriptor } from "@lingui/core";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { SchemaForm } from "@/components/app/form/schema";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
-import { usePortalExtendEntityFormConfig } from "./portal";
 import { useIsEntityFieldMutatable } from "./hooks/useIsEntityFieldMutatable";
+import { usePortalExtendEntityFormConfig } from "./portal";
 
 type IProps = {
   entity: string;

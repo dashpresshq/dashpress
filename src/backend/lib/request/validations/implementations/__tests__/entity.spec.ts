@@ -1,11 +1,11 @@
-import { requestHandler } from "backend/lib/request";
-import { UserPermissions } from "shared/constants/user";
 import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
   setupAllTestData,
   setupRolesTestData,
 } from "__tests__/api/_test-utils";
+import { requestHandler } from "backend/lib/request";
+import { UserPermissions } from "shared/constants/user";
 
 const handler = requestHandler({
   GET: async (getValidatedRequest) => {

@@ -1,12 +1,14 @@
-import { UserPermissions } from "shared/constants/user";
-import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { msg } from "@lingui/macro";
 import type { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/constants/portal/user";
-import type { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
-import { ListManager } from "@/components/app/list-manager";
+import { UserPermissions } from "shared/constants/user";
+
 import { FormButton } from "@/components/app/button/form";
+import { ListManager } from "@/components/app/list-manager";
+import type { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
+
 import {
   useCreateRolePermissionMutation,
   useDeleteRolePermissionMutation,

@@ -1,25 +1,26 @@
-import {
-  isBoolean,
-  isString,
-  isEmail,
-  maxLength,
-  minLength,
-  isURL,
-  isNumber,
-  isJSON,
-  isPositive,
-  matches,
-  isAlphanumeric,
-  isNotEmpty,
-  isDate,
-  isRgbColor,
-  min,
-  max,
-  isIn,
-  isUppercase,
-} from "class-validator";
-import { msg } from "@lingui/macro";
 import type { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import {
+  isAlphanumeric,
+  isBoolean,
+  isDate,
+  isEmail,
+  isIn,
+  isJSON,
+  isNotEmpty,
+  isNumber,
+  isPositive,
+  isRgbColor,
+  isString,
+  isUppercase,
+  isURL,
+  matches,
+  max,
+  maxLength,
+  min,
+  minLength,
+} from "class-validator";
+
 import {
   doesntMatchOtherField,
   greaterThanOtherField,

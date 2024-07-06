@@ -1,9 +1,10 @@
+import { BadRequestError } from "backend/lib/errors";
 import type {
   UserPreferencesKeys,
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
 import { USER_PREFERENCES_CONFIG } from "shared/user-preferences/constants";
-import { BadRequestError } from "backend/lib/errors";
+
 import type { AbstractConfigDataPersistenceService } from "../lib/config-persistence";
 import { createConfigDomainPersistenceService } from "../lib/config-persistence";
 

@@ -1,10 +1,11 @@
-import { render, screen } from "@testing-library/react";
-import { msg } from "@lingui/macro";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { msg } from "@lingui/macro";
+import { render, screen } from "@testing-library/react";
+
 import { Table } from ".";
-import type { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
+import type { ITableProps } from "./types";
 
 const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {
   overridePaginatedDataState: {
@@ -34,7 +35,7 @@ describe("Table", () => {
 
     expect(
       screen.getByRole("row", {
-        name: "Id Sort By Id Filter Id By Id Name Header Sort By Name Header Desc Filter Name Header By Search Age Sort By Age Filter Age By Number Verified Filter Verified By Boolean Role Filter Role By Status Author Sort By Author Filter Author By List Registered Sort By Registered Filter Registered By Date Actions",
+        name: "Id Sort By Id Name Header Sort By Name Header Desc Age Sort By Age Verified Role Author Sort By Author Registered Sort By Registered Actions",
       })
     ).toBeInTheDocument();
     expect(

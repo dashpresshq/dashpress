@@ -1,12 +1,14 @@
 import type { Table } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
+
 import {
+  TableBody as TableBodyRoot,
   TableCell,
   TableRow,
-  TableBody as TableBodyRoot,
 } from "@/components/ui/table";
-import type { IEmptyWrapperProps } from "../empty-wrapper/types";
+
 import { EmptyWrapper } from "../empty-wrapper";
+import type { IEmptyWrapperProps } from "../empty-wrapper/types";
 
 interface IProps {
   table: Table<Record<string, unknown>>;

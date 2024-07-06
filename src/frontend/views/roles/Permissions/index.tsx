@@ -1,25 +1,27 @@
-import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import {
-  UserPermissions,
-  USER_PERMISSIONS_CONFIG,
-} from "shared/constants/user";
-import { RolesDocumentation } from "frontend/docs/roles";
-import { AppLayout } from "frontend/_layouts/app";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { msg } from "@lingui/macro";
 import type { MessageDescriptor } from "@lingui/core";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { msg } from "@lingui/macro";
+import { AppLayout } from "frontend/_layouts/app";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { RolesDocumentation } from "frontend/docs/roles";
+import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import {
+  USER_PERMISSIONS_CONFIG,
+  UserPermissions,
+} from "shared/constants/user";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+
 import { ContentLayout } from "@/components/app/content-layout";
-import { ListSkeleton } from "@/components/app/skeleton/list";
 import { SectionBox } from "@/components/app/section-box";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { ListSkeleton } from "@/components/app/skeleton/list";
 import { Tabs } from "@/components/app/tabs";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { useRolePermissions } from "../permissions.store";
 import { MutatePermission } from "./MutatePermission";
 import {

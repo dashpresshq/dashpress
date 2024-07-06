@@ -1,4 +1,5 @@
 import { matches } from "class-validator";
+
 import { CAPITAL_AND_UNDERSCORE_REGEX } from "./Form";
 
 describe("CAPITAL_AND_UNDERSCORE_REGEX", () => {

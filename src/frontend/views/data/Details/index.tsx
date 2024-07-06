@@ -1,20 +1,22 @@
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useEntityDataDetails } from "frontend/hooks/data/data.store";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useEntityDataDetails } from "frontend/hooks/data/data.store";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
+
 import { SectionBox } from "@/components/app/section-box";
+
+import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
+import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
+import { DETAILS_LAYOUT_KEY, DetailsLayout } from "./_Layout";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
-import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
-import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
 import { useDetailsViewMenuItems, usePortalActionButtons } from "./portal";
-import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 
 export function EntityDetails() {
   const entityId = useEntityId();

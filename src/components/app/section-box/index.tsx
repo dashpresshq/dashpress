@@ -1,12 +1,14 @@
-import type { ReactNode } from "react";
 import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import type { ReactNode } from "react";
+
+import { ActionButtons } from "@/components/app/button/action";
 import { SoftButton } from "@/components/app/button/soft";
 import { SystemIcon } from "@/components/app/system-icons";
-import { ActionButtons } from "@/components/app/button/action";
 import { Tooltip } from "@/components/app/tooltip";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import type { IGroupActionButton } from "../button/types";
 
 export interface IProps {

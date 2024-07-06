@@ -1,17 +1,18 @@
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import type { AppConfigurationKeys } from "shared/configurations";
-import { evalJavascriptString } from "shared/lib/script-runner";
-import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import type { ISchemaFormScriptProps } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import type { AppConfigurationKeys } from "shared/configurations";
+import type { ISchemaFormScriptProps } from "shared/form-schemas/types";
+import { evalJavascriptString } from "shared/lib/script-runner";
 import { fakeMessageDescriptor } from "translations/fake";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { SchemaForm } from "@/components/app/form/schema";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { useToast } from "@/components/app/toast/use-toast";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 
 interface IProps {
   value: string;

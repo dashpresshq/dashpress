@@ -1,14 +1,12 @@
 /* eslint-disable testing-library/no-node-access */
-import type { ReactNode } from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-
-import ManageDashboard from "pages/dashboard/manage";
-import Dashboard from "pages";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import Dashboard from "pages";
+import ManageDashboard from "pages/dashboard/manage";
+import type { ReactNode } from "react";
 
 setupApiHandlers();
 

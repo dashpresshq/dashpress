@@ -1,8 +1,10 @@
-import { useEffect } from "react";
-import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { msg } from "@lingui/macro";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { useEffect } from "react";
+
 import { ListManager } from "@/components/app/list-manager";
 import type { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
+
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {

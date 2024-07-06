@@ -1,10 +1,11 @@
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-
+// eslint-disable-next-line simple-import-sort/imports
 import { useLingui } from "@lingui/react";
 import { highlight, languages } from "prismjs/components/prism-core";
 import Editor from "react-simple-code-editor";
 import { noop } from "shared/lib/noop";
+
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
 
 import {
   generateClassNames,
@@ -37,7 +38,7 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
         className={cn(
           generateClassNames(meta),
           "line-numbers",
-          "![&_textarea]:rounded-md !rounded-md border border-border [&_pre]:min-h-12 [&_textarea]:focus:border-primary [&_textarea]:focus:outline-none [&_textarea]:focus:ring-1 [&_textarea]:focus:ring-primary disabled:[&_textarea]:bg-soft",
+          "![&_textarea]:rounded-md !rounded-md border border-border [&_pre]:min-h-12 [&_textarea]:focus:border-primary [&_textarea]:focus:!outline-none [&_textarea]:focus:ring-1 [&_textarea]:focus:!ring-primary disabled:[&_textarea]:bg-soft",
           styles.root
         )}
       >

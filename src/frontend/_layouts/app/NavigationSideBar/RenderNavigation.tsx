@@ -154,7 +154,7 @@ export function RenderNavigation({
 
           return (
             <li className="block list-none transition-all" key={id}>
-              {type === NavigationMenuItemType.Header ? (
+              {type === NavigationMenuItemType.Header && isFullWidth ? (
                 <p
                   className={cn(
                     "mb-2 ml-1 mr-0 mt-5 text-[11px] font-semibold uppercase text-white",

@@ -13,11 +13,31 @@ export interface IProps {
   isOverAButton: boolean;
 }
 
+const GROUP_SPLIT = 10;
+
+export const splitTextInGroups = (text: string) =>
+  text
+    .split(" ")
+    .reduce((acc, curr, index) => {
+      const i = Math.floor(index / GROUP_SPLIT);
+
+      if (!acc[i]) {
+        acc[i] = "";
+      }
+
+      acc[i] += `${curr} `;
+
+      return acc;
+    }, [])
+    .join("<br />")
+    .trim();
+
 export function Tooltip({ children, text, isOverAButton }: IProps) {
   if (!text) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return <>{children}</>;
   }
+
   return (
     <TooltipProvider>
       <TooltipRoot>
@@ -25,7 +45,7 @@ export function Tooltip({ children, text, isOverAButton }: IProps) {
         <TooltipContent>
           <div
             className="rounded-md bg-base px-3 py-1.5 text-sm text-main shadow-md"
-            dangerouslySetInnerHTML={{ __html: text }}
+            dangerouslySetInnerHTML={{ __html: splitTextInGroups(text) }}
           />
         </TooltipContent>
       </TooltipRoot>

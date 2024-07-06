@@ -1,5 +1,4 @@
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { render, screen } from "@testing-library/react";
@@ -7,6 +6,8 @@ import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import type { INavigationMenuItem } from "shared/types/menu";
 import { NavigationMenuItemType, SystemLinks } from "shared/types/menu";
+
+import { USE_ROUTER_PARAMS } from "@/__tests__/_/constants";
 
 import { SideBar } from "../SideBar";
 
@@ -90,7 +91,7 @@ describe("<RenderNavigation />", () => {
       </TestProviders>
     );
 
-    expect(screen.queryByText("Header")).not.toBeVisible();
+    expect(screen.queryByText("Header")).not.toBeInTheDocument();
 
     expect(
       screen.queryByRole("link", { name: "Settings" })

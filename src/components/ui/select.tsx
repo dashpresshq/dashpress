@@ -176,23 +176,59 @@ export interface ISelectProps {
   };
 }
 
+const LOCAL_SEARCH_THRESHOLD = 10;
+
 export function Select({
   onChange,
-  options,
+  options: fullOptions,
   disabled,
   isLoading,
   value,
   name,
   placeholder,
   className,
-  onSearch,
+  onSearch: onSearchForAsync,
   disabledOptions,
 }: ISelectProps) {
   const { _ } = useLingui();
 
-  const valueLabel = options.find(
+  const valueLabel = fullOptions.find(
     (option) => String(option.value) === String(value)
   )?.label;
+
+  const [searchString, setSearchString] = React.useState("");
+
+  const onSearch = React.useMemo<ISelectProps["onSearch"]>(() => {
+    if (onSearchForAsync) {
+      return onSearchForAsync;
+    }
+    if (fullOptions.length <= LOCAL_SEARCH_THRESHOLD) {
+      return undefined;
+    }
+
+    return {
+      isLoading: false,
+      value: searchString,
+      onChange: setSearchString,
+    };
+  }, [fullOptions, searchString]);
+
+  const optionsToRender = React.useMemo<ISelectData[]>(() => {
+    if (!onSearch) {
+      return fullOptions;
+    }
+
+    if (!searchString) {
+      return fullOptions;
+    }
+
+    const searchStringInLower = searchString.toLowerCase();
+
+    return fullOptions.filter(({ label }) =>
+      _(label).toLocaleLowerCase().includes(searchStringInLower)
+    );
+  }, [fullOptions, searchString]);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <SelectRoot
@@ -202,6 +238,7 @@ export function Select({
         }
       }}
       value={value}
+      onOpenChange={setIsOpen}
     >
       <SelectTrigger
         className={className}
@@ -221,17 +258,20 @@ export function Select({
               initialValue={onSearch.value}
               onChange={onSearch.onChange}
               loading={onSearch.isLoading}
+              shouldAutoFocus={isOpen}
             />
           </div>
         )}
-        {onSearch?.value && options.length === 0 && !onSearch?.isLoading && (
-          <EmptyWrapper text={msg`No Search Results`} />
-        )}
-        {options.length === 0 && !onSearch && (
+        {onSearch?.value &&
+          optionsToRender.length === 0 &&
+          !onSearch?.isLoading && (
+            <EmptyWrapper text={msg`No Search Results`} />
+          )}
+        {fullOptions.length === 0 && !onSearch && (
           <EmptyWrapper text={msg`No Options`} />
         )}
         {onSearch?.isLoading && <ListSkeleton count={10} />}
-        {options.map(({ value: value$1, label }) => (
+        {optionsToRender.map(({ value: value$1, label }) => (
           <SelectItem
             key={String(value$1)}
             value={String(value$1)}

@@ -1,6 +1,6 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Loader, Search } from "react-feather";
 
 import { Input } from "@/components/ui/input";
@@ -9,12 +9,24 @@ interface IProps {
   onChange: (value: string) => void;
   loading?: boolean;
   initialValue?: string;
+  shouldAutoFocus?: boolean;
 }
 
-export function FormSearch({ onChange, loading, initialValue }: IProps) {
+export function FormSearch({
+  onChange,
+  loading,
+  initialValue,
+  shouldAutoFocus,
+}: IProps) {
   const { _ } = useLingui();
-
   const [value, setValue] = useState(initialValue || "");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (shouldAutoFocus && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [shouldAutoFocus, value]);
 
   return (
     <div className="relative flex w-full">
@@ -37,6 +49,7 @@ export function FormSearch({ onChange, loading, initialValue }: IProps) {
           setValue(e.target.value);
         }}
         placeholder={_(msg`Search`)}
+        ref={inputRef}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 import * as μs from "microseconds";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
+
+import { typescriptSafeObjectDotKeys } from "@/shared/lib/objects";
 
 import { handleResponseError } from "../errors";
 import { logger } from "./logging";

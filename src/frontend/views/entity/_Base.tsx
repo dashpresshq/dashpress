@@ -1,15 +1,15 @@
 import { msg } from "@lingui/macro";
-import { AppLayout } from "frontend/_layouts/app";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import type { ReactNode } from "react";
 
 import { SoftButton } from "@/components/app/button/soft";
 import type { IMenuActionItem } from "@/components/app/button/types";
 import { ContentLayout } from "@/components/app/content-layout";
 import { MenuSection } from "@/components/app/menu-section";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useEntitySlug } from "@/frontend/hooks/entity/entity.config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
 
 import { useMutateBaseEntitySettingsMenu } from "./portal";
 

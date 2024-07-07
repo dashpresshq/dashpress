@@ -1,16 +1,4 @@
 import { msg } from "@lingui/macro";
-import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { DictionDocumentation } from "frontend/docs/diction";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
-import {
-  useEntityDiction,
-  useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import type { AppConfigurationValueType } from "shared/configurations/constants";
-import { UserPermissions } from "shared/constants/user";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import { SectionBox } from "@/components/app/section-box";
@@ -19,6 +7,18 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { NAVIGATION_MENU_ENDPOINT } from "@/frontend/_layouts/app/NavigationSideBar/constants";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { DictionDocumentation } from "@/frontend/docs/diction";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import { useUpsertConfigurationMutation } from "@/frontend/hooks/configuration/configuration.store";
+import {
+  useEntityDiction,
+  useEntitySlug,
+} from "@/frontend/hooks/entity/entity.config";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import type { AppConfigurationValueType } from "@/shared/configurations/constants";
+import { UserPermissions } from "@/shared/constants/user";
 
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

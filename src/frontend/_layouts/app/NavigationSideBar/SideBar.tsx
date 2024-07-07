@@ -1,19 +1,19 @@
-import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { useApi } from "frontend/lib/data/useApi";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect } from "react";
 import { ChevronRight } from "react-feather";
 import { useSessionStorage } from "react-use";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import type { INavigationMenuItem } from "shared/types/menu";
 
 import { Tooltip } from "@/components/app/tooltip";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
+import { useAppConfiguration } from "@/frontend/hooks/configuration/configuration.store";
+import { CRUD_CONFIG_NOT_FOUND } from "@/frontend/lib/crud-config";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import type { INavigationMenuItem } from "@/shared/types/menu";
 
 import {
   NAVIGATION_MENU_ENDPOINT,

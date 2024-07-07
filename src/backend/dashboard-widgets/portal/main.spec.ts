@@ -1,4 +1,4 @@
-import { GranularEntityPermissions } from "shared/types/user";
+import { GranularEntityPermissions } from "@/shared/types/user";
 
 import { PORTAL_DASHBOARD_PERMISSION } from "./main";
 

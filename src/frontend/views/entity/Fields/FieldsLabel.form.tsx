@@ -1,9 +1,3 @@
-import type { ICrudConfig } from "frontend/lib/crud-config";
-import {
-  composeValidators,
-  maxLength,
-  minLength,
-} from "frontend/lib/validations";
 import { Field, Form } from "react-final-form";
 import { fakeMessageDescriptor } from "translations/fake";
 
@@ -13,6 +7,12 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
+import type { ICrudConfig } from "@/frontend/lib/crud-config";
+import {
+  composeValidators,
+  maxLength,
+  minLength,
+} from "@/frontend/lib/validations";
 
 interface IProps {
   fields: string[];

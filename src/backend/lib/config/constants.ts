@@ -1,4 +1,4 @@
-import { generateRandomString } from "shared/lib/strings/random";
+import { generateRandomString } from "@/shared/lib/strings/random";
 
 import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";

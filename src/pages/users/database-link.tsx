@@ -1,4 +1,4 @@
-import { UsersLinkToDatabase } from "frontend/views/users/DatabaseLink";
+import { UsersLinkToDatabase } from "@/frontend/views/users/DatabaseLink";
 
 export { getServerSideProps } from "translations/utils";
 

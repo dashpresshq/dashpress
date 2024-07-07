@@ -1,19 +1,5 @@
 import { msg } from "@lingui/macro";
-import { AppLayout } from "frontend/_layouts/app";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { UsersLinkToDatabaseDocumentation } from "frontend/docs/users-link-to-database";
-import {
-  useAppConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useEffect, useState } from "react";
-import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
-import { UserPermissions } from "shared/constants/user";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { fakeMessageDescriptor } from "translations/fake";
 
 import { ContentLayout } from "@/components/app/content-layout";
@@ -24,6 +10,20 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { UsersLinkToDatabaseDocumentation } from "@/frontend/docs/users-link-to-database";
+import {
+  useAppConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import { useEntityFieldLists } from "@/frontend/hooks/entity/entity.store";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { ACTIVE_ENTITIES_ENDPOINT } from "@/shared/constants/entities";
+import { UserPermissions } from "@/shared/constants/user";
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
 
 type IUsersLinkToDatabaseForm = {
   table: string;

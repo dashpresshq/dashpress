@@ -1,8 +1,8 @@
-import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 
 import type { IMenuActionItem } from "@/components/app/button/types";
+import { useEntityCrudConfig } from "@/frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
 
 import { useCanUserPerformCrudAction } from "../hooks/useCanUserPerformCrudAction";
 import { usePluginTableMenuItems } from "./portal";

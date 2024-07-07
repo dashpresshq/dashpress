@@ -1,11 +1,11 @@
-import { AppLayout } from "frontend/_layouts/app";
+import { AppLayout } from "@/frontend/_layouts/app";
 import {
   useEntityCrudConfig,
   useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
+} from "@/frontend/hooks/entity/entity.config";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { META_USER_PERMISSIONS } from "@/shared/constants/user";
+import { GranularEntityPermissions } from "@/shared/types/user";
 
 import { useEntityActionMenuItems } from "../../entity/constants";
 import { WholeEntityTable } from "./_WholeEntityTable";

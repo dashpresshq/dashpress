@@ -1,4 +1,4 @@
-import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
+import { createUnAuthenticatedMocks } from "@/tests/api/setups/_authenticatedMock";
 
 import { requestHandler } from "../request";
 import {

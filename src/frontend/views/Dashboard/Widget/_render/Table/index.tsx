@@ -1,9 +1,9 @@
 import { msg } from "@lingui/macro";
-import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 
 import { Table } from "@/components/app/table";
 import type { ITableColumn } from "@/components/app/table/types";
+import { typescriptSafeObjectDotKeys } from "@/shared/lib/objects";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
 
 import { TableWidgetSchema } from "./types";
 

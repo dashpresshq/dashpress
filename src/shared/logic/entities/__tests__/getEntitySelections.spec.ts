@@ -1,5 +1,6 @@
-import type { IEntityField } from "shared/types/db";
 import { fakeMessageDescriptor } from "translations/fake";
+
+import type { IEntityField } from "@/shared/types/db";
 
 import { getEntitySelections, guessEntityType } from "../getEntitySelections";
 

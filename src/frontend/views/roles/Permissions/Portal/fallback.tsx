@@ -1,12 +1,13 @@
-import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { useActiveEntities } from "frontend/hooks/entity/entity.store";
+import { fakeMessageDescriptor } from "translations/fake";
+
+import { useEntityDictionPlurals } from "@/frontend/hooks/entity/entity.queries";
+import { useActiveEntities } from "@/frontend/hooks/entity/entity.store";
 import {
   META_USER_PERMISSIONS,
   USER_PERMISSIONS_CONFIG,
   UserPermissions,
-} from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
-import { fakeMessageDescriptor } from "translations/fake";
+} from "@/shared/constants/user";
+import { GranularEntityPermissions } from "@/shared/types/user";
 
 import { MutatePermission } from "../MutatePermission";
 

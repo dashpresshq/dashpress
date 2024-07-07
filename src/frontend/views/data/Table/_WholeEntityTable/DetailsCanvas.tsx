@@ -1,11 +1,11 @@
 import { msg } from "@lingui/macro";
-import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { SoftButton } from "@/components/app/button/soft";
 import { OffCanvas } from "@/components/app/off-canvas";
+import { useEntityCrudConfig } from "@/frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
 
 import { EntityDetailsView } from "../../Details/DetailsView";
 import { PortalDataComponent } from "../../portal";

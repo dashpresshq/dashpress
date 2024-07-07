@@ -1,6 +1,6 @@
-import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
-import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
-import { requestHandler } from "backend/lib/request";
+import { requestHandler } from "@/backend/lib/request";
+import { createAuthenticatedMocks } from "@/tests/api/setups";
+import { createUnAuthenticatedMocks } from "@/tests/api/setups/_authenticatedMock";
 
 const handler = requestHandler(
   {

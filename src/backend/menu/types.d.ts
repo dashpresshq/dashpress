@@ -1,4 +1,4 @@
-import type { INavigationMenuItem } from "shared/types/menu";
+import type { INavigationMenuItem } from "@/shared/types/menu";
 
 export interface IBaseNavigationMenuApiService {
   generateMenuItems(): Promise<INavigationMenuItem[]>;

@@ -1,10 +1,4 @@
 import { msg } from "@lingui/macro";
-import { AuthLayout } from "frontend/_layouts/guest";
-import type { CustomNextPage } from "frontend/_layouts/types";
-import { useSetupCheck } from "frontend/hooks/setup/setup.store";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import type { ISetupUserForm } from "shared/form-schemas/setup/user";
-import { SETUP_USER_FORM_SCHEMA } from "shared/form-schemas/setup/user";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import {
@@ -12,6 +6,12 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { AuthLayout } from "@/frontend/_layouts/guest";
+import type { CustomNextPage } from "@/frontend/_layouts/types";
+import { useSetupCheck } from "@/frontend/hooks/setup/setup.store";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import type { ISetupUserForm } from "@/shared/form-schemas/setup/user";
+import { SETUP_USER_FORM_SCHEMA } from "@/shared/form-schemas/setup/user";
 
 import { useSetupUserMutation } from "../setup.store";
 

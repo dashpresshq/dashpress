@@ -1,4 +1,4 @@
-import { noop } from "shared/lib/noop";
+import { noop } from "@/shared/lib/noop";
 
 import type { WidgetFormField } from "../../types";
 

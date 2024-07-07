@@ -1,8 +1,9 @@
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { useApi } from "frontend/lib/data/useApi";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import type { ISetupCheck } from "shared/types/auth";
+
+import { CRUD_CONFIG_NOT_FOUND } from "@/frontend/lib/crud-config";
+import { useApi } from "@/frontend/lib/data/useApi";
+import type { ISetupCheck } from "@/shared/types/auth";
 
 export const SETUP_CHECK_URL = "/api/setup/check";
 

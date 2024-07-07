@@ -1,14 +1,14 @@
-import type { ConfigurationApiService } from "backend/configuration/configuration.service";
-import { configurationApiService } from "backend/configuration/configuration.service";
-import type { RDBMSDataApiService } from "backend/data/data-access/RDBMS";
-import { rDBMSDataApiService } from "backend/data/data-access/RDBMS";
-import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
-import { BadRequestError, UnauthorizedError } from "backend/lib/errors";
-import { HashService } from "backend/lib/hash/hash.service";
-import type { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import { noop } from "shared/lib/noop";
-import type { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
-import type { IAccountProfile, IAccountUser } from "shared/types/user";
+import type { ConfigurationApiService } from "@/backend/configuration/configuration.service";
+import { configurationApiService } from "@/backend/configuration/configuration.service";
+import type { RDBMSDataApiService } from "@/backend/data/data-access/RDBMS";
+import { rDBMSDataApiService } from "@/backend/data/data-access/RDBMS";
+import type { AbstractConfigDataPersistenceService } from "@/backend/lib/config-persistence";
+import { BadRequestError, UnauthorizedError } from "@/backend/lib/errors";
+import { HashService } from "@/backend/lib/hash/hash.service";
+import type { IResetPasswordForm } from "@/shared/form-schemas/users/reset-password";
+import { noop } from "@/shared/lib/noop";
+import type { ISuccessfullAuthenticationResponse } from "@/shared/types/auth/portal";
+import type { IAccountProfile, IAccountUser } from "@/shared/types/user";
 
 import { authTokenApiService } from "../lib/auth-token/auth-token.service";
 import { getPortalAuthenticationResponse } from "./portal";

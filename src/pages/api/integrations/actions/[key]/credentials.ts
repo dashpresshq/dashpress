@@ -1,6 +1,6 @@
-import { integrationsApiService } from "backend/integrations/integrations.service";
-import { requestHandler } from "backend/lib/request";
-import { UserPermissions } from "shared/constants/user";
+import { integrationsApiService } from "@/backend/integrations/integrations.service";
+import { requestHandler } from "@/backend/lib/request";
+import { UserPermissions } from "@/shared/constants/user";
 
 const REQUEST_KEY_FIELD = "key";
 

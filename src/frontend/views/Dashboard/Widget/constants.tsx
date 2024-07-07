@@ -1,8 +1,8 @@
 import { msg } from "@lingui/macro";
-import type { IWidgetConfig } from "shared/types/dashboard";
 
 import { TableSkeleton } from "@/components/app/skeleton/table";
 import { Skeleton } from "@/components/ui/skeleton";
+import type { IWidgetConfig } from "@/shared/types/dashboard";
 
 import { SummaryCardWidgetSchema } from "./_render/Summary/types";
 import { TableWidgetSchema } from "./_render/Table/types";

@@ -1,8 +1,8 @@
 import { useLingui } from "@lingui/react";
-import type { IColorableSelection } from "shared/types/ui";
 
 import { spectrumVariants } from "@/components/ui/spectrum";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
+import type { IColorableSelection } from "@/shared/types/ui";
 
 export function OptionTag({ spectrum, label }: IColorableSelection) {
   const { _ } = useLingui();

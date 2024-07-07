@@ -1,16 +1,16 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { AppLayout } from "frontend/_layouts/app";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useRouter } from "next/router";
 import SortableList, { SortableItem } from "react-easy-sort";
-import { UserPermissions } from "shared/constants/user";
-import { arrayMoveImmutable } from "shared/lib/array/move";
 
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "@/shared/constants/user";
+import { arrayMoveImmutable } from "@/shared/lib/array/move";
 
 import {
   useArrangeDashboardWidgetMutation,

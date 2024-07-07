@@ -1,11 +1,11 @@
 import { msg } from "@lingui/macro";
-import { AppLayout } from "frontend/_layouts/app";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import type { ReactNode } from "react";
 
 import type { IMenuActionItem } from "@/components/app/button/types";
 import { ContentLayout } from "@/components/app/content-layout";
 import { MenuSection } from "@/components/app/menu-section";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
 
 import { useMutateBaseSettingsMenu } from "./portal";
 

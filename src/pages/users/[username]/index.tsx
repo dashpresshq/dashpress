@@ -1,4 +1,4 @@
-import { UserUpdate } from "frontend/views/users/Update";
+import { UserUpdate } from "@/frontend/views/users/Update";
 
 export { getServerSideProps } from "translations/utils";
 

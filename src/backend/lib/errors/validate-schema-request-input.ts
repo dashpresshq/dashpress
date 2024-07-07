@@ -1,5 +1,5 @@
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { runValidationError } from "shared/validations/run";
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
+import { runValidationError } from "@/shared/validations/run";
 
 import { BadRequestError } from ".";
 

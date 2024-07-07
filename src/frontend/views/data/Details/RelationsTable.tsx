@@ -1,17 +1,18 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useEntityDataReference } from "frontend/hooks/data/data.store";
+
+import { useEntityDataReference } from "@/frontend/hooks/data/data.store";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { FilterOperators } from "shared/types/data";
-import { GranularEntityPermissions } from "shared/types/user";
+} from "@/frontend/hooks/entity/entity.config";
+import { useEntityReferenceFields } from "@/frontend/hooks/entity/entity.store";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { useRouteParam } from "@/frontend/lib/routing/useRouteParam";
+import { META_USER_PERMISSIONS } from "@/shared/constants/user";
+import { FilterOperators } from "@/shared/types/data";
+import { GranularEntityPermissions } from "@/shared/types/user";
 
 import { WholeEntityTable } from "../Table/_WholeEntityTable";
 import {

@@ -1,4 +1,4 @@
-import { EntityCreate } from "frontend/views/data/Create";
+import { EntityCreate } from "@/frontend/views/data/Create";
 
 export { getServerSideProps } from "translations/utils";
 

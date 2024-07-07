@@ -1,10 +1,10 @@
-import type { IEntityField } from "shared/types/db";
+import type { IEntityField } from "@/shared/types/db";
 import type {
   EntityTypesForSelection,
   IColorableSelection,
-} from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations/field-types-config";
-import type { FormFieldTypes } from "shared/validations/types";
+} from "@/shared/types/ui";
+import { FIELD_TYPES_CONFIG_MAP } from "@/shared/validations/field-types-config";
+import type { FormFieldTypes } from "@/shared/validations/types";
 
 import { getEntitySelectionConfig } from "./getEntitySelectionConfig";
 

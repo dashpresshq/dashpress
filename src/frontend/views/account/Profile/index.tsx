@@ -1,11 +1,3 @@
-import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import type { IUpdateProfileForm } from "shared/form-schemas/profile/update";
-import { UPDATE_PROFILE_FORM_SCHEMA } from "shared/form-schemas/profile/update";
-
 import { SchemaForm } from "@/components/app/form/schema";
 import { SectionBox } from "@/components/app/section-box";
 import {
@@ -13,6 +5,13 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useAuthenticatedUserBag } from "@/frontend/hooks/auth/user.store";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { META_USER_PERMISSIONS } from "@/shared/constants/user";
+import type { IUpdateProfileForm } from "@/shared/form-schemas/profile/update";
+import { UPDATE_PROFILE_FORM_SCHEMA } from "@/shared/form-schemas/profile/update";
 
 import { BaseAccountLayout } from "../_Base";
 import { useUpdateProfileMutation } from "../account.store";

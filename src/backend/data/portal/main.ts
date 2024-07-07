@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
-import { noop } from "shared/lib/noop";
-import type { QueryFilterSchema } from "shared/types/data";
+import { noop } from "@/shared/lib/noop";
+import type { QueryFilterSchema } from "@/shared/types/data";
 
 import type { IDataApiService } from "../types";
 

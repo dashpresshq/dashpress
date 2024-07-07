@@ -1,10 +1,10 @@
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useApi } from "frontend/lib/data/useApi";
-import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import type { AppConfigurationKeys } from "shared/configurations";
-import { APP_CONFIGURATION_CONFIG } from "shared/configurations";
-import type { AppConfigurationValueType } from "shared/configurations/constants";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { useApiQueries } from "@/frontend/lib/data/useApi/useApiQueries";
+import { useWaitForResponseMutationOptions } from "@/frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import type { AppConfigurationKeys } from "@/shared/configurations";
+import { APP_CONFIGURATION_CONFIG } from "@/shared/configurations";
+import type { AppConfigurationValueType } from "@/shared/configurations/constants";
 
 import { useIsUserAutenticated } from "../auth/auth.actions";
 import { useAppConfigurationDomainMessages } from "./configuration.constant";

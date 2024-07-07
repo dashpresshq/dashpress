@@ -1,6 +1,6 @@
-import { useDomainMessages } from "frontend/lib/crud-config";
-import type { AppConfigurationKeys } from "shared/configurations";
-import { APP_CONFIGURATION_CONFIG } from "shared/configurations";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import type { AppConfigurationKeys } from "@/shared/configurations";
+import { APP_CONFIGURATION_CONFIG } from "@/shared/configurations";
 
 export const useAppConfigurationDomainMessages = (
   key: AppConfigurationKeys

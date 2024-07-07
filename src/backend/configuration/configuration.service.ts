@@ -1,6 +1,6 @@
-import { progammingError } from "backend/lib/errors";
-import { notAllowedOnDemoValidation } from "backend/lib/request/validations/implementations/not-allowed-on-demo";
-import type { AppConfigurationValueType } from "shared/configurations/constants";
+import { progammingError } from "@/backend/lib/errors";
+import { notAllowedOnDemoValidation } from "@/backend/lib/request/validations/implementations/not-allowed-on-demo";
+import type { AppConfigurationValueType } from "@/shared/configurations/constants";
 
 import type {
   AppConfigurationKeys,

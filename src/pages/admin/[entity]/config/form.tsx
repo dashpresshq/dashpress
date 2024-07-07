@@ -1,4 +1,4 @@
-import { EntityFormExtensionSettings } from "frontend/views/entity/Form";
+import { EntityFormExtensionSettings } from "@/frontend/views/entity/Form";
 
 export { getServerSideProps } from "translations/utils";
 

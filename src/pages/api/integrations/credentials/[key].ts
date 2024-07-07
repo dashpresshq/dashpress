@@ -1,4 +1,4 @@
-import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { IntegrationsConfigurationGroup } from "@/shared/types/integrations";
 
 import { integrationsConfigurationDetailsRequestHandler } from "../_base/[key]";
 

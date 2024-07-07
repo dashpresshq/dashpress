@@ -1,13 +1,13 @@
 import { msg } from "@lingui/macro";
-import { uniqBy } from "shared/lib/array/uniq-by";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import type {
-  EntityTypesForSelection,
-  IColorableSelection,
-} from "shared/types/ui";
 import { fakeMessageDescriptor } from "translations/fake";
 
 import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
+import { uniqBy } from "@/shared/lib/array/uniq-by";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
+import type {
+  EntityTypesForSelection,
+  IColorableSelection,
+} from "@/shared/types/ui";
 
 import { isUseColorsFlagOn } from "./selection.utils";
 

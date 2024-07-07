@@ -1,20 +1,20 @@
 /* eslint-disable no-param-reassign */
 import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useEffect, useState } from "react";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { fakeMessageDescriptor } from "translations/fake";
+
+import { SchemaForm } from "@/components/app/form/schema";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
 import type {
   ActionIntegrations,
   IFormAction,
   IIntegrationsList,
-} from "shared/types/actions";
-import { DataEventActions } from "shared/types/data";
-import { fakeMessageDescriptor } from "translations/fake";
-
-import { SchemaForm } from "@/components/app/form/schema";
+} from "@/shared/types/actions";
+import { DataEventActions } from "@/shared/types/data";
 
 import { useIntegrationImplementationsList } from "./form-actions.store";
 

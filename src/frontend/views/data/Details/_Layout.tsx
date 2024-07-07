@@ -1,13 +1,3 @@
-import { AppLayout } from "frontend/_layouts/app";
-import {
-  useEntityDataDetails,
-  useEntityReferenceCount,
-} from "frontend/hooks/data/data.store";
-import { useEntityId } from "frontend/hooks/entity/entity.config";
-import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
-import { DataStates } from "frontend/lib/data/types";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import type { ReactNode } from "react";
 
 import type { IMenuActionItem } from "@/components/app/button/types";
@@ -16,6 +6,16 @@ import { MenuSection } from "@/components/app/menu-section";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Card, CardContent } from "@/components/ui/card";
+import { AppLayout } from "@/frontend/_layouts/app";
+import {
+  useEntityDataDetails,
+  useEntityReferenceCount,
+} from "@/frontend/hooks/data/data.store";
+import { useEntityId } from "@/frontend/hooks/entity/entity.config";
+import { useEntityDictionPlurals } from "@/frontend/hooks/entity/entity.queries";
+import { useEntityReferenceFields } from "@/frontend/hooks/entity/entity.store";
+import { DataStates } from "@/frontend/lib/data/types";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
 import { fakeMessageDescriptor } from "@/translations/fake";
 
 import { useEntityActionMenuItems } from "../../entity/constants";

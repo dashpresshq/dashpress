@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { forwardRef } from "react";
-import type { GridSpanSizes } from "shared/types/ui";
+
+import type { GridSpanSizes } from "@/shared/types/ui";
 
 export const WidgetRoot = forwardRef<
   HTMLDivElement,

@@ -1,4 +1,4 @@
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
 
 export function objectToQueryParams(
   data?: Record<string, undefined | string | string[] | number | number[]>,

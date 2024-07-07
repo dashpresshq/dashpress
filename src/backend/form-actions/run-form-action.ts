@@ -1,11 +1,11 @@
-import { integrationsApiService } from "backend/integrations/integrations.service";
-import { getAppCredentialsAndConstants } from "backend/integrations-configurations/utils";
-import { usersApiService } from "backend/users/users.service";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { compileTemplateString } from "shared/lib/strings/templates";
-import type { DataEventActions } from "shared/types/data";
-import type { IAccountProfile } from "shared/types/user";
+import { integrationsApiService } from "@/backend/integrations/integrations.service";
+import { getAppCredentialsAndConstants } from "@/backend/integrations-configurations/utils";
+import { usersApiService } from "@/backend/users/users.service";
+import { INTEGRATIONS_GROUP_CONFIG } from "@/shared/config-bag/integrations";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import { compileTemplateString } from "@/shared/lib/strings/templates";
+import type { DataEventActions } from "@/shared/types/data";
+import type { IAccountProfile } from "@/shared/types/user";
 
 import { ACTION_INTEGRATIONS } from "../integrations/libs";
 import { formActionsApiService } from "./form-actions.service";

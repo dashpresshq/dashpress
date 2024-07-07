@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
-import type { IWidgetConfig } from "shared/types/dashboard";
+
+import type { IWidgetConfig } from "@/shared/types/dashboard";
 
 import { useDasboardWidgetScriptData } from "../dashboard.store";
 import { useDashboardWidgetRelativeDateStore } from "../relativeTime.store";

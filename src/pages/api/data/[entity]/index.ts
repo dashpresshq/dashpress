@@ -1,7 +1,7 @@
-import { dataApiController } from "backend/data/data.controller";
-import { requestHandler } from "backend/lib/request";
-import { DataActionType } from "shared/configurations";
-import type { IAccountProfile } from "shared/types/user";
+import { dataApiController } from "@/backend/data/data.controller";
+import { requestHandler } from "@/backend/lib/request";
+import { DataActionType } from "@/shared/configurations";
+import type { IAccountProfile } from "@/shared/types/user";
 
 export default requestHandler({
   POST: async (getValidatedRequest) => {

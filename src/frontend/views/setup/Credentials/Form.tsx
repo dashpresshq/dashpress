@@ -1,18 +1,18 @@
 import { msg } from "@lingui/macro";
-import { useToggle } from "frontend/hooks/state/useToggleState";
-import type { IFormProps } from "frontend/lib/form/types";
-import { required } from "frontend/lib/validations";
 import { Field, Form } from "react-final-form";
-import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
-import { upperCaseFirstLetter } from "shared/lib/strings";
-import type { IDataSourceCredentials } from "shared/types/data-sources";
-import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
 
 import { FormButton } from "@/components/app/button/form";
 import { FormNumberInput } from "@/components/app/form/input/number";
 import { FormSelect } from "@/components/app/form/input/select";
 import { FormSwitch } from "@/components/app/form/input/switch";
 import { FormInput } from "@/components/app/form/input/text";
+import { useToggle } from "@/frontend/hooks/state/useToggleState";
+import type { IFormProps } from "@/frontend/lib/form/types";
+import { required } from "@/frontend/lib/validations";
+import { typescriptSafeObjectDotKeys } from "@/shared/lib/objects";
+import { upperCaseFirstLetter } from "@/shared/lib/strings";
+import type { IDataSourceCredentials } from "@/shared/types/data-sources";
+import { DATA_SOURCES_CONFIG } from "@/shared/types/data-sources";
 
 export function CredentialsSetupForm({
   onSubmit,

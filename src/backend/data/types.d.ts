@@ -1,5 +1,5 @@
-import type { PaginatedData, QueryFilterSchema } from "shared/types/data";
-import type { IAccountProfile } from "shared/types/user";
+import type { PaginatedData, QueryFilterSchema } from "@/shared/types/data";
+import type { IAccountProfile } from "@/shared/types/user";
 
 export interface IPaginationFilters {
   take: number;

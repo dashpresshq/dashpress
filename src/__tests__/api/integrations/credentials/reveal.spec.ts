@@ -1,11 +1,11 @@
+import handler from "@/pages/api/integrations/credentials/reveal";
 import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
   setupAllTestData,
   setupRolesTestData,
   setupUsersTestData,
-} from "__tests__/api/_test-utils";
-import handler from "pages/api/integrations/credentials/reveal";
+} from "@/tests/api/setups";
 
 describe("/api/integrations/credentials/reveal", () => {
   beforeAll(async () => {

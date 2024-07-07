@@ -1,6 +1,6 @@
-import { formActionsApiService } from "backend/form-actions/form-actions.service";
-import { requestHandler } from "backend/lib/request";
-import { UserPermissions } from "shared/constants/user";
+import { formActionsApiService } from "@/backend/form-actions/form-actions.service";
+import { requestHandler } from "@/backend/lib/request";
+import { UserPermissions } from "@/shared/constants/user";
 
 const REQUEST_KEY_FIELD = "key";
 

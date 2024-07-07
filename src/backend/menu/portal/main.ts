@@ -1,5 +1,5 @@
-import { noop } from "shared/lib/noop";
-import type { INavigationMenuItem } from "shared/types/menu";
+import { noop } from "@/shared/lib/noop";
+import type { INavigationMenuItem } from "@/shared/types/menu";
 
 import type { IBaseNavigationMenuApiService } from "../types";
 

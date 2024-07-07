@@ -2,7 +2,7 @@
 import { useLingui } from "@lingui/react";
 import { highlight, languages } from "prismjs/components/prism-core";
 import Editor from "react-simple-code-editor";
-import { noop } from "shared/lib/noop";
+import { noop } from "@/shared/lib/noop";
 
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
@@ -13,7 +13,7 @@ import {
 } from "@/components/app/form/input/label-and-error";
 import type { ISharedFormInput } from "@/components/app/form/input/types";
 import styles from "@/components/app/render-code/styles.module.css";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 interface IFormCodeEditor extends ISharedFormInput {
   language?: "javascript";

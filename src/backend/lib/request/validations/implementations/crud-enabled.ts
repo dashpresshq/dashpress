@@ -1,16 +1,16 @@
-import { configurationApiService } from "backend/configuration/configuration.service";
+import { configurationApiService } from "@/backend/configuration/configuration.service";
 import {
   ForbiddenError,
   NotFoundError,
   progammingError,
-} from "backend/lib/errors";
-import { rolesApiService } from "backend/roles/roles.service";
+} from "@/backend/lib/errors";
+import { rolesApiService } from "@/backend/roles/roles.service";
 import type {
   DataActionType,
   IEntityCrudSettings,
-} from "shared/configurations";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
+} from "@/shared/configurations";
+import { META_USER_PERMISSIONS } from "@/shared/constants/user";
+import { GranularEntityPermissions } from "@/shared/types/user";
 
 import { ERROR_MESSAGE, getEntityFromRequest } from "./entity";
 import type { ValidationImplType } from "./types";

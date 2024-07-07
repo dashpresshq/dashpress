@@ -1,4 +1,4 @@
-import { progammingError } from "backend/lib/errors";
+import { progammingError } from "@/backend/lib/errors";
 
 import type { ValidationImplType } from "./types";
 

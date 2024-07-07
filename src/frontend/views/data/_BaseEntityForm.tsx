@@ -1,17 +1,5 @@
 import type { MessageDescriptor } from "@lingui/core";
-import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import {
-  useEntityCrudFields,
-  useEntityFieldLabels,
-  useEntityFieldSelections,
-  useEntityFieldValidations,
-  useProcessedEntityFieldTypes,
-} from "frontend/hooks/entity/entity.config";
-import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
-import type { DataStateKeys } from "frontend/lib/data/types";
-import { DataStates } from "frontend/lib/data/types";
 import { useMemo } from "react";
-import type { SystemIconsKeys } from "shared/constants/Icons";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import {
@@ -19,6 +7,18 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useEntityConfiguration } from "@/frontend/hooks/configuration/configuration.store";
+import {
+  useEntityCrudFields,
+  useEntityFieldLabels,
+  useEntityFieldSelections,
+  useEntityFieldValidations,
+  useProcessedEntityFieldTypes,
+} from "@/frontend/hooks/entity/entity.config";
+import { useEntityToOneReferenceFields } from "@/frontend/hooks/entity/entity.store";
+import type { DataStateKeys } from "@/frontend/lib/data/types";
+import { DataStates } from "@/frontend/lib/data/types";
+import type { SystemIconsKeys } from "@/shared/constants/Icons";
 
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";

@@ -1,33 +1,33 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import {
-  ENTITY_LIST_PATH,
-  ENTITY_TABLE_PATH,
-} from "frontend/hooks/data/constants";
-import {
-  useEntityFieldLabels,
-  useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { useEntityFields } from "frontend/hooks/entity/entity.store";
-import { useStringSelections } from "frontend/lib/selection";
-import { useIsEntityFieldMutatable } from "frontend/views/data/hooks/useIsEntityFieldMutatable";
 import { useEffect } from "react";
-import type { CrudViewsKeys } from "shared/configurations";
-import {
-  CRUD_HIDDEN_KEY_CONFIG,
-  ORDER_FIELD_CONFIG,
-} from "shared/configurations/permissions";
-import type { DataCrudKeys } from "shared/types/data";
 
 import { FormButton } from "@/components/app/button/form";
 import { ListManager } from "@/components/app/list-manager";
 import type { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import {
+  ENTITY_LIST_PATH,
+  ENTITY_TABLE_PATH,
+} from "@/frontend/hooks/data/constants";
+import {
+  useEntityFieldLabels,
+  useEntitySlug,
+} from "@/frontend/hooks/entity/entity.config";
+import { useEntityFields } from "@/frontend/hooks/entity/entity.store";
+import { useStringSelections } from "@/frontend/lib/selection";
+import { useIsEntityFieldMutatable } from "@/frontend/views/data/hooks/useIsEntityFieldMutatable";
+import type { CrudViewsKeys } from "@/shared/configurations";
+import {
+  CRUD_HIDDEN_KEY_CONFIG,
+  ORDER_FIELD_CONFIG,
+} from "@/shared/configurations/permissions";
+import type { DataCrudKeys } from "@/shared/types/data";
 
 import { ENTITY_CRUD_LABELS } from "../constants";
 import { makeEntityFieldsSelectionKey } from "./constants";

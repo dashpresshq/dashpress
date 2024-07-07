@@ -1,4 +1,4 @@
-import { EntityFormActionsSettings } from "frontend/views/entity/Actions";
+import { EntityFormActionsSettings } from "@/frontend/views/entity/Actions";
 
 export { getServerSideProps } from "translations/utils";
 

@@ -1,17 +1,18 @@
 /* eslint-disable prettier/prettier */
 
-import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { TestProviders } from "__tests__/_/Provider";
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { rest } from "msw";
-import ManageVariables from "pages/admin/settings/variables";
-import { UserPermissions } from "shared/constants/user";
-import type { IAuthenticatedUserBag } from "shared/types/user";
+
+import { AuthActions } from "@/frontend/hooks/auth/auth.actions";
+import ManageVariables from "@/pages/admin/settings/variables";
+import { UserPermissions } from "@/shared/constants/user";
+import type { IAuthenticatedUserBag } from "@/shared/types/user";
+import { BASE_TEST_URL } from "@/tests/api/handlers/_utils";
+import { USE_ROUTER_PARAMS } from "@/tests/constants";
+import { TestProviders } from "@/tests/Provider";
+import { setupApiHandlers } from "@/tests/setupApihandlers";
+import { getTableRows } from "@/tests/utils";
 
 const server = setupApiHandlers();
 

@@ -1,4 +1,4 @@
-import { TableViewsSettings } from "frontend/views/entity/Views";
+import { TableViewsSettings } from "@/frontend/views/entity/Views";
 
 export { getServerSideProps } from "translations/utils";
 

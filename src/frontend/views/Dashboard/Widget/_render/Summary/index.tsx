@@ -1,5 +1,5 @@
-import { systemIconToSVG } from "shared/constants/Icons";
-import type { ISummaryWidgetConfig } from "shared/types/dashboard";
+import { systemIconToSVG } from "@/shared/constants/Icons";
+import type { ISummaryWidgetConfig } from "@/shared/types/dashboard";
 
 import {
   getFullAndRelativeCount,

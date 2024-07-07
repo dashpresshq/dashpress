@@ -1,8 +1,9 @@
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { StorageService, TemporayStorageService } from "frontend/lib/storage";
-import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
 import { useMemo } from "react";
 import languages from "translations/languages";
+
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { StorageService, TemporayStorageService } from "@/frontend/lib/storage";
+import { STORAGE_CONSTANTS } from "@/frontend/lib/storage/constants";
 
 import { PORTAL_GUEST_ROUTES } from "./portal";
 

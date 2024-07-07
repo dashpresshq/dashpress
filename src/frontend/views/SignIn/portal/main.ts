@@ -1,6 +1,6 @@
-import type { ISignInForm } from "shared/form-schemas/auth/signin";
-import { noop } from "shared/lib/noop";
-import type { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
+import type { ISignInForm } from "@/shared/form-schemas/auth/signin";
+import { noop } from "@/shared/lib/noop";
+import type { ISuccessfullAuthenticationResponse } from "@/shared/types/auth/portal";
 
 export const useHandleNoTokenAuthResponse = () => {
   return (

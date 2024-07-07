@@ -1,4 +1,4 @@
-import { createStore } from "frontend/lib/store";
+import { createStore } from "@/frontend/lib/store";
 
 type IStore = {
   widgetRelativeDate: Record<string, string>;

@@ -1,4 +1,4 @@
-import { StorageIntegrations } from "frontend/views/integrations/storage";
+import { StorageIntegrations } from "@/frontend/views/integrations/storage";
 
 export { getServerSideProps } from "translations/utils";
 

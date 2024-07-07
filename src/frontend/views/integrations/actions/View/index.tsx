@@ -1,11 +1,11 @@
 import { msg } from "@lingui/macro";
-import type {
-  ActionIntegrations,
-  IIntegrationsList,
-} from "shared/types/actions";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import { Tabs } from "@/components/app/tabs";
+import type {
+  ActionIntegrations,
+  IIntegrationsList,
+} from "@/shared/types/actions";
 
 import { PasswordMessage } from "../../Password";
 import { useActivateIntegrationMutation } from "../actions.store";

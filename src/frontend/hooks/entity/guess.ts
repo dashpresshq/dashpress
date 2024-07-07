@@ -1,11 +1,11 @@
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import type { IEntityField } from "shared/types/db";
-import type { ValidationsBoundToType } from "shared/validations";
-import { ENTITY_VALIDATION_CONFIG } from "shared/validations";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import type { IEntityField } from "@/shared/types/db";
+import type { ValidationsBoundToType } from "@/shared/validations";
+import { ENTITY_VALIDATION_CONFIG } from "@/shared/validations";
 import type {
   FormFieldTypes,
   IFieldValidationItem,
-} from "shared/validations/types";
+} from "@/shared/validations/types";
 
 export const getFieldTypeBoundedValidations = (
   fieldType: FormFieldTypes

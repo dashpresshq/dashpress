@@ -1,4 +1,4 @@
-import { SignIn } from "frontend/views/SignIn";
+import { SignIn } from "@/frontend/views/SignIn";
 
 export { getServerSideProps } from "translations/utils";
 

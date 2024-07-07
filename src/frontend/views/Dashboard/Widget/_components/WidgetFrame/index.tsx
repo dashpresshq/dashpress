@@ -1,17 +1,17 @@
 import { msg } from "@lingui/macro";
-import type { DataStateKeys } from "frontend/lib/data/types";
-import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import type { ReactElement } from "react";
 import { forwardRef } from "react";
-import type { IWidgetConfig } from "shared/types/dashboard";
-import { WIDGET_SCRIPT_RELATIVE_TIME_MARKER } from "shared/types/dashboard";
-import type { ISharedWidgetConfig } from "shared/types/dashboard/base";
 
 import { EmptyWrapper } from "@/components/app/empty-wrapper";
 import { RenderCode } from "@/components/app/render-code";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
+import type { DataStateKeys } from "@/frontend/lib/data/types";
+import { WidgetRoot } from "@/frontend/views/Dashboard/styles";
+import type { IWidgetConfig } from "@/shared/types/dashboard";
+import { WIDGET_SCRIPT_RELATIVE_TIME_MARKER } from "@/shared/types/dashboard";
+import type { ISharedWidgetConfig } from "@/shared/types/dashboard/base";
 
 import { WIDGET_CONFIG } from "../../constants";
 import { useWidgetNavigationLink } from "../../useWidgetNavigationLink";

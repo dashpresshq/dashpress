@@ -1,4 +1,4 @@
-import type { PaginatedData } from "shared/types/data";
+import type { PaginatedData } from "@/shared/types/data";
 
 import type { IPaginationFilters } from "./types";
 

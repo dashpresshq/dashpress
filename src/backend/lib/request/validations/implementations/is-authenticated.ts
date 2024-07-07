@@ -1,6 +1,6 @@
-import { authTokenApiService } from "backend/lib/auth-token/auth-token.service";
-import { UnauthorizedError } from "backend/lib/errors";
-import { REQUEST_ERROR_CODES } from "shared/constants/auth";
+import { authTokenApiService } from "@/backend/lib/auth-token/auth-token.service";
+import { UnauthorizedError } from "@/backend/lib/errors";
+import { REQUEST_ERROR_CODES } from "@/shared/constants/auth";
 
 import type { ValidationImplType } from "./types";
 

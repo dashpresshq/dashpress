@@ -1,5 +1,5 @@
-import { UserPermissions } from "shared/constants/user";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { UserPermissions } from "@/shared/constants/user";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
 
 import { DocumentationRoot } from "./_base";
 

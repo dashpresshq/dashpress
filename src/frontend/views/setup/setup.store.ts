@@ -1,11 +1,12 @@
 import { msg } from "@lingui/macro";
-import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
-import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import type { ISetupUserForm } from "shared/form-schemas/setup/user";
-import type { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
-import type { IDataSourceCredentials } from "shared/types/data-sources";
+
+import { useAuthenticateUser } from "@/frontend/hooks/auth/useAuthenticateUser";
+import { SETUP_CHECK_URL } from "@/frontend/hooks/setup/setup.store";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useWaitForResponseMutationOptions } from "@/frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import type { ISetupUserForm } from "@/shared/form-schemas/setup/user";
+import type { ISuccessfullAuthenticationResponse } from "@/shared/types/auth/portal";
+import type { IDataSourceCredentials } from "@/shared/types/data-sources";
 
 export function useSetupCredentialsMutation() {
   return useWaitForResponseMutationOptions<IDataSourceCredentials>({

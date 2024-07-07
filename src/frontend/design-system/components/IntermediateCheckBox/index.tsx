@@ -1,7 +1,7 @@
 import type { Icon as IconType } from "react-feather";
 import { CheckSquare, MinusSquare, Square } from "react-feather";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 type CheckboxState = "checked" | "unchecked" | "partial";
 

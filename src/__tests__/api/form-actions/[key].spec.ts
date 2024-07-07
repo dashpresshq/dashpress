@@ -1,12 +1,9 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import { setupFormActionsTestData } from "__tests__/api/_test-utils/_form-actions";
-import handler from "pages/api/form-actions/[key]";
-import type { IFormAction } from "shared/types/actions";
-import { ActionIntegrations } from "shared/types/actions";
-import { DataEventActions } from "shared/types/data";
+import handler from "@/pages/api/form-actions/[key]";
+import type { IFormAction } from "@/shared/types/actions";
+import { ActionIntegrations } from "@/shared/types/actions";
+import { DataEventActions } from "@/shared/types/data";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
+import { setupFormActionsTestData } from "@/tests/api/setups/_form-actions";
 
 const TEST_FORM_ACTIONS: IFormAction[] = [
   {

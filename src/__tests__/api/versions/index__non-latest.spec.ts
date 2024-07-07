@@ -1,5 +1,5 @@
-import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
-import handler from "pages/api/versions";
+import handler from "@/pages/api/versions";
+import { createAuthenticatedMocks } from "@/tests/api/setups";
 
 jest.mock("latest-version", () => jest.fn().mockReturnValue("9.9.9"));
 

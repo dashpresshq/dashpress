@@ -1,6 +1,7 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { DATE_FILTER_VALUE } from "shared/types/data";
+
+import { DATE_FILTER_VALUE } from "@/shared/types/data";
 
 type MsgFn = (value: number) => MessageDescriptor;
 

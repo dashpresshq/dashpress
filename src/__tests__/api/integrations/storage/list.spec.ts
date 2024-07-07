@@ -1,5 +1,5 @@
-import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
-import handler from "pages/api/integrations/storage/list";
+import handler from "@/pages/api/integrations/storage/list";
+import { createAuthenticatedMocks } from "@/tests/api/setups";
 
 describe("/api/integrations/storage/list", () => {
   it("should list storage integrations", async () => {

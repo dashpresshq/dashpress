@@ -1,8 +1,9 @@
-import type { ConfigurationApiService } from "backend/configuration/configuration.service";
-import { configurationApiService } from "backend/configuration/configuration.service";
 import jsonwebtoken from "jsonwebtoken";
-import { noop } from "shared/lib/noop";
-import type { IAccountProfile } from "shared/types/user";
+
+import type { ConfigurationApiService } from "@/backend/configuration/configuration.service";
+import { configurationApiService } from "@/backend/configuration/configuration.service";
+import { noop } from "@/shared/lib/noop";
+import type { IAccountProfile } from "@/shared/types/user";
 
 import type { ConfigApiService } from "../config/config.service";
 import { configApiService, ConfigKeys } from "../config/config.service";

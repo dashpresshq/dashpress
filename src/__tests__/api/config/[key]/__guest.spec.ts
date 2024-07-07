@@ -1,9 +1,6 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
-import handler from "pages/api/config/[key]/__guest";
+import handler from "@/pages/api/config/[key]/__guest";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
+import { createUnAuthenticatedMocks } from "@/tests/api/setups/_authenticatedMock";
 
 describe("/api/config/[key]/__guest", () => {
   beforeAll(async () => {

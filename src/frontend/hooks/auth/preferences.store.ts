@@ -1,13 +1,13 @@
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useApi } from "frontend/lib/data/useApi";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { useWaitForResponseMutationOptions } from "@/frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import type {
   UserPreferencesKeys,
   UserPreferencesValueType,
-} from "shared/user-preferences/constants";
-import { USER_PREFERENCES_CONFIG } from "shared/user-preferences/constants";
+} from "@/shared/user-preferences/constants";
+import { USER_PREFERENCES_CONFIG } from "@/shared/user-preferences/constants";
 
 import { useIsUserAutenticated } from "./auth.actions";
 

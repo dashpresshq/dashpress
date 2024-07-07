@@ -1,8 +1,5 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import handler from "pages/api/account/index";
+import handler from "@/pages/api/account/index";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
 
 describe("/api/account/index", () => {
   beforeAll(async () => {

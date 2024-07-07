@@ -1,11 +1,11 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import Head from "next/head";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { CardContent, CardHeader } from "@/components/ui/card";
+import { useAppConfiguration } from "@/frontend/hooks/configuration/configuration.store";
 
 import { useAppTheme } from "../useAppTheme";
 

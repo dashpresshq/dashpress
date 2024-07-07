@@ -1,4 +1,4 @@
-import { AccountProfile } from "frontend/views/account/Profile";
+import { AccountProfile } from "@/frontend/views/account/Profile";
 
 export { getServerSideProps } from "translations/utils";
 

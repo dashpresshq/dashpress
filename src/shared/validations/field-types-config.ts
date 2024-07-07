@@ -1,6 +1,7 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import type { TableFilterType } from "shared/types/data";
+
+import type { TableFilterType } from "@/shared/types/data";
 
 import type { FormFieldTypes, SelectableAbleValidations } from "./types";
 

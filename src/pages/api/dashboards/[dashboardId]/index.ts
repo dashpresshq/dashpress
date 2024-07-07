@@ -1,7 +1,7 @@
-import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
-import { requestHandler } from "backend/lib/request";
-import { UserPermissions } from "shared/constants/user";
-import type { IAccountProfile } from "shared/types/user";
+import { dashboardWidgetsApiService } from "@/backend/dashboard-widgets/dashboard-widgets.service";
+import { requestHandler } from "@/backend/lib/request";
+import { UserPermissions } from "@/shared/constants/user";
+import type { IAccountProfile } from "@/shared/types/user";
 
 const REQUEST_QUERY_FIELD = "dashboardId";
 

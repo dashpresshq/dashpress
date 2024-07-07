@@ -1,6 +1,6 @@
-import { BadRequestError } from "backend/lib/errors";
-import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import type { IKeyValue } from "shared/types/options";
+import { BadRequestError } from "@/backend/lib/errors";
+import { IntegrationsConfigurationGroup } from "@/shared/types/integrations";
+import type { IKeyValue } from "@/shared/types/options";
 
 import {
   INTEGRATION_CONFIG_GROUP_DEMILITER,

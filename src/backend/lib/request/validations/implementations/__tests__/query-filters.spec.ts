@@ -1,8 +1,5 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import { requestHandler } from "backend/lib/request";
+import { requestHandler } from "@/backend/lib/request";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
 
 const handler = requestHandler({
   GET: async (getValidatedRequest) => {

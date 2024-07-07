@@ -1,7 +1,8 @@
 import { msg } from "@lingui/macro";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import type { IActionIntegrationsImplemention } from "shared/types/actions";
 import { fakeMessageDescriptor } from "translations/fake";
+
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
+import type { IActionIntegrationsImplemention } from "@/shared/types/actions";
 
 import { SEND_SMS } from "./sendSms";
 import type { IActionConfig } from "./types";

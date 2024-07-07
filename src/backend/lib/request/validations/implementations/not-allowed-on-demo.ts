@@ -1,4 +1,4 @@
-import { BadRequestError } from "backend/lib/errors";
+import { BadRequestError } from "@/backend/lib/errors";
 
 import type { ValidationImplType } from "./types";
 

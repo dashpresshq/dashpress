@@ -1,4 +1,4 @@
-import { EntityFieldsSettings } from "frontend/views/entity/Fields";
+import { EntityFieldsSettings } from "@/frontend/views/entity/Fields";
 
 export { getServerSideProps } from "translations/utils";
 

@@ -1,6 +1,7 @@
-import { entitiesApiService } from "backend/entities/entities.service";
-import { NotFoundError } from "backend/lib/errors";
 import type { NextApiRequest } from "next";
+
+import { entitiesApiService } from "@/backend/entities/entities.service";
+import { NotFoundError } from "@/backend/lib/errors";
 
 import type { ValidationImplType } from "./types";
 

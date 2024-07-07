@@ -1,5 +1,5 @@
-import { progammingError } from "backend/lib/errors";
-import type { IAccountProfile } from "shared/types/user";
+import { progammingError } from "@/backend/lib/errors";
+import type { IAccountProfile } from "@/shared/types/user";
 
 import type { ValidationImplType } from "./types";
 

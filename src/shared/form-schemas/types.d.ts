@@ -1,11 +1,12 @@
 import type { MessageDescriptor } from "@lingui/core";
-import type { SystemIconsKeys } from "shared/constants/Icons";
-import type { IEvaluateScriptContext } from "shared/types/forms";
-import type { GridSpanSizes, IColorableSelection } from "shared/types/ui";
+
+import type { SystemIconsKeys } from "@/shared/constants/Icons";
+import type { IEvaluateScriptContext } from "@/shared/types/forms";
+import type { GridSpanSizes, IColorableSelection } from "@/shared/types/ui";
 import type {
   FormFieldTypes,
   IFieldValidationItem,
-} from "shared/validations/types";
+} from "@/shared/validations/types";
 
 export type ISchemaFormScriptProps<T> = IEvaluateScriptContext & {
   formValues: T;

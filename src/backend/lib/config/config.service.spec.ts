@@ -1,7 +1,8 @@
 /* eslint-disable no-new */
 import fs from "fs-extra";
 import path from "path";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
 
 import type { ConfigKeys } from "./config.service";
 import { ConfigApiService } from "./config.service";

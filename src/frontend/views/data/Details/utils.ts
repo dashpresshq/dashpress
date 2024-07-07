@@ -1,5 +1,5 @@
-import type { DataStateKeys } from "frontend/lib/data/types";
-import type { IEntityRelation } from "shared/types/db";
+import type { DataStateKeys } from "@/frontend/lib/data/types";
+import type { IEntityRelation } from "@/shared/types/db";
 
 export const getEntitiesRelationsCount = (
   type: IEntityRelation["type"],

@@ -1,7 +1,8 @@
-import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
-import { requestHandler } from "backend/lib/request";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { fakeMessageDescriptor } from "translations/fake";
+
+import { requestHandler } from "@/backend/lib/request";
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
+import { createAuthenticatedMocks } from "@/tests/api/setups";
 
 const TEST_FORM_SCHEMA: IAppliedSchemaFormConfig<{ name: string }> = {
   name: {

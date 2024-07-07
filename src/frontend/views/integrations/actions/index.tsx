@@ -1,9 +1,4 @@
 import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { UserPermissions } from "shared/constants/user";
 
 import { SectionBox } from "@/components/app/section-box";
 import {
@@ -11,6 +6,11 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { useRouteParam } from "@/frontend/lib/routing/useRouteParam";
+import { UserPermissions } from "@/shared/constants/user";
 
 import { BaseActionsLayout } from "../_Base";
 import { ACTIONS_VIEW_KEY } from "../constants";

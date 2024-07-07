@@ -1,13 +1,5 @@
 import { msg } from "@lingui/macro";
-import { AppLayout } from "frontend/_layouts/app";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useCallback } from "react";
-import { UserPermissions } from "shared/constants/user";
-import type { IRolesList } from "shared/types/roles";
-import { SystemRoles } from "shared/types/user";
 
 import { ActionButtons } from "@/components/app/button/action";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
@@ -17,6 +9,14 @@ import type {
 } from "@/components/app/pagination-table";
 import { FEPaginationTable } from "@/components/app/pagination-table";
 import { Card } from "@/components/ui/card";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "@/shared/constants/user";
+import type { IRolesList } from "@/shared/types/roles";
+import { SystemRoles } from "@/shared/types/user";
 
 import { ROLES_ENDPOINT_CONFIG, useRoleDeletionMutation } from "./roles.store";
 

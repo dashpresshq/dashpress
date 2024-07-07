@@ -1,7 +1,7 @@
-import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
-import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import type { EncryptionApiService } from "backend/lib/encryption/encryption.service";
-import { encryptionApiService } from "backend/lib/encryption/encryption.service";
+import type { AbstractConfigDataPersistenceService } from "@/backend/lib/config-persistence";
+import { createConfigDomainPersistenceService } from "@/backend/lib/config-persistence";
+import type { EncryptionApiService } from "@/backend/lib/encryption/encryption.service";
+import { encryptionApiService } from "@/backend/lib/encryption/encryption.service";
 
 import { IntegrationsConfigurationApiService } from "./_base";
 

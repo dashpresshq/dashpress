@@ -1,6 +1,6 @@
-import { entitiesApiService } from "backend/entities/entities.service";
-import { requestHandler } from "backend/lib/request";
-import type { IAccountProfile } from "shared/types/user";
+import { entitiesApiService } from "@/backend/entities/entities.service";
+import { requestHandler } from "@/backend/lib/request";
+import type { IAccountProfile } from "@/shared/types/user";
 
 export default requestHandler({
   GET: async (getValidatedRequest) => {

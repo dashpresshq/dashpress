@@ -1,5 +1,5 @@
-import { createStore } from "frontend/lib/store";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { createStore } from "@/frontend/lib/store";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
 
 type IStore = {
   values: Record<string, Record<string, boolean>>;

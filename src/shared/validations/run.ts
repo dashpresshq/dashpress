@@ -1,8 +1,9 @@
 import { i18n } from "@lingui/core";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { compileTemplateString } from "shared/lib/strings/templates";
+
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
+import { compileTemplateString } from "@/shared/lib/strings/templates";
 
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
 

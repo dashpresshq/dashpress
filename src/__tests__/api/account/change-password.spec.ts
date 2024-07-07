@@ -1,11 +1,7 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import handler from "pages/api/account/change-password";
-import signInHandler from "pages/api/auth/signin";
-
-import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
+import handler from "@/pages/api/account/change-password";
+import signInHandler from "@/pages/api/auth/signin";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
+import { createUnAuthenticatedMocks } from "@/tests/api/setups/_authenticatedMock";
 
 describe("/api/account/change-password", () => {
   const OLD_ENV = process.env;

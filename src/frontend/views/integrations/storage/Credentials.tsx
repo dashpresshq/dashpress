@@ -1,9 +1,5 @@
 import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useEffect, useState } from "react";
-import type { ISchemaFormConfig } from "shared/form-schemas/types";
-import type { IStorageIntegration } from "shared/types/actions";
 import { fakeMessageDescriptor } from "translations/fake";
 
 import { SchemaForm } from "@/components/app/form/schema";
@@ -13,6 +9,10 @@ import {
 } from "@/components/app/skeleton/form";
 import { useToastActionQueryError } from "@/components/app/toast/error";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import type { ISchemaFormConfig } from "@/shared/form-schemas/types";
+import type { IStorageIntegration } from "@/shared/types/actions";
 
 import { PasswordToReveal } from "../Password";
 import {

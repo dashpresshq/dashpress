@@ -1,4 +1,4 @@
-import { EntityCrudSettings } from "frontend/views/entity/Crud";
+import { EntityCrudSettings } from "@/frontend/views/entity/Crud";
 
 export { getServerSideProps } from "translations/utils";
 

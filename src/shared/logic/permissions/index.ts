@@ -2,9 +2,9 @@ import {
   CAN_ACCESS_ENTITY,
   META_USER_PERMISSIONS,
   UserPermissions,
-} from "shared/constants/user";
-import { replaceGranular } from "shared/constants/user/shared";
-import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
+} from "@/shared/constants/user";
+import { replaceGranular } from "@/shared/constants/user/shared";
+import { GranularEntityPermissions, SystemRoles } from "@/shared/types/user";
 
 import { portalMetaPermissionCheck } from "./portal";
 

@@ -1,7 +1,8 @@
 import type { UseQueryResult } from "@tanstack/react-query";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import type { IPaginatedDataState, PaginatedData } from "shared/types/data";
+
+import type { IPaginatedDataState, PaginatedData } from "@/shared/types/data";
 
 import { buildApiOptions } from "../_buildOptions";
 import { getPaginatedDataCachekey } from "../constants/getQueryCacheKey";

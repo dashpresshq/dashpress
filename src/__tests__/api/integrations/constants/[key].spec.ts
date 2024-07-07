@@ -1,12 +1,12 @@
+import listHandler from "@/pages/api/integrations/constants";
+import handler from "@/pages/api/integrations/constants/[key]";
 import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
   createAuthenticatedViewerMocks,
   setupAllTestData,
   setupRolesTestData,
-} from "__tests__/api/_test-utils";
-import listHandler from "pages/api/integrations/constants";
-import handler from "pages/api/integrations/constants/[key]";
+} from "@/tests/api/setups";
 
 const currentState = async () => {
   const { req, res } = createAuthenticatedMocks({

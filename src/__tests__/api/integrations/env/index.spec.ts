@@ -1,10 +1,10 @@
+import handler from "@/pages/api/integrations/env";
 import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedViewerMocks,
   setupAllTestData,
   setupRolesTestData,
-} from "__tests__/api/_test-utils";
-import handler from "pages/api/integrations/env";
+} from "@/tests/api/setups";
 
 describe("/api/integrations/env", () => {
   beforeAll(async () => {

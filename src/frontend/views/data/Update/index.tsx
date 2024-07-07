@@ -1,20 +1,22 @@
-import { AppLayout } from "frontend/_layouts/app";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
+import { ContentLayout } from "@/components/app/content-layout";
+import { SectionBox } from "@/components/app/section-box";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useUserHasPermission } from "@/frontend/hooks/auth/user.store";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
-} from "frontend/hooks/data/data.store";
+} from "@/frontend/hooks/data/data.store";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
-
-import { ContentLayout } from "@/components/app/content-layout";
-import { SectionBox } from "@/components/app/section-box";
+} from "@/frontend/hooks/entity/entity.config";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import {
+  META_USER_PERMISSIONS,
+  UserPermissions,
+} from "@/shared/constants/user";
 
 import { useEntityActionMenuItems } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";

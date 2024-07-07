@@ -1,10 +1,10 @@
-import type { UsersApiService } from "backend/users/users.service";
-import { usersApiService } from "backend/users/users.service";
-import { makeRoleId, roleLabel } from "shared/constants/user";
-import type { IBaseRoleForm } from "shared/form-schemas/roles/base";
-import type { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
-import type { IRolesList } from "shared/types/roles";
-import { SystemRoles } from "shared/types/user";
+import type { UsersApiService } from "@/backend/users/users.service";
+import { usersApiService } from "@/backend/users/users.service";
+import { makeRoleId, roleLabel } from "@/shared/constants/user";
+import type { IBaseRoleForm } from "@/shared/form-schemas/roles/base";
+import type { IBasePermissionForm } from "@/shared/form-schemas/roles/permissions/base";
+import type { IRolesList } from "@/shared/types/roles";
+import { SystemRoles } from "@/shared/types/user";
 
 import type { RolesApiService } from "./roles.service";
 import { rolesApiService } from "./roles.service";

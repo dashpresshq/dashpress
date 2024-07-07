@@ -1,8 +1,8 @@
 import { msg } from "@lingui/macro";
-import type { IIntegrationsList } from "shared/types/actions";
-import { ActionIntegrations } from "shared/types/actions";
 
 import { SchemaForm } from "@/components/app/form/schema";
+import type { IIntegrationsList } from "@/shared/types/actions";
+import { ActionIntegrations } from "@/shared/types/actions";
 
 import { useDeactivateIntegrationMutation } from "../actions.store";
 

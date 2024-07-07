@@ -2,10 +2,10 @@ import { i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { format } from "date-fns";
 import Image from "next/image";
-import type { IColorableSelection } from "shared/types/ui";
-import type { FormFieldTypes } from "shared/validations/types";
 
 import { SoftButton } from "@/components/app/button/soft";
+import type { IColorableSelection } from "@/shared/types/ui";
+import type { FormFieldTypes } from "@/shared/validations/types";
 
 import { OptionTag } from "./OptionTag";
 import type { ReferenceDisplayFromTypes } from "./ReferenceComponent";

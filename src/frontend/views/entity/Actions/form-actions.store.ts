@@ -2,17 +2,17 @@ import {
   CRUD_CONFIG_NOT_FOUND,
   MAKE_ENDPOINTS_CONFIG,
   useDomainMessages,
-} from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useApi } from "frontend/lib/data/useApi";
-import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
-import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+} from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { MutationHelpers } from "@/frontend/lib/data/useMutate/mutation-helpers";
+import { useApiMutateOptimisticOptions } from "@/frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { useWaitForResponseMutationOptions } from "@/frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import type {
   IFormAction,
   IIntegrationImplementationList,
-} from "shared/types/actions";
+} from "@/shared/types/actions";
 
 export const FORM_ACTION_ENDPOINT = MAKE_ENDPOINTS_CONFIG(`/api/form-actions`);
 

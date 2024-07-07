@@ -1,4 +1,4 @@
-import { CredentialsSetup } from "frontend/views/setup/Credentials";
+import { CredentialsSetup } from "@/frontend/views/setup/Credentials";
 
 export { getServerSideProps } from "translations/utils";
 

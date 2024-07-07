@@ -1,7 +1,7 @@
-import { requestHandler } from "backend/lib/request";
-import { usersApiService } from "backend/users/users.service";
-import { UserPermissions } from "shared/constants/user";
-import { RESET_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/users/reset-password";
+import { requestHandler } from "@/backend/lib/request";
+import { usersApiService } from "@/backend/users/users.service";
+import { UserPermissions } from "@/shared/constants/user";
+import { RESET_PASSWORD_FORM_SCHEMA } from "@/shared/form-schemas/users/reset-password";
 
 export default requestHandler(
   {

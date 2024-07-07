@@ -1,21 +1,20 @@
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { PersistentDocumentation } from "frontend/docs/persistent-query";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
-import { UserPermissions } from "shared/constants/user";
-
 import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { PersistentDocumentation } from "@/frontend/docs/persistent-query";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import { useEntitySlug } from "@/frontend/hooks/entity/entity.config";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { useTableColumns } from "@/frontend/views/data/Table/useTableColumns";
+import { UserPermissions } from "@/shared/constants/user";
 
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

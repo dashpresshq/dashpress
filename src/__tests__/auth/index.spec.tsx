@@ -1,13 +1,14 @@
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { TestProviders } from "__tests__/_/Provider";
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { AuthActions } from "frontend/hooks/auth/auth.actions";
-import SignIn from "pages/auth";
 import * as React from "react";
 
-import { getToastMessage } from "../_/utils/closeAllToasts";
+import { AuthActions } from "@/frontend/hooks/auth/auth.actions";
+import SignIn from "@/pages/auth";
+import { USE_ROUTER_PARAMS } from "@/tests/constants";
+import { TestProviders } from "@/tests/Provider";
+import { setupApiHandlers } from "@/tests/setupApihandlers";
+
+import { getToastMessage } from "../_/utils";
 
 setupApiHandlers();
 

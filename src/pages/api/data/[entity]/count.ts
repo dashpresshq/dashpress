@@ -1,6 +1,6 @@
-import { dataApiController } from "backend/data/data.controller";
-import { requestHandler } from "backend/lib/request";
-import { DataActionType } from "shared/configurations";
+import { dataApiController } from "@/backend/data/data.controller";
+import { requestHandler } from "@/backend/lib/request";
+import { DataActionType } from "@/shared/configurations";
 
 export default requestHandler({
   GET: async (getValidatedRequest) => {

@@ -1,11 +1,11 @@
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { TestProviders } from "__tests__/_/Provider";
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SiteSettings from "pages/admin/settings/site";
 
-import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
+import SiteSettings from "@/pages/admin/settings/site";
+import { USE_ROUTER_PARAMS } from "@/tests/constants";
+import { TestProviders } from "@/tests/Provider";
+import { setupApiHandlers } from "@/tests/setupApihandlers";
+import { getToastMessage } from "@/tests/utils";
 
 setupApiHandlers();
 

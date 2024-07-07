@@ -1,8 +1,8 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { createStore } from "frontend/lib/store";
 
 import type { IGroupActionButton } from "@/components/app/button/types";
+import { createStore } from "@/frontend/lib/store";
 
 import { DOCUMENTATION_LABEL } from ".";
 

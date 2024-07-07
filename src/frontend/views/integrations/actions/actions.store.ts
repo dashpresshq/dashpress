@@ -1,15 +1,16 @@
 import { msg } from "@lingui/macro";
+
 import {
   CRUD_CONFIG_NOT_FOUND,
   useDomainMessages,
-} from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useApi } from "frontend/lib/data/useApi";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { reduceStringToNumber } from "shared/lib/strings";
-import type { IIntegrationsList } from "shared/types/actions";
-import { ActionIntegrations } from "shared/types/actions";
+} from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { useWaitForResponseMutationOptions } from "@/frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { reduceStringToNumber } from "@/shared/lib/strings";
+import type { IIntegrationsList } from "@/shared/types/actions";
+import { ActionIntegrations } from "@/shared/types/actions";
 
 import { usePasswordStore } from "../password.store";
 

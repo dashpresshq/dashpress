@@ -1,4 +1,4 @@
-import { EntityDetails } from "frontend/views/data/Details";
+import { EntityDetails } from "@/frontend/views/data/Details";
 
 export { getServerSideProps } from "translations/utils";
 

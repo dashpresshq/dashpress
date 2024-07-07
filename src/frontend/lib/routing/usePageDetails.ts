@@ -1,9 +1,9 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
 
 import type { IGroupActionButton } from "@/components/app/button/types";
+import { META_USER_PERMISSIONS } from "@/shared/constants/user";
 
 import { createStore } from "../store";
 

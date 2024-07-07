@@ -1,7 +1,7 @@
-import { requestHandler } from "backend/lib/request";
-import { rolesApiController } from "backend/roles/roles.controller";
-import { UserPermissions } from "shared/constants/user";
-import { ensureIsArray } from "shared/lib/array/ensure";
+import { requestHandler } from "@/backend/lib/request";
+import { rolesApiController } from "@/backend/roles/roles.controller";
+import { UserPermissions } from "@/shared/constants/user";
+import { ensureIsArray } from "@/shared/lib/array/ensure";
 
 const REQUEST_QUERY_FIELD = "roleId";
 

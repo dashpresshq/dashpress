@@ -1,12 +1,12 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
-import type { IIntegrationsList } from "shared/types/actions";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import { useToastActionQueryError } from "@/components/app/toast/error";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { typescriptSafeObjectDotKeys } from "@/shared/lib/objects";
+import type { IIntegrationsList } from "@/shared/types/actions";
 
 import { PasswordMessage, PasswordToReveal } from "../../Password";
 import {

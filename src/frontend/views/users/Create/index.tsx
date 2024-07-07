@@ -1,16 +1,16 @@
 import { msg } from "@lingui/macro";
-import { AppLayout } from "frontend/_layouts/app";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { UserPermissions } from "shared/constants/user";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import type { ICreateUserForm } from "shared/form-schemas/users";
 
 import { ContentLayout } from "@/components/app/content-layout";
 import { SchemaForm } from "@/components/app/form/schema";
 import { SectionBox } from "@/components/app/section-box";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "@/shared/constants/user";
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
+import type { ICreateUserForm } from "@/shared/form-schemas/users";
 
 import { useCreateUserMutation } from "../users.store";
 

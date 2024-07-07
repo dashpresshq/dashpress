@@ -1,28 +1,28 @@
 import { msg } from "@lingui/macro";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
-import {
-  composeValidators,
-  maxLength,
-  minLength,
-} from "frontend/lib/validations";
 import { useMemo, useState } from "react";
 import { Field, Form } from "react-final-form";
-import type { IFormInputRightAction } from "shared/form-schemas/types";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import type {
-  EntityTypesForSelection,
-  IColorableSelection,
-} from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import type {
-  FormFieldTypes,
-  IFieldValidationItem,
-} from "shared/validations/types";
 
 import { FormButton } from "@/components/app/button/form";
 import { FormSelect } from "@/components/app/form/input/select";
 import { OffCanvas } from "@/components/app/off-canvas";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import { getFieldTypeBoundedValidations } from "@/frontend/hooks/entity/guess";
+import {
+  composeValidators,
+  maxLength,
+  minLength,
+} from "@/frontend/lib/validations";
+import type { IFormInputRightAction } from "@/shared/form-schemas/types";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import type {
+  EntityTypesForSelection,
+  IColorableSelection,
+} from "@/shared/types/ui";
+import { FIELD_TYPES_CONFIG_MAP } from "@/shared/validations";
+import type {
+  FormFieldTypes,
+  IFieldValidationItem,
+} from "@/shared/validations/types";
 
 import { FieldSelectionCanvas } from "./FieldsSelection";
 import { FieldValidationCanvas } from "./FieldsValidation";

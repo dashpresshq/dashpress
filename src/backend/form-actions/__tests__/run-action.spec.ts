@@ -1,16 +1,17 @@
+import fetchMock from "jest-fetch-mock";
+import { createTransport } from "nodemailer";
+
+import detailsHandler from "@/pages/api/data/[entity]/[id]/index";
+import indexHandler from "@/pages/api/data/[entity]/index";
+import { ActionIntegrations } from "@/shared/types/actions";
+import { DataEventActions } from "@/shared/types/data";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
   setupCredentialsTestData,
-} from "__tests__/api/_test-utils";
-import { setupFormActionsTestData } from "__tests__/api/_test-utils/_form-actions";
-import { setupIntegrationsConstantsTestData } from "__tests__/api/_test-utils/_integrations-constants";
-import fetchMock from "jest-fetch-mock";
-import { createTransport } from "nodemailer";
-import detailsHandler from "pages/api/data/[entity]/[id]/index";
-import indexHandler from "pages/api/data/[entity]/index";
-import { ActionIntegrations } from "shared/types/actions";
-import { DataEventActions } from "shared/types/data";
+} from "@/tests/api/setups";
+import { setupFormActionsTestData } from "@/tests/api/setups/_form-actions";
+import { setupIntegrationsConstantsTestData } from "@/tests/api/setups/_integrations-constants";
 
 jest.mock("nodemailer", () => ({
   createTransport: jest.fn(),

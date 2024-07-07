@@ -1,14 +1,14 @@
 import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { useApi } from "frontend/lib/data/useApi";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { Fragment } from "react";
-import { UserPermissions } from "shared/constants/user";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 import { SectionBox } from "@/components/app/section-box";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "@/shared/constants/user";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
 
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";

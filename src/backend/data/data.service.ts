@@ -1,10 +1,10 @@
-import { runFormAction } from "backend/form-actions/run-form-action";
-import { NotFoundError, progammingError } from "backend/lib/errors";
-import { compileTemplateString } from "shared/lib/strings/templates";
-import type { PaginatedData, QueryFilterSchema } from "shared/types/data";
-import { DataEventActions, FilterOperators } from "shared/types/data";
-import type { IEntityField } from "shared/types/db";
-import type { IAccountProfile } from "shared/types/user";
+import { runFormAction } from "@/backend/form-actions/run-form-action";
+import { NotFoundError, progammingError } from "@/backend/lib/errors";
+import { compileTemplateString } from "@/shared/lib/strings/templates";
+import type { PaginatedData, QueryFilterSchema } from "@/shared/types/data";
+import { DataEventActions, FilterOperators } from "@/shared/types/data";
+import type { IEntityField } from "@/shared/types/db";
+import type { IAccountProfile } from "@/shared/types/user";
 
 import type { ConfigurationApiService } from "../configuration/configuration.service";
 import { configurationApiService } from "../configuration/configuration.service";

@@ -1,4 +1,4 @@
-import type { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "@/shared/types/dashboard";
 
 import type { IWidgetConfigBag } from "../../types";
 

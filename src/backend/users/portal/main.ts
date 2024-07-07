@@ -1,4 +1,4 @@
-import type { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
+import type { ISuccessfullAuthenticationResponse } from "@/shared/types/auth/portal";
 
 export const getPortalAuthenticationResponse = async (
   username: string,

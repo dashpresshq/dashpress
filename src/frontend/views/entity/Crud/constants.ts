@@ -1,4 +1,4 @@
-import type { CrudViewsKeys } from "shared/configurations";
+import type { CrudViewsKeys } from "@/shared/configurations";
 
 export const makeEntityFieldsSelectionKey = (
   entity: string,

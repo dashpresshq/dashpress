@@ -1,4 +1,4 @@
-import type { GranularEntityPermissions } from "shared/types/user";
+import type { GranularEntityPermissions } from "@/shared/types/user";
 
 export const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";
 

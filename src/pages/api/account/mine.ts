@@ -1,8 +1,8 @@
-import { requestHandler } from "backend/lib/request";
-import { usersApiController } from "backend/users/users.controller";
-import { usersApiService } from "backend/users/users.service";
-import { UPDATE_PROFILE_FORM_SCHEMA } from "shared/form-schemas/profile/update";
-import type { IAccountProfile } from "shared/types/user";
+import { requestHandler } from "@/backend/lib/request";
+import { usersApiController } from "@/backend/users/users.controller";
+import { usersApiService } from "@/backend/users/users.service";
+import { UPDATE_PROFILE_FORM_SCHEMA } from "@/shared/form-schemas/profile/update";
+import type { IAccountProfile } from "@/shared/types/user";
 
 export default requestHandler({
   PATCH: async (getValidatedRequest) => {

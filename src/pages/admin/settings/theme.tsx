@@ -1,4 +1,4 @@
-import { ThemeSettings } from "frontend/views/settings/Theme";
+import { ThemeSettings } from "@/frontend/views/settings/Theme";
 
 export { getServerSideProps } from "translations/utils";
 

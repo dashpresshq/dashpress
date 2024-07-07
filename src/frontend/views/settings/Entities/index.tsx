@@ -1,21 +1,20 @@
-import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  useAppConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { useApi } from "frontend/lib/data/useApi";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
-import { UserPermissions } from "shared/constants/user";
-import type { ILabelValue } from "shared/types/options";
-
 import { SectionBox } from "@/components/app/section-box";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { NAVIGATION_MENU_ENDPOINT } from "@/frontend/_layouts/app/NavigationSideBar/constants";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { EnabledEntitiesDocumentation } from "@/frontend/docs/enabled-entities";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import {
+  useAppConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import { useEntityDictionPlurals } from "@/frontend/hooks/entity/entity.queries";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { ACTIVE_ENTITIES_ENDPOINT } from "@/shared/constants/entities";
+import { UserPermissions } from "@/shared/constants/user";
+import type { ILabelValue } from "@/shared/types/options";
 
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";

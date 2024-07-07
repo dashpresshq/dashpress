@@ -1,5 +1,5 @@
-import { configurationApiController } from "backend/configuration/configuration.controller";
-import { requestHandler } from "backend/lib/request";
+import { configurationApiController } from "@/backend/configuration/configuration.controller";
+import { requestHandler } from "@/backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "key";
 

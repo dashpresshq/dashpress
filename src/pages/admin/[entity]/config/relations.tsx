@@ -1,4 +1,4 @@
-import { EntityRelationsSettings } from "frontend/views/entity/Relations";
+import { EntityRelationsSettings } from "@/frontend/views/entity/Relations";
 
 export { getServerSideProps } from "translations/utils";
 

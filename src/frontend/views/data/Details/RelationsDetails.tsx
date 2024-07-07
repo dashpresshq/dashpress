@@ -1,29 +1,29 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useRouter } from "next/router";
+
+import { SoftButton } from "@/components/app/button/soft";
+import { SectionBox } from "@/components/app/section-box";
 import {
   useEntityDataDetails,
   useEntityDataReference,
-} from "frontend/hooks/data/data.store";
+} from "@/frontend/hooks/data/data.store";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
+} from "@/frontend/hooks/entity/entity.config";
 import {
   useEntityIdField,
   useEntityReferenceFields,
-} from "frontend/hooks/entity/entity.store";
-import { isQueryIdle } from "frontend/lib/data/useApi/utils";
-import { SYSTEM_LOADING_VALUE } from "frontend/lib/routing/constants";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { useRouter } from "next/router";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-
-import { SoftButton } from "@/components/app/button/soft";
-import { SectionBox } from "@/components/app/section-box";
+} from "@/frontend/hooks/entity/entity.store";
+import { isQueryIdle } from "@/frontend/lib/data/useApi/utils";
+import { SYSTEM_LOADING_VALUE } from "@/frontend/lib/routing/constants";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { useRouteParam } from "@/frontend/lib/routing/useRouteParam";
+import { META_USER_PERMISSIONS } from "@/shared/constants/user";
 
 import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";

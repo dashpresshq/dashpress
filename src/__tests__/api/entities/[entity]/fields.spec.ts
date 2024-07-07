@@ -1,8 +1,5 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import handler from "pages/api/entities/[entity]/fields";
+import handler from "@/pages/api/entities/[entity]/fields";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
 
 describe("/api/entities/[entity]/fields", () => {
   beforeAll(async () => {

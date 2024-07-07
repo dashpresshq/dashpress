@@ -1,4 +1,4 @@
-import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { useAppConfiguration } from "@/frontend/hooks/configuration/configuration.store";
 
 function hexToHSL(H: string) {
   // Convert hex to RGB first

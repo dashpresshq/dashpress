@@ -1,13 +1,17 @@
-import type { ConfigurationApiService } from "backend/configuration/configuration.service";
-import { configurationApiService } from "backend/configuration/configuration.service";
-import { BadRequestError } from "backend/lib/errors";
-import type { RolesApiService } from "backend/roles/roles.service";
-import { rolesApiService } from "backend/roles/roles.service";
-import { CRUD_HIDDEN_KEY_CONFIG } from "shared/configurations/permissions";
-import { sortListByOrder } from "shared/lib/array/sort";
-import type { DataCrudKeys } from "shared/types/data";
-import type { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
-import type { ILabelValue } from "shared/types/options";
+import type { ConfigurationApiService } from "@/backend/configuration/configuration.service";
+import { configurationApiService } from "@/backend/configuration/configuration.service";
+import { BadRequestError } from "@/backend/lib/errors";
+import type { RolesApiService } from "@/backend/roles/roles.service";
+import { rolesApiService } from "@/backend/roles/roles.service";
+import { CRUD_HIDDEN_KEY_CONFIG } from "@/shared/configurations/permissions";
+import { sortListByOrder } from "@/shared/lib/array/sort";
+import type { DataCrudKeys } from "@/shared/types/data";
+import type {
+  IDBSchema,
+  IEntityField,
+  IEntityRelation,
+} from "@/shared/types/db";
+import type { ILabelValue } from "@/shared/types/options";
 
 import type { SchemasApiService } from "../schema/schema.service";
 import { schemasApiService } from "../schema/schema.service";

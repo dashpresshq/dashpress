@@ -1,17 +1,4 @@
 import { msg } from "@lingui/macro";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import type { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
-import { UserPermissions } from "shared/constants/user";
-import { evalJavascriptString } from "shared/lib/script-runner";
 import { fakeMessageDescriptor } from "translations/fake";
 
 import { SchemaForm } from "@/components/app/form/schema";
@@ -22,6 +9,19 @@ import {
 } from "@/components/app/skeleton/form";
 import { useToast } from "@/components/app/toast/use-toast";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { PresentationScriptDocumentation } from "@/frontend/docs/scripts/presentations-scripts";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import { useEntitySlug } from "@/frontend/hooks/entity/entity.config";
+import { useEvaluateScriptContext } from "@/frontend/hooks/scripts";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import type { IPresentationScriptParams } from "@/frontend/views/data/evaluatePresentationScript";
+import { UserPermissions } from "@/shared/constants/user";
+import { evalJavascriptString } from "@/shared/lib/script-runner";
 
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

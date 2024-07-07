@@ -1,7 +1,7 @@
-import { dataApiService } from "backend/data/data.service";
-import { requestHandler } from "backend/lib/request";
-import { schemasApiService } from "backend/schema/schema.service";
-import { noop } from "shared/lib/noop";
+import { dataApiService } from "@/backend/data/data.service";
+import { requestHandler } from "@/backend/lib/request";
+import { schemasApiService } from "@/backend/schema/schema.service";
+import { noop } from "@/shared/lib/noop";
 
 export default requestHandler(
   {

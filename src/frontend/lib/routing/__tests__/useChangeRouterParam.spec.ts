@@ -1,4 +1,4 @@
-import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { USE_ROUTER_PARAMS } from "@/tests/constants";
 
 import { upsertRouterPathQueryWithValue } from "../useChangeRouterParam";
 

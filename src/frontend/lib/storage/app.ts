@@ -1,4 +1,4 @@
-import { sluggify } from "shared/lib/strings";
+import { sluggify } from "@/shared/lib/strings";
 
 import { StorageService } from ".";
 

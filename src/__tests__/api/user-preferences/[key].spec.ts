@@ -1,8 +1,5 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import handler from "pages/api/user-preferences/[key]";
+import handler from "@/pages/api/user-preferences/[key]";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
 
 describe.skip("/api/user-preferences/[key]", () => {
   beforeAll(async () => {

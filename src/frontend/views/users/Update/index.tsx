@@ -1,20 +1,4 @@
 import { msg } from "@lingui/macro";
-import { AppLayout } from "frontend/_layouts/app";
-import {
-  useAuthenticatedUserBag,
-  useUserHasPermission,
-} from "frontend/hooks/auth/user.store";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { UserPermissions } from "shared/constants/user";
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import type { IUpdateUserForm } from "shared/form-schemas/users";
-import {
-  type IResetPasswordForm,
-  RESET_PASSWORD_FORM_SCHEMA,
-} from "shared/form-schemas/users/reset-password";
 
 import { ContentLayout } from "@/components/app/content-layout";
 import { SchemaForm } from "@/components/app/form/schema";
@@ -24,6 +8,22 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { AppLayout } from "@/frontend/_layouts/app";
+import {
+  useAuthenticatedUserBag,
+  useUserHasPermission,
+} from "@/frontend/hooks/auth/user.store";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "@/shared/constants/user";
+import type { IAppliedSchemaFormConfig } from "@/shared/form-schemas/types";
+import type { IUpdateUserForm } from "@/shared/form-schemas/users";
+import {
+  type IResetPasswordForm,
+  RESET_PASSWORD_FORM_SCHEMA,
+} from "@/shared/form-schemas/users/reset-password";
 
 import { useUsernameFromRouteParam } from "../hooks";
 import {

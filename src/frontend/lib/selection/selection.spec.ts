@@ -1,4 +1,4 @@
-import { renderHook } from "__tests__/_/lib/renderHook";
+import { renderHook } from "@/tests/lib/renderHook";
 
 import { useStringSelections } from ".";
 

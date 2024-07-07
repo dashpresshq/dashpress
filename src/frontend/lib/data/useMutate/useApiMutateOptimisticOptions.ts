@@ -1,8 +1,8 @@
 import { msg } from "@lingui/macro";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { noop } from "shared/lib/noop";
 
 import { useToast } from "@/components/app/toast/use-toast";
+import { noop } from "@/shared/lib/noop";
 import { fakeMessageDescriptor } from "@/translations/fake";
 
 import { getQueryCachekey } from "../constants/getQueryCacheKey";

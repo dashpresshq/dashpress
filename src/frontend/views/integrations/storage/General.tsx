@@ -1,10 +1,4 @@
 import { msg } from "@lingui/macro";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  useAppConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import type { AppConfigurationValueType } from "shared/configurations/constants";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import {
@@ -12,6 +6,12 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import {
+  useAppConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import type { AppConfigurationValueType } from "@/shared/configurations/constants";
 
 export function GeneralStorageSettings() {
   const fileUploadSettings = useAppConfiguration("file_upload_settings");

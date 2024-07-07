@@ -1,6 +1,7 @@
-import type { DataStateKeys } from "frontend/lib/data/types";
 import { forwardRef } from "react";
-import type { IWidgetConfig } from "shared/types/dashboard";
+
+import type { DataStateKeys } from "@/frontend/lib/data/types";
+import type { IWidgetConfig } from "@/shared/types/dashboard";
 
 import { WidgetFrame } from "./_components/WidgetFrame";
 import type { IWidgetSettingProps } from "./_components/WidgetHeader/types";

@@ -1,12 +1,12 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { DEFAULT_PAGINATED_DATA } from "frontend/lib/data/constants/defaults";
-import { usePaginatedData } from "frontend/lib/data/useApi/usePaginatedData";
-import { pluralize } from "shared/lib/strings";
 
 import type { IEmptyWrapperProps } from "@/components/app/empty-wrapper/types";
 import { Table } from "@/components/app/table";
 import type { ITableColumn } from "@/components/app/table/types";
+import { DEFAULT_PAGINATED_DATA } from "@/frontend/lib/data/constants/defaults";
+import { usePaginatedData } from "@/frontend/lib/data/useApi/usePaginatedData";
+import { pluralize } from "@/shared/lib/strings";
 
 import { useTableState } from "../hooks";
 import type { IDataTableProps } from "../types";

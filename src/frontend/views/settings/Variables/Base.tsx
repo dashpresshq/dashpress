@@ -1,9 +1,9 @@
 import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
 import { useState } from "react";
-import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
 import { Tabs } from "@/components/app/tabs";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { IntegrationsConfigurationGroup } from "@/shared/types/integrations";
 
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";

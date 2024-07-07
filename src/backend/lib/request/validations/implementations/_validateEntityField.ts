@@ -1,5 +1,5 @@
-import { entitiesApiService } from "backend/entities/entities.service";
-import { BadRequestError } from "backend/lib/errors";
+import { entitiesApiService } from "@/backend/entities/entities.service";
+import { BadRequestError } from "@/backend/lib/errors";
 
 export const validateEntityFields = async (
   entity: string,

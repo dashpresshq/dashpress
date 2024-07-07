@@ -1,15 +1,9 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import arrayMutators from "final-form-arrays";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import type { IFormProps } from "frontend/lib/form/types";
-import { composeValidators, required } from "frontend/lib/validations";
-import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { Fragment } from "react";
 import { Field, Form, useField } from "react-final-form";
 import { FieldArray } from "react-final-form-arrays";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import type { QueryFilterSchema } from "shared/types/data";
 
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import { FormButton } from "@/components/app/button/form";
@@ -21,6 +15,12 @@ import { FormGrid } from "@/components/app/form/schema/form-grid";
 import { FILTER_OPERATOR_CONFIG } from "@/components/app/table/filters/constants";
 import type { ITableColumn } from "@/components/app/table/types";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import type { IFormProps } from "@/frontend/lib/form/types";
+import { composeValidators, required } from "@/frontend/lib/validations";
+import { ACTIONS_ACCESSOR } from "@/frontend/views/data/Table/useTableColumns";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import type { QueryFilterSchema } from "@/shared/types/data";
 
 const OPERATOR_SELECTORS = [
   {

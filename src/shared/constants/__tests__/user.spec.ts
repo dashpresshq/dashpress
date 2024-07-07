@@ -1,4 +1,4 @@
-import { GranularEntityPermissions } from "shared/types/user";
+import { GranularEntityPermissions } from "@/shared/types/user";
 
 import { META_USER_PERMISSIONS } from "../user";
 

@@ -1,11 +1,11 @@
 import type { Icon } from "react-feather";
 import { ChevronsDown, ChevronsUp } from "react-feather";
-import type { SystemIconsKeys } from "shared/constants/Icons";
 
 import { SystemIcon } from "@/components/app/system-icons";
 import type { SpectrumColorTypes } from "@/components/ui/spectrum";
 import { spectrumVariants } from "@/components/ui/spectrum";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
+import type { SystemIconsKeys } from "@/shared/constants/Icons";
 
 const DirectionImplementation: Record<
   "up" | "down" | "side",

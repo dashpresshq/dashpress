@@ -1,21 +1,21 @@
+import { Fragment } from "react";
+
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   useAppConfiguration,
   useEntityConfiguration,
-} from "frontend/hooks/configuration/configuration.store";
-import { useEntityDataDetails } from "frontend/hooks/data/data.store";
+} from "@/frontend/hooks/configuration/configuration.store";
+import { useEntityDataDetails } from "@/frontend/hooks/data/data.store";
 import {
   useEntityCrudFields,
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-} from "frontend/hooks/entity/entity.config";
-import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
-import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import { DataStates } from "frontend/lib/data/types";
-import { Fragment } from "react";
-
-import { ViewStateMachine } from "@/components/app/view-state-machine";
-import { Skeleton } from "@/components/ui/skeleton";
+} from "@/frontend/hooks/entity/entity.config";
+import { useEntityToOneReferenceFields } from "@/frontend/hooks/entity/entity.store";
+import { useEvaluateScriptContext } from "@/frontend/hooks/scripts";
+import { DataStates } from "@/frontend/lib/data/types";
 
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";

@@ -1,8 +1,7 @@
-import { setupUsersTestData } from "__tests__/api/_test-utils";
-import { authTokenApiService } from "backend/lib/auth-token/auth-token.service";
-import handler from "pages/api/setup/user";
-
-import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
+import { authTokenApiService } from "@/backend/lib/auth-token/auth-token.service";
+import handler from "@/pages/api/setup/user";
+import { setupUsersTestData } from "@/tests/api/setups";
+import { createUnAuthenticatedMocks } from "@/tests/api/setups/_authenticatedMock";
 
 describe("/api/setup/user", () => {
   beforeAll(async () => {

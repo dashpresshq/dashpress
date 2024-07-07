@@ -1,4 +1,4 @@
-import { ListUsers } from "frontend/views/users/List";
+import { ListUsers } from "@/frontend/views/users/List";
 
 export { getServerSideProps } from "translations/utils";
 

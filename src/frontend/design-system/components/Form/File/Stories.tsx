@@ -1,7 +1,8 @@
 /* eslint-disable react/function-component-definition */
 
-import { TestProviders } from "__tests__/_/Provider";
 import type { Story } from "@storybook/react";
+
+import { TestProviders } from "@/tests/Provider";
 
 import type { IProps } from "./Presentation";
 import { Presentation } from "./Presentation";

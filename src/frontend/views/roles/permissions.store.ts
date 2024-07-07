@@ -1,10 +1,10 @@
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useApi } from "frontend/lib/data/useApi";
-import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
-import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
-import { objectToQueryParams } from "frontend/lib/routing/queryObjectToQueryString";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { MutationHelpers } from "@/frontend/lib/data/useMutate/mutation-helpers";
+import { useApiMutateOptimisticOptions } from "@/frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { objectToQueryParams } from "@/frontend/lib/routing/queryObjectToQueryString";
 
 import { useRoleIdFromRouteParam } from "./hooks";
 import { ROLES_ENDPOINT_CONFIG } from "./roles.store";

@@ -1,9 +1,8 @@
-import { noop } from "shared/lib/noop";
-
 import type {
   IGroupActionButton,
   IMenuActionItem,
 } from "@/components/app/button/types";
+import { noop } from "@/shared/lib/noop";
 
 export const useDetailsViewMenuItems = ({
   entity,

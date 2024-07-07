@@ -6,7 +6,8 @@ import {
   subWeeks,
   subYears,
 } from "date-fns";
-import { DATE_FILTER_VALUE } from "shared/types/data";
+
+import { DATE_FILTER_VALUE } from "@/shared/types/data";
 
 type DateFilterValueFnType = (count: number) => Date;
 

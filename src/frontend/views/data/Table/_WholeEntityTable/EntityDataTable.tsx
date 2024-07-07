@@ -1,9 +1,8 @@
-import { ENTITY_TABLE_PATH } from "frontend/hooks/data/constants";
-import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
-
 import { TableSkeleton } from "@/components/app/skeleton/table";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Card } from "@/components/ui/card";
+import { ENTITY_TABLE_PATH } from "@/frontend/hooks/data/constants";
+import { useEntityCrudConfig } from "@/frontend/hooks/entity/entity.config";
 
 import { useCanUserPerformCrudAction } from "../../hooks/useCanUserPerformCrudAction";
 import { BaseDataTable } from "../DataTable";

@@ -1,14 +1,5 @@
 import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { useApi } from "frontend/lib/data/useApi";
-import {
-  useActiveIntegrations,
-  useIntegrationsList,
-} from "frontend/views/integrations/actions/actions.store";
 import { useCallback, useState } from "react";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import type { IFormAction } from "shared/types/actions";
 
 import { ActionButtons } from "@/components/app/button/action";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
@@ -21,6 +12,15 @@ import type {
 import { FEPaginationTable } from "@/components/app/pagination-table";
 import { TableSkeleton } from "@/components/app/skeleton/table";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { useApi } from "@/frontend/lib/data/useApi";
+import {
+  useActiveIntegrations,
+  useIntegrationsList,
+} from "@/frontend/views/integrations/actions/actions.store";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
+import type { IFormAction } from "@/shared/types/actions";
 
 import { ActionForm } from "./Form";
 import {

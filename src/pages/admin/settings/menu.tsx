@@ -1,4 +1,4 @@
-import { MenuSettings } from "frontend/views/settings/Menu";
+import { MenuSettings } from "@/frontend/views/settings/Menu";
 
 export { getServerSideProps } from "translations/utils";
 

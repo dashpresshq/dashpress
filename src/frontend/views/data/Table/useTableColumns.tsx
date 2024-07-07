@@ -1,30 +1,30 @@
 import { msg } from "@lingui/macro";
+import type { ReactNode } from "react";
+
+import { ActionButtons } from "@/components/app/button/action";
+import type { ITableColumn } from "@/components/app/table/types";
 import {
   useAppConfiguration,
   useEntityConfiguration,
-} from "frontend/hooks/configuration/configuration.store";
-import { ENTITY_LIST_PATH } from "frontend/hooks/data/constants";
+} from "@/frontend/hooks/configuration/configuration.store";
+import { ENTITY_LIST_PATH } from "@/frontend/hooks/data/constants";
 import {
   useEntityCrudFields,
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-} from "frontend/hooks/entity/entity.config";
+} from "@/frontend/hooks/entity/entity.config";
 import {
   useEntityIdField,
   useEntityToOneReferenceFields,
-} from "frontend/hooks/entity/entity.store";
-import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import type { DataStateKeys } from "frontend/lib/data/types";
-import type { ReactNode } from "react";
-import { ellipsis } from "shared/lib/strings";
-import type { TableFilterType } from "shared/types/data";
-import type { IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import type { FormFieldTypes } from "shared/validations/types";
-
-import { ActionButtons } from "@/components/app/button/action";
-import type { ITableColumn } from "@/components/app/table/types";
+} from "@/frontend/hooks/entity/entity.store";
+import { useEvaluateScriptContext } from "@/frontend/hooks/scripts";
+import type { DataStateKeys } from "@/frontend/lib/data/types";
+import { ellipsis } from "@/shared/lib/strings";
+import type { TableFilterType } from "@/shared/types/data";
+import type { IColorableSelection } from "@/shared/types/ui";
+import { FIELD_TYPES_CONFIG_MAP } from "@/shared/validations";
+import type { FormFieldTypes } from "@/shared/validations/types";
 
 import { usePortalActionButtons } from "../Details/portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";

@@ -1,23 +1,8 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { useMutation } from "@tanstack/react-query";
-import { FormCodeEditor } from "frontend/design-system/components/Form/CodeEditor";
-import { GRID_SPAN_OPTIONS } from "frontend/design-system/constants/grid";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
-import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import type { IFormProps } from "frontend/lib/form/types";
-import { resetFormValues } from "frontend/lib/form/utils";
-import { required } from "frontend/lib/validations";
 import { useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import type { IWidgetConfig } from "shared/types/dashboard";
-import type { ILabelValue } from "shared/types/options";
 import {
   fakeMessageDescriptor,
   transformLabelValueToSelectData,
@@ -34,6 +19,21 @@ import { RenderCode } from "@/components/app/render-code";
 import { Tabs } from "@/components/app/tabs";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FormCodeEditor } from "@/frontend/design-system/components/Form/CodeEditor";
+import { GRID_SPAN_OPTIONS } from "@/frontend/design-system/constants/grid";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { WidgetScriptDocumentation } from "@/frontend/docs/scripts/widget-scripts";
+import { useEntityConfiguration } from "@/frontend/hooks/configuration/configuration.store";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { loadedDataState } from "@/frontend/lib/data/constants/loadedDataState";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import type { IFormProps } from "@/frontend/lib/form/types";
+import { resetFormValues } from "@/frontend/lib/form/utils";
+import { required } from "@/frontend/lib/validations";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import type { IWidgetConfig } from "@/shared/types/dashboard";
+import type { ILabelValue } from "@/shared/types/options";
 
 import { BASE_WIDGET_CONFIG } from "../constants";
 import { usePortalDashboardTypesOptions } from "../portal";

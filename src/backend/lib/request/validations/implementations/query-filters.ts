@@ -1,6 +1,7 @@
 import qs from "qs";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import type { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
+
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import type { FieldQueryFilter, QueryFilterSchema } from "@/shared/types/data";
 
 import { validateEntityFields } from "./_validateEntityField";
 import { entityValidationImpl } from "./entity";

@@ -1,4 +1,4 @@
-import { VersionInfo } from "frontend/views/settings/Versions";
+import { VersionInfo } from "@/frontend/views/settings/Versions";
 
 export { getServerSideProps } from "translations/utils";
 

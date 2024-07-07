@@ -1,4 +1,4 @@
-import { SiteSettings } from "frontend/views/settings/Site";
+import { SiteSettings } from "@/frontend/views/settings/Site";
 
 export { getServerSideProps } from "translations/utils";
 

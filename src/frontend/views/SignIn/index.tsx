@@ -1,19 +1,19 @@
 import { msg } from "@lingui/macro";
 import { useMutation } from "@tanstack/react-query";
-import { AuthLayout } from "frontend/_layouts/guest";
-import type { CustomNextPage } from "frontend/_layouts/types";
-import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
-import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
-import { useSetupCheck } from "frontend/hooks/setup/setup.store";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import type { ISignInForm } from "shared/form-schemas/auth/signin";
-import { AUTH_SIGNIN_FORM_SCHEMA } from "shared/form-schemas/auth/signin";
-import type { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import { ComponentIsLoading } from "@/components/app/loading-component";
 import { useToast } from "@/components/app/toast/use-toast";
+import { AuthLayout } from "@/frontend/_layouts/guest";
+import type { CustomNextPage } from "@/frontend/_layouts/types";
+import { useAuthenticateUser } from "@/frontend/hooks/auth/useAuthenticateUser";
+import { useGuestCheck } from "@/frontend/hooks/auth/useGuestCheck";
+import { useSetupCheck } from "@/frontend/hooks/setup/setup.store";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import type { ISignInForm } from "@/shared/form-schemas/auth/signin";
+import { AUTH_SIGNIN_FORM_SCHEMA } from "@/shared/form-schemas/auth/signin";
+import type { ISuccessfullAuthenticationResponse } from "@/shared/types/auth/portal";
 import { fakeMessageDescriptor } from "@/translations/fake";
 
 import { useHandleNoTokenAuthResponse } from "./portal";

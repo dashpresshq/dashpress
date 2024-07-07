@@ -1,15 +1,14 @@
-import { useEntityDataDetails } from "frontend/hooks/data/data.store";
+import { SectionBox } from "@/components/app/section-box";
+import { useEntityDataDetails } from "@/frontend/hooks/data/data.store";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-
-import { SectionBox } from "@/components/app/section-box";
+} from "@/frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { META_USER_PERMISSIONS } from "@/shared/constants/user";
 
 import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";

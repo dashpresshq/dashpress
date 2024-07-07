@@ -1,20 +1,20 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { FormScriptDocumentation } from "frontend/docs/scripts/form-scripts";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import type { ReactElement } from "react";
-import { UserPermissions } from "shared/constants/user";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 import { SectionBox } from "@/components/app/section-box";
 import { Tabs } from "@/components/app/tabs";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { FormScriptDocumentation } from "@/frontend/docs/scripts/form-scripts";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import { useEntitySlug } from "@/frontend/hooks/entity/entity.config";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "@/shared/constants/user";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
 
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

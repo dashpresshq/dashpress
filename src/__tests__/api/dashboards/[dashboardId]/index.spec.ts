@@ -1,10 +1,7 @@
-import {
-  createAuthenticatedMocks,
-  setupAllTestData,
-} from "__tests__/api/_test-utils";
-import { setupDashboardTestData } from "__tests__/api/_test-utils/_dashboard";
-import handler from "pages/api/dashboards/[dashboardId]";
-import { HOME_DASHBOARD_KEY } from "shared/types/dashboard";
+import handler from "@/pages/api/dashboards/[dashboardId]";
+import { HOME_DASHBOARD_KEY } from "@/shared/types/dashboard";
+import { createAuthenticatedMocks, setupAllTestData } from "@/tests/api/setups";
+import { setupDashboardTestData } from "@/tests/api/setups/_dashboard";
 
 jest.mock("nanoid", () => ({
   nanoid: jest

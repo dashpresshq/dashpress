@@ -1,9 +1,9 @@
+import handler from "@/pages/api/menu";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
   setupAppConfigTestData,
-} from "__tests__/api/_test-utils";
-import handler from "pages/api/menu";
+} from "@/tests/api/setups";
 
 describe("/api/menu", () => {
   beforeAll(async () => {

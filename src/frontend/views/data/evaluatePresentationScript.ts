@@ -1,5 +1,5 @@
-import { evalJavascriptStringSafely } from "shared/lib/script-runner";
-import type { IEvaluateScriptContext } from "shared/types/forms";
+import { evalJavascriptStringSafely } from "@/shared/lib/script-runner";
+import type { IEvaluateScriptContext } from "@/shared/types/forms";
 
 export type IPresentationScriptParams = {
   row: Record<string, unknown>;

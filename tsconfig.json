@@ -21,6 +21,8 @@
     "strict": false,
     "isolatedModules": true,
     "paths": {
+      "@/components/*": ["./frontend/components/*"],
+      "@/tests/*": ["./__tests__/_/*"],
       "@/*": ["./*"]
     }
   },

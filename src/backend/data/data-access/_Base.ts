@@ -1,5 +1,5 @@
-import type { IColumnFilterBag, QueryFilterSchema } from "shared/types/data";
-import { DATE_FILTER_VALUE, FilterOperators } from "shared/types/data";
+import type { IColumnFilterBag, QueryFilterSchema } from "@/shared/types/data";
+import { DATE_FILTER_VALUE, FilterOperators } from "@/shared/types/data";
 
 import type { IPaginationFilters } from "../types";
 import { relativeDateNotationToActualDate } from "./time.constants";

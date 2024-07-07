@@ -1,9 +1,4 @@
 import { msg } from "@lingui/macro";
-import { AppLayout } from "frontend/_layouts/app";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import type { ReactNode } from "react";
 
 import { ContentLayout } from "@/components/app/content-layout";
@@ -11,6 +6,11 @@ import { MenuSection } from "@/components/app/menu-section";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Card, CardContent } from "@/components/ui/card";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { useRouteParam } from "@/frontend/lib/routing/useRouteParam";
 import { fakeMessageDescriptor } from "@/translations/fake";
 
 import {

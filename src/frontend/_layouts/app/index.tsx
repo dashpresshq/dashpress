@@ -1,8 +1,4 @@
 import { useLingui } from "@lingui/react";
-import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
-import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
@@ -11,6 +7,10 @@ import { useEffect } from "react";
 import { Breadcrumbs } from "@/components/app/breadcrumbs";
 import type { IMenuActionItem } from "@/components/app/button/types";
 import { DropDownMenu } from "@/components/app/drop-drop-menu";
+import { usePageRequiresPermission } from "@/frontend/hooks/auth/user.store";
+import { useAppConfiguration } from "@/frontend/hooks/configuration/configuration.store";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { usePageDetailsStore } from "@/frontend/lib/routing/usePageDetails";
 
 import { useAppTheme } from "../useAppTheme";
 import { DEMO_LINKS } from "./constant";

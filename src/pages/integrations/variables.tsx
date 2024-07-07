@@ -1,4 +1,4 @@
-import { ManageVariables } from "frontend/views/integrations/Variables";
+import { ManageVariables } from "@/frontend/views/integrations/Variables";
 
 export { getServerSideProps } from "translations/utils";
 

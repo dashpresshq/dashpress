@@ -1,7 +1,7 @@
-import { requestHandler } from "backend/lib/request";
-import { usersApiService } from "backend/users/users.service";
-import { CHANGE_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/profile/password";
-import type { IAccountProfile } from "shared/types/user";
+import { requestHandler } from "@/backend/lib/request";
+import { usersApiService } from "@/backend/users/users.service";
+import { CHANGE_PASSWORD_FORM_SCHEMA } from "@/shared/form-schemas/profile/password";
+import type { IAccountProfile } from "@/shared/types/user";
 
 export default requestHandler(
   {

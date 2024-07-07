@@ -1,18 +1,19 @@
 import { msg } from "@lingui/macro";
+
 import {
   ENTITY_LIST_PATH,
   ENTITY_REFERENCE_PATH,
-} from "frontend/hooks/data/constants";
+} from "@/frontend/hooks/data/constants";
 import type {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
-} from "shared/form-schemas/types";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import type { IColorableSelection } from "shared/types/ui";
+} from "@/shared/form-schemas/types";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
+import type { IColorableSelection } from "@/shared/types/ui";
 import type {
   FormFieldTypes,
   IFieldValidationItem,
-} from "shared/validations/types";
+} from "@/shared/validations/types";
 
 interface IEntitySchemaFormConfigProps {
   fields: string[];

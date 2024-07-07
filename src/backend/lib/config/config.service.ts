@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
 
 import { ConfigBag } from "./constants";
 import { ConfigKeys } from "./types";

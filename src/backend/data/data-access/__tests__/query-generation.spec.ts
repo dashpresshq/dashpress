@@ -1,6 +1,6 @@
-import { setupAllTestData } from "__tests__/api/_test-utils";
-import type { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
-import { FilterOperators } from "shared/types/data";
+import type { FieldQueryFilter, QueryFilterSchema } from "@/shared/types/data";
+import { FilterOperators } from "@/shared/types/data";
+import { setupAllTestData } from "@/tests/api/setups";
 
 import { RDBMSDataApiService, rDBMSDataApiService } from "../RDBMS";
 

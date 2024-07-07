@@ -1,8 +1,8 @@
-import { setupCredentialsTestData } from "__tests__/api/_test-utils";
-import { credentialsApiService } from "backend/integrations-configurations";
-import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { getDbConnection } from "backend/lib/connection/db";
-import type { IDBSchema } from "shared/types/db";
+import { credentialsApiService } from "@/backend/integrations-configurations";
+import { createConfigDomainPersistenceService } from "@/backend/lib/config-persistence";
+import { getDbConnection } from "@/backend/lib/connection/db";
+import type { IDBSchema } from "@/shared/types/db";
+import { setupCredentialsTestData } from "@/tests/api/setups";
 
 import { SchemasApiService } from "../schema.service";
 

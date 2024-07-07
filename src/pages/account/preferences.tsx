@@ -1,4 +1,4 @@
-import { UserPreferences } from "frontend/views/account/Preferences";
+import { UserPreferences } from "@/frontend/views/account/Preferences";
 
 export { getServerSideProps } from "translations/utils";
 

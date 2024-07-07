@@ -1,5 +1,5 @@
-import { integrationsApiService } from "backend/integrations/integrations.service";
-import { requestHandler } from "backend/lib/request";
+import { integrationsApiService } from "@/backend/integrations/integrations.service";
+import { requestHandler } from "@/backend/lib/request";
 
 const REQUEST_KEY_FIELD = "key";
 

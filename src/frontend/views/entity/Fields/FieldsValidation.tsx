@@ -1,24 +1,7 @@
 import { msg } from "@lingui/macro";
 import arrayMutators from "final-form-arrays";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  composeValidators,
-  maxLength,
-  required,
-} from "frontend/lib/validations";
 import { Field, Form } from "react-final-form";
 import { FieldArray } from "react-final-form-arrays";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import {
-  ENTITY_VALIDATION_CONFIG,
-  FIELD_TYPES_CONFIG_MAP,
-} from "shared/validations";
-import type {
-  FormFieldTypes,
-  IFieldValidationItem,
-  ValidationTypes,
-} from "shared/validations/types";
 import { fakeMessageDescriptor } from "translations/fake";
 
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
@@ -27,6 +10,23 @@ import { FormNumberInput } from "@/components/app/form/input/number";
 import { FormInput } from "@/components/app/form/input/text";
 import { SectionBox } from "@/components/app/section-box";
 import { Select } from "@/components/ui/select";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import {
+  composeValidators,
+  maxLength,
+  required,
+} from "@/frontend/lib/validations";
+import { typescriptSafeObjectDotEntries } from "@/shared/lib/objects";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
+import {
+  ENTITY_VALIDATION_CONFIG,
+  FIELD_TYPES_CONFIG_MAP,
+} from "@/shared/validations";
+import type {
+  FormFieldTypes,
+  IFieldValidationItem,
+  ValidationTypes,
+} from "@/shared/validations/types";
 
 interface IProps {
   field: string;

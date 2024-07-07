@@ -1,23 +1,4 @@
 import { msg } from "@lingui/macro";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { FieldsSettingsDocumentation } from "frontend/docs/fields";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import {
-  useEntityFieldLabels,
-  useEntityFieldSelections,
-  useEntityFieldValidations,
-  useEntitySlug,
-  useProcessedEntityFieldTypes,
-} from "frontend/hooks/entity/entity.config";
-import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { UserPermissions } from "shared/constants/user";
 
 import { SectionBox } from "@/components/app/section-box";
 import {
@@ -26,6 +7,25 @@ import {
 } from "@/components/app/skeleton/form";
 import { Tabs } from "@/components/app/tabs";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { FieldsSettingsDocumentation } from "@/frontend/docs/fields";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "@/frontend/hooks/configuration/configuration.store";
+import {
+  useEntityFieldLabels,
+  useEntityFieldSelections,
+  useEntityFieldValidations,
+  useEntitySlug,
+  useProcessedEntityFieldTypes,
+} from "@/frontend/hooks/entity/entity.config";
+import { useEntityFieldLists } from "@/frontend/hooks/entity/entity.store";
+import { useChangeRouterParam } from "@/frontend/lib/routing/useChangeRouterParam";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { useRouteParam } from "@/frontend/lib/routing/useRouteParam";
+import { UserPermissions } from "@/shared/constants/user";
 
 import { BaseEntitySettingsLayout } from "../_Base";
 import {

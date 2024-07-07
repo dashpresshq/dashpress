@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-conditional-expect */
-import { ConfigApiService } from "backend/lib/config/config.service";
+import { ConfigApiService } from "@/backend/lib/config/config.service";
 
 import type { AbstractConfigDataPersistenceService } from "../AbstractConfigDataPersistenceService";
 import { DatabaseConfigDataPersistenceAdaptor } from "../DatabaseConfigDataPersistenceAdaptor";

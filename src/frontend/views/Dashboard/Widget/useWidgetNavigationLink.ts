@@ -1,6 +1,6 @@
-import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useCanUserPerformCrudAction } from "frontend/views/data/hooks/useCanUserPerformCrudAction";
+import { useEntityConfiguration } from "@/frontend/hooks/configuration/configuration.store";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import { useCanUserPerformCrudAction } from "@/frontend/views/data/hooks/useCanUserPerformCrudAction";
 
 export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);

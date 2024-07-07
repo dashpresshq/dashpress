@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { listAllFilesInDir } = require("./lib");
-// TODO
+
 let files = process.argv.slice(2);
 
 if (files.length === 0) {

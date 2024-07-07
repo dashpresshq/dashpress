@@ -1,8 +1,9 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { sluggify } from "shared/lib/strings";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { SystemRoles } from "shared/types/user";
+
+import { sluggify } from "@/shared/lib/strings";
+import { userFriendlyCase } from "@/shared/lib/strings/friendly-case";
+import { SystemRoles } from "@/shared/types/user";
 
 import { APPLIED_CAN_ACCESS, NO_PERMISSION_REQUIRED } from "./shared";
 

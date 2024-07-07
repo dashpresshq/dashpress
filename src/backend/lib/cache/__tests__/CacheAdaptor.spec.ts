@@ -1,4 +1,4 @@
-import { ConfigApiService } from "backend/lib/config/config.service";
+import { ConfigApiService } from "@/backend/lib/config/config.service";
 
 import type { AbstractCacheService } from "../AbstractCacheService";
 import { MemoryCacheAdaptor } from "../MemoryCacheAdaptor";

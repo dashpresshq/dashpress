@@ -1,5 +1,6 @@
 import qs from "qs";
-import type { IPaginatedDataState } from "shared/types/data";
+
+import type { IPaginatedDataState } from "@/shared/types/data";
 
 export const tableDataParamsToQueryString = (
   dataState: IPaginatedDataState<unknown>

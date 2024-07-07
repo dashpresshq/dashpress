@@ -1,19 +1,20 @@
 import { msg } from "@lingui/macro";
+import { useRouter } from "next/router";
+
 import {
   MAKE_ENDPOINTS_CONFIG,
   useDomainMessages,
-} from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useApi } from "frontend/lib/data/useApi";
-import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
-import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useRouter } from "next/router";
-import type { ICreateUserForm } from "shared/form-schemas/users";
-import type { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import type { IAccountProfile } from "shared/types/user";
+} from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useApi } from "@/frontend/lib/data/useApi";
+import { MutationHelpers } from "@/frontend/lib/data/useMutate/mutation-helpers";
+import { useApiMutateOptimisticOptions } from "@/frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { useWaitForResponseMutationOptions } from "@/frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { NAVIGATION_LINKS } from "@/frontend/lib/routing/links";
+import type { ICreateUserForm } from "@/shared/form-schemas/users";
+import type { IResetPasswordForm } from "@/shared/form-schemas/users/reset-password";
+import type { IAccountProfile } from "@/shared/types/user";
 
 import { useUsernameFromRouteParam } from "./hooks";
 

@@ -1,19 +1,8 @@
 import { msg } from "@lingui/macro";
 import arrayMutators from "final-form-arrays";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import type { IFormProps } from "frontend/lib/form/types";
-import {
-  composeValidators,
-  maxLength,
-  required,
-} from "frontend/lib/validations";
-import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { useFieldArray } from "react-final-form-arrays";
-import { generateRandomString } from "shared/lib/strings/random";
-import type { IPaginatedDataState, ITableView } from "shared/types/data";
 
 import { ActionButtons } from "@/components/app/button/action";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
@@ -23,6 +12,17 @@ import { FormInput } from "@/components/app/form/input/text";
 import { Table } from "@/components/app/table";
 import type { ITableColumn } from "@/components/app/table/types";
 import { Tabs } from "@/components/app/tabs";
+import { useAppConfigurationDomainMessages } from "@/frontend/hooks/configuration/configuration.constant";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import type { IFormProps } from "@/frontend/lib/form/types";
+import {
+  composeValidators,
+  maxLength,
+  required,
+} from "@/frontend/lib/validations";
+import { ACTIONS_ACCESSOR } from "@/frontend/views/data/Table/useTableColumns";
+import { generateRandomString } from "@/shared/lib/strings/random";
+import type { IPaginatedDataState, ITableView } from "@/shared/types/data";
 
 interface IProps {
   values: ITableView[];

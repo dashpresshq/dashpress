@@ -1,15 +1,14 @@
-import { AppLayout } from "frontend/_layouts/app";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { UserPermissions } from "shared/constants/user";
-import type { IBaseRoleForm } from "shared/form-schemas/roles/base";
-import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
-
 import { ContentLayout } from "@/components/app/content-layout";
 import { SchemaForm } from "@/components/app/form/schema";
 import { SectionBox } from "@/components/app/section-box";
+import { AppLayout } from "@/frontend/_layouts/app";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { useNavigationStack } from "@/frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "@/shared/constants/user";
+import type { IBaseRoleForm } from "@/shared/form-schemas/roles/base";
+import { BASE_ROLE_FORM_SCHEMA } from "@/shared/form-schemas/roles/base";
 
 import { useCreateRoleMutation } from "../roles.store";
 

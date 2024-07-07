@@ -1,20 +1,5 @@
 import { msg } from "@lingui/macro";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { VariablesDocumentation } from "frontend/docs/variables";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { useApi } from "frontend/lib/data/useApi";
-import type { IPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useSetCurrentActionItems } from "frontend/lib/routing/usePageDetails";
-import {
-  PasswordMessage,
-  PasswordToReveal,
-} from "frontend/views/integrations/Password";
 import { useCallback, useMemo, useState } from "react";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { UserPermissions } from "shared/constants/user";
-import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import type { IKeyValue } from "shared/types/options";
 
 import { ActionButtons } from "@/components/app/button/action";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
@@ -26,6 +11,21 @@ import type {
 import { FEPaginationTable } from "@/components/app/pagination-table";
 import { useToastActionQueryError } from "@/components/app/toast/error";
 import { Card } from "@/components/ui/card";
+import { useDocumentationActionButton } from "@/frontend/docs/constants";
+import { VariablesDocumentation } from "@/frontend/docs/variables";
+import { useUserHasPermission } from "@/frontend/hooks/auth/user.store";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { useApi } from "@/frontend/lib/data/useApi";
+import type { IPageDetails } from "@/frontend/lib/routing/usePageDetails";
+import { useSetCurrentActionItems } from "@/frontend/lib/routing/usePageDetails";
+import {
+  PasswordMessage,
+  PasswordToReveal,
+} from "@/frontend/views/integrations/Password";
+import { INTEGRATIONS_GROUP_CONFIG } from "@/shared/config-bag/integrations";
+import { UserPermissions } from "@/shared/constants/user";
+import { IntegrationsConfigurationGroup } from "@/shared/types/integrations";
+import type { IKeyValue } from "@/shared/types/options";
 
 import {
   INTEGRATIONS_GROUP_ENDPOINT,

@@ -1,11 +1,12 @@
 import { msg } from "@lingui/macro";
-import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import type { IChangePasswordForm } from "shared/form-schemas/profile/password";
-import type { IUpdateProfileForm } from "shared/form-schemas/profile/update";
+
+import { AUTHENTICATED_ACCOUNT_URL } from "@/frontend/hooks/auth/user.store";
+import { useDomainMessages } from "@/frontend/lib/crud-config";
+import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
+import { ApiRequest } from "@/frontend/lib/data/makeRequest";
+import { useWaitForResponseMutationOptions } from "@/frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import type { IChangePasswordForm } from "@/shared/form-schemas/profile/password";
+import type { IUpdateProfileForm } from "@/shared/form-schemas/profile/update";
 
 export function useUpdateProfileMutation() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PROFILE);

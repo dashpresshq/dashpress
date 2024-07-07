@@ -1,9 +1,10 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { TemporayStorageService } from "frontend/lib/storage";
-import { createStore } from "frontend/lib/store";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
+
+import { TemporayStorageService } from "@/frontend/lib/storage";
+import { createStore } from "@/frontend/lib/store";
 
 import { usePageDetailsStore } from "./usePageDetails";
 

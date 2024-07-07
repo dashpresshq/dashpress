@@ -1,4 +1,4 @@
-import type { IStorageIntegrationsImplemention } from "backend/storage/types";
+import type { IStorageIntegrationsImplemention } from "@/backend/storage/types";
 
 export const GOOGLE_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{}> =
   {

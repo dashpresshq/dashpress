@@ -5,6 +5,7 @@ import languages from "translations/languages";
 
 import { SchemaForm } from "@/components/app/form/schema";
 import { SectionBox } from "@/components/app/section-box";
+import { usePortalThemesSelection } from "@/frontend/_layouts/portal";
 import { useDomainMessages } from "@/frontend/lib/crud-config";
 import { LANG_DOMAINS } from "@/frontend/lib/crud-config/lang-domains";
 import { useSetPageDetails } from "@/frontend/lib/routing/usePageDetails";
@@ -39,7 +40,9 @@ export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
 };
 
 export function UserPreferences() {
-  const { theme, setTheme, themes } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const themes = usePortalThemesSelection();
+
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PREFERENCES);
   const router = useRouter();
 

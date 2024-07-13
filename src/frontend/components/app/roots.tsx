@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { LinguiProvider } from "translations/utils";
 
 import { PortalProvider } from "@/frontend/_layouts/app/portal";
+import { APP_THEMES } from "@/frontend/_layouts/portal";
 import { GoogleTagManager } from "@/frontend/_layouts/scripts/GoogleTagManager";
 import { QueryProvider } from "@/frontend/lib/data/QueryClient";
 
@@ -18,9 +19,7 @@ export function ApplicationRoot({
   translation?: Messages;
 }) {
   return (
-    <ThemeProvider
-      themes={["light", "dark"].sort((a, b) => a.localeCompare(b))}
-    >
+    <ThemeProvider themes={APP_THEMES}>
       <LinguiProvider translation={translation}>
         <QueryProvider>
           <Toaster />

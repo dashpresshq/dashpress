@@ -2,6 +2,8 @@
 /* eslint-disable no-bitwise */
 import { useAppConfiguration } from "@/frontend/hooks/configuration/configuration.store";
 
+import { usePortalThemes } from "./portal";
+
 type ThreeNumbers = readonly [number, number, number];
 
 function hexToRgb(hex$1: string): ThreeNumbers {
@@ -66,6 +68,8 @@ function hexToOklch(hex: string) {
 
 export const useAppTheme = () => {
   const themeColor = useAppConfiguration("theme_color");
+
+  usePortalThemes();
 
   document.documentElement.style.setProperty(
     "--app-primary",

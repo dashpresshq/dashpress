@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss";
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config: Config = {
-  content: ["./src/components/**/*.{ts,tsx}", "./src/frontend/**/*.{ts,tsx}"],
+  content: ["./src/frontend/**/*.{ts,tsx}"],
   darkMode: ["class"],
   theme: {
     container: {
@@ -15,18 +15,21 @@ const config: Config = {
     },
     extend: {
       colors: {
-        soft: "hsl(var(--dp-soft))",
-        muted: "hsl(var(--dp-muted))",
-        main: "hsl(var(--dp-main))",
-        border: "hsl(var(--dp-border))",
-        base: "hsl(var(--dp-base))",
-        foundation: "hsl(var(--dp-foundation))",
-        "primary-text": "hsl(var(--dp-primary-text))",
-        hover: "hsla(var(--dp-border), 0.3)",
+        soft: "oklch(var(--dp-soft))",
+        foundation: "oklch(var(--dp-foundation))",
+        base: "oklch(var(--dp-base))",
+
+        border: "oklch(var(--dp-border))",
+        hover: "oklch(var(--dp-border)/30%)",
+
+        main: "oklch(var(--dp-main))",
+        muted: "oklch(var(--dp-muted))",
+
+        "primary-text": "oklch(var(--dp-primary-text))",
         primary: {
-          DEFAULT: "hsl(var(--dp-primary))",
-          alpha: "hsla(var(--dp-primary), var(--dp-primary-alpha-opacity))",
-          "alpha-text": "hsl(var(--dp-primary-alpha-text))",
+          DEFAULT: "oklch(var(--dp-primary))",
+          alpha: "oklch(var(--dp-primary)/var(--dp-primary-alpha-opacity))",
+          "alpha-text": "oklch(var(--dp-primary-alpha-text))",
         },
       },
       borderRadius: {

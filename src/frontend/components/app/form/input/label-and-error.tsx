@@ -71,8 +71,6 @@ export function LabelAndError({ formInput, children }: IProps) {
   );
 }
 
-// :eyes this is applied correctly on all forms
-
 export const generateClassNames = (meta: FieldMetaState<any>): string =>
   cn({
     "ring-1 !ring-red-600": !!isFormMetaWithError(meta),

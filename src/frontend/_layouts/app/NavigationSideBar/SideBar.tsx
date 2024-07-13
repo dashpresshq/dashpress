@@ -89,7 +89,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
           : SIDE_BAR_WIDTH_VARIATIONS.collapsed,
       }}
     >
-      <div className="flex h-[50px] items-center justify-center bg-[hsla(var(--dp-primary),0.95)]">
+      <div className="flex h-[50px] items-center justify-center bg-[oklch(var(--dp-primary)/95%)]">
         <Link href="/">
           {isFullWidth ? (
             <Image
@@ -111,7 +111,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         </Link>
       </div>
       <div className="flex h-[calc(100dvh-50px)] flex-col justify-between">
-        <ScrollArea className="h-[calc(100%-1px)] bg-[hsla(var(--dp-primary),0.95)]">
+        <ScrollArea className="h-[calc(100%-1px)] bg-[oklch(var(--dp-primary)/95%)]">
           <ProfileOnNavigation isFullWidth={isFullWidth} />
           <ViewStateMachine
             loading={navigationMenuItems.isLoading}
@@ -130,7 +130,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         <Tooltip isOverAButton text="Use `Ctrl + B` to toggle">
           <Button
             variant="ghost"
-            className="h-9 rounded-none bg-[hsla(var(--dp-primary),0.8)] shadow-sm"
+            className="h-9 rounded-none bg-[oklch(var(--dp-primary)/85%)] shadow-sm"
             onClick={() => setIsFullWidth(!isFullWidth)}
           >
             <ChevronRight

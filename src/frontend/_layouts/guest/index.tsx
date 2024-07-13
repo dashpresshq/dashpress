@@ -22,11 +22,11 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
   useAppTheme();
   const { _ } = useLingui();
 
-  let value = 0.2;
+  let value = 20;
 
   const getRandom = () => {
-    value -= 0.025;
-    return `hsla(var(--dp-primary),${value})`;
+    value -= 1.0;
+    return `oklch(var(--dp-primary)/${value}%)`;
   };
 
   return (
@@ -46,7 +46,7 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
           >
             <rect fill="#000" width="1600" height="800" />
             <g
-              stroke="hsla(var(--dp-primary))"
+              stroke="oklch(var(--dp-primary))"
               strokeWidth="66.7"
               strokeOpacity="0.05"
             >

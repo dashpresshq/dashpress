@@ -1,10 +1,10 @@
 import { useLingui } from "@lingui/react";
 
 import { FormInput } from "@/components/app/form/input/text";
-import { FormCodeEditor } from "@/frontend/design-system/components/Form/CodeEditor";
 import { FormFileInput } from "@/frontend/design-system/components/Form/File";
 import { useExtendRenderFormInputProps } from "@/frontend/views/data/portal";
 
+import { FormCodeEditor } from "../input/code-editor";
 import { FormDateInput } from "../input/date";
 import { FormNumberInput } from "../input/number";
 import { FormPasswordInput } from "../input/password";

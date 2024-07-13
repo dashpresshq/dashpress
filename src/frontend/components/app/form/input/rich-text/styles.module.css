@@ -1,21 +1,14 @@
 .root :global .ql-editor {
-  min-height: 18em;
-  border: none;
-  border-radius: 0;
+  @apply rounded-none border-0 min-h-56;
 }
 
 .root :global .ql-toolbar {
-  display: block;
-  background: hsl(var(--dp-soft));
-  color: hsl(var(--dp-main));
-  border: 1px solid hsl(var(--dp-border));
-  border-radius: 0.25rem 0.25rem 0 0;
+  @apply rounded-md rounded-b-none text-main bg-soft block border border-border;
 }
 
 .root :global .ql-stroke,
 .root :global .ql-fill {
-  color: hsl(var(--dp-main));
-  stroke: hsl(var(--dp-main));
+  @apply stroke-main text-main;
 }
 
 .root :global .ql-snow.ql-toolbar button:hover,
@@ -32,32 +25,29 @@
 .root :global .ql-snow .ql-toolbar .ql-picker-item:hover,
 .root :global .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .root :global .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-  color: hsl(var(--dp-primary));
+  @apply text-primary;
 }
 
 .root :global .ql-toolbar button:hover .ql-stroke {
-  stroke: hsl(var(--dp-primary));
+  @apply stroke-primary;
 }
 
 .root :global .ql-container {
-  background: hsl(var(--dp-base));
-  border: 1px solid hsl(var(--dp-border));
-  border-radius: 0 0 0.25rem 0.25rem;
+  @apply rounded-md rounded-t-none bg-base border border-border;
 }
 
 .root :global .ql-container.ql-disabled {
-  background-color: hsl(var(--dp-soft));
-  opacity: 1;
+  @apply bg-soft opacity-100;
 }
 
 .root :global .ql-editor.ql-blank::before {
-  color: hsl(var(--dp-muted));
+  @apply text-muted;
 }
 
 .root :global .ql-picker {
-  color: hsl(var(--dp-main));
+  @apply text-main;
 }
 
-.root :global .quill.invalid {
-  border: 1px solid #dc2626 !important;
+.root :global .quill {
+  @apply rounded-md shadow-sm;
 }

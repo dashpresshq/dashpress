@@ -35,11 +35,11 @@ export function NavigationSkeleton() {
           return (
             <Skeleton
               key={index}
-              className="h-4 max-w-24 bg-[hsla(0,0%,0%,0.3)]"
+              className="h-4 max-w-24 bg-[oklch(0%_0_0/30%)]"
             />
           );
         }
-        return <Skeleton key={index} className="h-6 bg-[hsla(0,0%,0%,0.3)]" />;
+        return <Skeleton key={index} className="h-6 bg-[oklch(0%_0_0/30%)]" />;
       })}
     </div>
   );

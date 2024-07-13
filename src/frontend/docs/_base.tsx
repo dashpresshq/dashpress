@@ -17,8 +17,8 @@ export function DocumentationRoot({ children }: { children: ReactNode }) {
       <div
         style={
           {
-            "--tw-prose-code": "hsl(var(--dp-main))",
-            "--tw-prose-headings": "hsl(var(--dp-main))",
+            "--tw-prose-code": "oklch(var(--dp-tmp-text))",
+            "--tw-prose-headings": "oklch(var(--dp-tmp-text))",
           } as CSSProperties
         }
         className="prose !text-main [&_pre]:!m-0"

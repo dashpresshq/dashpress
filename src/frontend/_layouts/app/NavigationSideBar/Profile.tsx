@@ -48,7 +48,7 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
       <DropDownMenu
         ellipsis
         ariaLabel="Toggle Profile Menu"
-        className="bg-[hsla(var(--dp-primary),0.6)] hover:bg-[hsla(var(--dp-primary),0.9)] [&_svg]:text-white"
+        className="bg-[oklch(0%_0_0/10%)] hover:bg-[oklch(0%_0_0/30%)] [&_svg]:text-white"
         menuItems={[...constantNavigation, ...constantNavigationMenuItems].map(
           ({ label, action, systemIcon }) => ({
             id: action,

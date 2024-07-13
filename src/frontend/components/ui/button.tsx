@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-text shadow hover:bg-[hsla(var(--dp-primary),0.85)] focus-visible:ring-primary",
+          "bg-primary text-primary-text shadow hover:bg-[oklch(var(--dp-primary)/85%)] focus-visible:ring-primary",
         destructive:
           "bg-red-100 text-red-600 shadow-sm hover:bg-red-600 hover:text-white focus-visible:ring-red-600",
         soft: "bg-primary-alpha text-primary-alpha-text shadow-sm hover:bg-primary hover:text-primary-text focus-visible:ring-primary",

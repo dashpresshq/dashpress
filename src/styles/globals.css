@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./themes.css";
+
 @layer base {
   :root {
     --radius: 0.5rem;
@@ -11,151 +13,33 @@
 
     --app-primary: 249, 52%, 46%;
 
-    --white: 0, 0%, 100%;
+    --white: 100% 0 0;
   }
 
   [data-theme="light"] {
-    --dp-primary: var(--app-primary);
     --dp-primary-text: var(--white);
-
-    --dp-soft: 213, 47%, 96%;
-    --dp-muted: 227, 22%, 71%;
-    --dp-main: 229, 8%, 41%;
-    --dp-border: 215, 51%, 93%;
-    --dp-base: 0, 0%, 100%;
-    --dp-foundation: 210, 33%, 96%;
-
+    --dp-primary: var(--app-primary);
     --dp-primary-alpha-opacity: var(--light-primary-alpha-opacity);
     --dp-primary-alpha-text: var(--app-primary);
+    --dp-soft: 97.4663% 0.011947 259.822565;
+    --dp-foundation: 94.542% 0.012 259.823;
+    --dp-base: 107.213% 0.012 259.823;
+    --dp-border: 89.669% 0.012 259.823;
+    --dp-main: 41.8869% 0.053885 255.824911;
+    --dp-muted: 50.264% 0.054 255.825;
   }
 
   [data-theme="dark"] {
     --dp-primary: var(--app-primary);
-    --dp-primary-text: var(--white);
-
-    --dp-soft: 215, 15%, 15%;
-    --dp-muted: 212, 9%, 58%;
-    --dp-main: 210, 17%, 82%;
-    --dp-border: 212, 12%, 21%;
-    --dp-base: 215, 21%, 11%;
-    --dp-foundation: 216, 28%, 7%;
-
     --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
     --dp-primary-alpha-text: var(--white);
-  }
-
-  [data-theme="gruv_box"] {
-    --dp-primary: 27, 99.1%, 54.7%;
-    --dp-primary-text: 195, 6.5%, 12.2%;
-
-    --dp-soft: 20, 5.3%, 22.4%;
-    --dp-muted: 40, 38.2%, 73.3%;
-    --dp-main: 43, 58.8%, 81%;
-    --dp-border: 28, 10.7%, 43.9%;
-    --dp-base: 22, 7.4%, 29.2%;
-    --dp-foundation: 22, 7.4%, 29.2%;
-
-    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
-    --dp-primary-alpha-text: 48, 86.7%, 88.2%;
-
-    /*
-overidePrimary: 27, 99.1%, 54.7%
-base-color: 22, 7.4%, 29.2%
-foundation-color: 22, 7.4%, 29.2%
-soft-color: 20, 5.3%, 22.4%
-main-text: 43, 58.8%, 81%
-muted-text: 40, 38.2%, 73.3%
-border-color: 28, 10.7%, 43.9%
-text-on-primary: 195, 6.5%, 12.2%
-text-on-shade: 48, 86.7%, 88.2%
-    */
-
-    /* overidePrimary: "#fe8019",
-    "base-color": "#504945",
-    "foundation-color": "#504945",
-    "soft-color": "#3c3836",
-    "main-text": "#ebdbb2",
-    "muted-text": "#d5c4a1",
-    "border-color": "#7c6f64",
-    "text-on-primary": "#1d2021",
-    "text-on-shade": "#fbf1c7",
-    "shade-opacity": "5A", */
-  }
-
-  [data-theme="high_contrast"] {
-    --dp-primary: var(--app-primary);
     --dp-primary-text: var(--white);
-
-    --dp-soft: 0, 0%, 6.7%;
-    --dp-muted: 0, 0%, 93.3%;
-    --dp-main: 0, 0%, 100%;
-    --dp-border: 0, 0%, 13.3%;
-    --dp-base: 0, 0%, 2%;
-    --dp-foundation: 0, 0%, 0%;
-
-    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
-    --dp-primary-alpha-text: var(--white);
-  }
-
-  [data-theme="nord"] {
-    --dp-primary: var(--app-primary);
-    --dp-primary-text: var(--white);
-
-    --dp-soft: 0, 0%, 6.7%;
-    --dp-muted: 0, 0%, 93.3%;
-    --dp-main: 0, 0%, 100%;
-    --dp-border: 0, 0%, 13.3%;
-    --dp-base: 0, 0%, 2%;
-    --dp-foundation: 0, 0%, 0%;
-
-    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
-    --dp-primary-alpha-text: var(--white);
-  }
-
-  [data-theme="solarized_light"] {
-    --dp-primary: 180, 6.9%, 60.4%;
-    --dp-primary-text: 46, 42.4%, 88.4%;
-
-    --dp-soft: 46, 42.4%, 88.4%;
-    --dp-muted: 180, 6.9%, 60.4%;
-    --dp-main: 196, 12.9%, 45.5%;
-    --dp-border: 180, 6.9%, 60.4%;
-    --dp-base: 44, 86.7%, 94.1%;
-    --dp-foundation: 46, 42.4%, 88.4%;
-
-    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
-    --dp-primary-alpha-text: 46, 42.4%, 88.4%;
-  }
-
-  [data-theme="solarized_dark"] {
-    --dp-primary: 175, 58.6%, 39.8%;
-    --dp-primary-text: 44, 86.7%, 94.1%;
-
-    --dp-soft: 192, 100%, 10.6%;
-    --dp-muted: 196, 12.9%, 45.5%;
-    --dp-main: 44, 86.7%, 94.1%;
-    --dp-border: 194, 14.1%, 40.2%;
-    --dp-base: 192, 80.8%, 14.3%;
-    --dp-foundation: 192, 100%, 10.6%;
-
-    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
-    --dp-primary-alpha-text: 44, 86.7%, 94.1%;
-  }
-
-  /* // TODO */
-  [data-theme="retro"] {
-    --dp-primary: 27, 99.1%, 54.7%;
-    --dp-primary-text: 195, 6.5%, 12.2%;
-
-    --dp-soft: 20, 5.3%, 22.4%;
-    --dp-muted: 40, 38.2%, 73.3%;
-    --dp-main: 43, 58.8%, 81%;
-    --dp-border: 28, 10.7%, 43.9%;
-    --dp-base: 22, 7.4%, 29.2%;
-    --dp-foundation: 22, 7.4%, 29.2%;
-
-    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
-    --dp-primary-alpha-text: 48, 86.7%, 88.2%;
+    --dp-soft: 23.2607% 0.013807 253.100675;
+    --dp-foundation: 22.563% 0.014 253.101;
+    --dp-base: 20.935% 0.014 253.101;
+    --dp-border: 26.75% 0.014 253.101;
+    --dp-main: 74.6477% 0.0216 264.435964;
+    --dp-muted: 89.577% 0.022 264.436;
   }
 }
 

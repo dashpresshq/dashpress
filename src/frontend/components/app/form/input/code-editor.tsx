@@ -38,7 +38,10 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
         className={cn(
           generateClassNames(meta),
           "line-numbers",
-          "![&_textarea]:rounded-md !rounded-md border border-border [&_pre]:min-h-12 [&_textarea]:focus:border-primary [&_textarea]:focus:!outline-none [&_textarea]:focus:ring-1 [&_textarea]:focus:!ring-primary disabled:[&_textarea]:bg-soft",
+          "rounded-md border border-border p-2 shadow-sm focus:ring-1 focus:ring-primary",
+          {
+            "bg-soft": disabled,
+          },
           styles.root
         )}
       >
@@ -51,7 +54,8 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
           disabled={disabled}
           placeholder={placeholder ? _(placeholder) : undefined}
           textareaId={name}
-          padding={4}
+          textareaClassName="outline-none"
+          preClassName="min-h-12"
           // eslint-disable-next-line tailwindcss/no-custom-classname
           className="form-code-editor min-h-72 text-sm"
           style={{

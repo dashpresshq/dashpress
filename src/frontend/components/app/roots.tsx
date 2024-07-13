@@ -19,15 +19,7 @@ export function ApplicationRoot({
 }) {
   return (
     <ThemeProvider
-      themes={[
-        "light",
-        "dark",
-        "gruv_box",
-        "high_contrast",
-        "solarized_dark",
-        "solarized_light",
-        "nord",
-      ]}
+      themes={["light", "dark"].sort((a, b) => a.localeCompare(b))}
     >
       <LinguiProvider translation={translation}>
         <QueryProvider>

@@ -4,7 +4,6 @@ import type { Story } from "@storybook/react";
 import { Field, Form } from "react-final-form";
 import { fakeMessageDescriptor } from "translations/fake";
 
-import { FormCodeEditor } from "@/frontend/design-system/components/Form/CodeEditor";
 import { FormFileInput } from "@/frontend/design-system/components/Form/File";
 import { required } from "@/frontend/lib/validations";
 import { TestProviders } from "@/tests/Provider";
@@ -12,6 +11,7 @@ import { TestProviders } from "@/tests/Provider";
 import { ActionButtons } from "../../button/action";
 import { DELETE_BUTTON_PROPS } from "../../button/constants";
 import { FormButton } from "../../button/form";
+import { FormCodeEditor } from "./code-editor";
 import { FormDateInput } from "./date";
 import { FormNumberInput } from "./number";
 import { FormPasswordInput } from "./password";

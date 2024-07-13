@@ -10,6 +10,7 @@ import {
 
 import { FormButton } from "@/components/app/button/form";
 import { SoftButton } from "@/components/app/button/soft";
+import { FormCodeEditor } from "@/components/app/form/input/code-editor";
 import { IconInputField } from "@/components/app/form/input/icon";
 import { FormSelect } from "@/components/app/form/input/select";
 import { SpectrumColorInputField } from "@/components/app/form/input/spectrum";
@@ -19,7 +20,6 @@ import { RenderCode } from "@/components/app/render-code";
 import { Tabs } from "@/components/app/tabs";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Skeleton } from "@/components/ui/skeleton";
-import { FormCodeEditor } from "@/frontend/design-system/components/Form/CodeEditor";
 import { GRID_SPAN_OPTIONS } from "@/frontend/design-system/constants/grid";
 import { useDocumentationActionButton } from "@/frontend/docs/constants";
 import { WidgetScriptDocumentation } from "@/frontend/docs/scripts/widget-scripts";

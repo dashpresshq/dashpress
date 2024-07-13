@@ -1,51 +1,74 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-bitwise */
 import { useAppConfiguration } from "@/frontend/hooks/configuration/configuration.store";
 
-function hexToHSL(H: string) {
-  // Convert hex to RGB first
-  let r = 0;
-  let g = 0;
-  let b = 0;
-  if (H.length === 4) {
-    r = `0x${H[1]}${H[1]}` as unknown as number;
-    g = `0x${H[2]}${H[2]}` as unknown as number;
-    b = `0x${H[3]}${H[3]}` as unknown as number;
-  } else if (H.length === 7) {
-    r = `0x${H[1]}${H[2]}` as unknown as number;
-    g = `0x${H[3]}${H[4]}` as unknown as number;
-    b = `0x${H[5]}${H[6]}` as unknown as number;
+type ThreeNumbers = readonly [number, number, number];
+
+function hexToRgb(hex$1: string): ThreeNumbers {
+  let hex = hex$1.replace("#", "");
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((c) => c + c)
+      .join("");
   }
-  // Then to HSL
+  const bigint = parseInt(hex, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return [r, g, b];
+}
+
+function rgbToXyz([r, g, b]: ThreeNumbers) {
   r /= 255;
   g /= 255;
   b /= 255;
-  const cmin = Math.min(r, g, b);
-  const cmax = Math.max(r, g, b);
-  const delta = cmax - cmin;
-  let h = 0;
-  let s = 0;
-  let l = 0;
 
-  if (delta === 0) h = 0;
-  else if (cmax === r) h = ((g - b) / delta) % 6;
-  else if (cmax === g) h = (b - r) / delta + 2;
-  else h = (r - g) / delta + 4;
+  r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
+  g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
+  b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
 
-  h = Math.round(h * 60);
+  const x = (r * 0.4124564 + g * 0.3575761 + b * 0.1804375) / 0.95047;
+  const y = (r * 0.2126729 + g * 0.7151522 + b * 0.072175) / 1.0;
+  const z = (r * 0.0193339 + g * 0.119192 + b * 0.9503041) / 1.08883;
 
-  if (h < 0) h += 360;
+  return [x, y, z] as const;
+}
 
-  l = (cmax + cmin) / 2;
-  s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-  s = +(s * 100).toFixed(1);
-  l = +(l * 100).toFixed(1);
+function xyzToLab([x, y, z]: ThreeNumbers) {
+  x = x > 0.008856 ? Math.cbrt(x) : 7.787 * x + 16 / 116;
+  y = y > 0.008856 ? Math.cbrt(y) : 7.787 * y + 16 / 116;
+  z = z > 0.008856 ? Math.cbrt(z) : 7.787 * z + 16 / 116;
 
-  return `${h}, ${s}%, ${l}%`;
+  const l = 116 * y - 16;
+  const a = 500 * (x - y);
+  const b = 200 * (y - z);
+
+  return [l, a, b] as const;
+}
+
+function labToOklch([l, a, b]: ThreeNumbers) {
+  const c = Math.sqrt(a * a + b * b);
+  const h = Math.atan2(b, a);
+  const hDegrees = (h * 180) / Math.PI;
+  const hPositive = hDegrees < 0 ? hDegrees + 360 : hDegrees;
+
+  return [l / 100, c / 100, hPositive] as const;
+}
+
+function hexToOklch(hex: string) {
+  const rgb = hexToRgb(hex);
+  const xyz = rgbToXyz(rgb);
+  const lab = xyzToLab(xyz);
+  const [l, c, h] = labToOklch(lab);
+  return `${l.toFixed(3)}% ${c.toFixed(3)} ${h.toFixed(3)}`;
 }
 
 export const useAppTheme = () => {
   const themeColor = useAppConfiguration("theme_color");
+
   document.documentElement.style.setProperty(
     "--app-primary",
-    hexToHSL(themeColor.data.primary)
+    hexToOklch(themeColor.data.primary)
   );
 };

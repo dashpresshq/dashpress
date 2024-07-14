@@ -10,7 +10,7 @@ export const WidgetRoot = forwardRef<
     span: GridSpanSizes;
     height: string;
   }
->(function WidgetRootCmp({ children, span, height }, ref) {
+>(function WidgetRootCmp({ children, span, height, ...props }, ref) {
   return (
     <div
       ref={ref}
@@ -20,6 +20,7 @@ export const WidgetRoot = forwardRef<
           "--grid-height": height,
         } as CSSProperties
       }
+      {...props}
       className="grid-item row-start-[span_var(--grid-height)]"
     >
       {children}

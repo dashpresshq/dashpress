@@ -11,7 +11,7 @@ import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { queryCache, TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
 
-import { getToastMessage } from "../_/utils";
+import { getToastMessage, selectCombobox } from "../_/utils";
 
 const server = setupApiHandlers();
 
@@ -100,12 +100,7 @@ describe("pages/setup/credentials", () => {
       screen.queryByRole("button", { name: "Toggle Connection URL" })
     ).not.toBeInTheDocument();
 
-    await userEvent.type(
-      await screen.findByLabelText("Database Type"),
-      "Postgres"
-    );
-
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Database Type", "Postgres");
 
     await userEvent.click(
       await screen.findByRole("button", { name: "Toggle Connection URL" })
@@ -113,23 +108,13 @@ describe("pages/setup/credentials", () => {
 
     expect(screen.getByLabelText("Connection URL")).toBeInTheDocument();
 
-    await userEvent.type(
-      await screen.findByLabelText("Database Type"),
-      "Mysql"
-    );
-
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Database Type", "Mysql");
 
     expect(screen.queryByLabelText("Connection URL")).not.toBeInTheDocument();
 
     expect(container.querySelectorAll("label")).toHaveLength(7);
 
-    await userEvent.type(
-      await screen.findByLabelText("Database Type"),
-      "Mssql"
-    );
-
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Database Type", "Mssql");
 
     await userEvent.click(
       await screen.findByRole("button", { name: "Toggle Connection URL" })
@@ -137,12 +122,7 @@ describe("pages/setup/credentials", () => {
 
     expect(screen.getByLabelText("Connection URL")).toBeInTheDocument();
 
-    await userEvent.type(
-      await screen.findByLabelText("Database Type"),
-      "Sqlite"
-    );
-
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Database Type", "Sqlite");
 
     expect(screen.queryByLabelText("Connection URL")).not.toBeInTheDocument();
   });
@@ -162,12 +142,7 @@ describe("pages/setup/credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.type(
-        await screen.findByLabelText("Database Type"),
-        "Sqlite"
-      );
-
-      await userEvent.keyboard("{Enter}");
+      await selectCombobox("Database Type", "Sqlite");
 
       expect(container.querySelectorAll("label")).toHaveLength(2);
 
@@ -209,12 +184,7 @@ describe("pages/setup/credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.type(
-        await screen.findByLabelText("Database Type"),
-        title
-      );
-
-      await userEvent.keyboard("{Enter}");
+      await selectCombobox("Database Type", title);
 
       expect(screen.getByLabelText("Port")).toHaveValue(port);
 
@@ -252,12 +222,7 @@ describe("pages/setup/credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.type(
-        await screen.findByLabelText("Database Type"),
-        title
-      );
-
-      await userEvent.keyboard("{Enter}");
+      await selectCombobox("Database Type", title);
 
       await userEvent.click(
         await screen.findByRole("button", { name: "Toggle Connection URL" })

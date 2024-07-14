@@ -1,4 +1,4 @@
 export interface IWidgetSettingProps {
-  setId: () => void;
+  setId: string;
   delete: () => void;
 }

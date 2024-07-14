@@ -114,7 +114,7 @@ describe("pages/admin/[entity]/config/form", () => {
       );
 
       expect(await getToastMessage()).toBe(
-        "Expression: •JS-Error: SyntaxError: Unexpected identifier"
+        "Could not parse Javascript•Expression: \\n•JS-Error: SyntaxError: Unexpected identifier"
       );
 
       await closeAllToasts();

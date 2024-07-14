@@ -1,5 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import userEvent, {
+  PointerEventsCheckLevel,
+} from "@testing-library/user-event";
 import { useState } from "react";
 import { fakeMessageDescriptor } from "translations/fake";
 
@@ -43,15 +45,21 @@ function TestComponent({
 }
 
 describe("Table Filters", () => {
+  const user = userEvent.setup({
+    pointerEventsCheck: PointerEventsCheckLevel.Never,
+  });
+
   describe("Strings", () => {
     const type = { _type: "string", bag: undefined } as const;
 
     it("should have the correct options", async () => {
       render(<TestComponent type={type} />);
 
-      await userEvent.click(
+      await user.click(
         screen.getByRole("button", { name: "Filter Test Column By Search" })
       );
+
+      await user.click(screen.getByRole("combobox"));
 
       expect(
         (await screen.findAllByRole("option")).map(
@@ -69,11 +77,11 @@ describe("Table Filters", () => {
     it("should filter by value correctly", async () => {
       render(<TestComponent type={type} />);
 
-      await userEvent.click(
+      await user.click(
         screen.getByRole("button", { name: "Filter Test Column By Search" })
       );
 
-      await userEvent.type(screen.getByPlaceholderText("Search"), "Hello");
+      await user.type(screen.getByPlaceholderText("Search"), "Hello");
 
       await waitFor(() => {
         expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
@@ -82,10 +90,7 @@ describe("Table Filters", () => {
         });
       });
 
-      await userEvent.selectOptions(
-        screen.getByRole("combobox", { name: "Select Filter Operator" }),
-        "Equal"
-      );
+      await user.selectOptions(screen.getByRole("combobox"), "Equal");
 
       await waitFor(() => {
         expect(setFilterValueJestFn).toHaveBeenLastCalledWith({

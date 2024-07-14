@@ -12,7 +12,7 @@ import { BASE_TEST_URL } from "@/tests/api/handlers/_utils";
 import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
-import { getTableRows } from "@/tests/utils";
+import { getTableRows, waitForSkeletonsToVanish } from "@/tests/utils";
 
 const server = setupApiHandlers();
 
@@ -50,13 +50,16 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
           <ManageVariables />
         </TestProviders>
       );
-      const priviledgeSection = screen.getByLabelText(
-        "credentials priviledge section"
-      );
 
       await userEvent.click(
         await screen.findByRole("tab", { name: "Secrets" })
       );
+
+      const priviledgeSection = screen.getByRole("tabpanel", {
+        name: "Secrets",
+      });
+
+      await waitForSkeletonsToVanish();
 
       expect(
         within(priviledgeSection).queryByText(
@@ -90,9 +93,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
         </TestProviders>
       );
 
-      const priviledgeSection = await screen.findByLabelText(
-        "constants priviledge section"
-      );
+      const priviledgeSection = screen.getByRole("tabpanel", {
+        name: "Constants",
+      });
 
       expect(
         within(priviledgeSection).queryByText(

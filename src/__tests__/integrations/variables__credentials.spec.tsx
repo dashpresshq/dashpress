@@ -8,7 +8,13 @@ import ManageVariables from "@/pages/admin/settings/variables";
 import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
-import { closeAllToasts, confirmDelete, getTableRows,getToastMessage  } from "@/tests/utils";
+import {
+  closeAllToasts,
+  confirmDelete,
+  getTableRows,
+  getToastMessage,
+  waitForSkeletonsToVanish,
+} from "@/tests/utils";
 
 setupApiHandlers();
 
@@ -34,9 +40,11 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      const priviledgeSection = await screen.findByLabelText(
-        "constants priviledge section"
-      );
+      await waitForSkeletonsToVanish();
+
+      const priviledgeSection = screen.getByRole("tabpanel", {
+        name: "Constants",
+      });
 
       expect(
         within(priviledgeSection).queryByText(
@@ -64,11 +72,13 @@ describe("pages/integrations/variables => credentials", () => {
           <ManageVariables />
         </TestProviders>
       );
-      const priviledgeSection = await screen.findByLabelText(
-        "credentials priviledge section"
-      );
 
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+
+      const priviledgeSection = screen.getByRole("tabpanel", {
+        name: "Secrets",
+      });
+
       expect(
         within(priviledgeSection).getByText(
           `For security reasons, Please input your account password to reveal credentials`
@@ -98,9 +108,7 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
       expect(
         await getTableRows(
@@ -127,9 +135,7 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
       expect(
         screen.queryByRole("button", {
@@ -155,13 +161,11 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      const priviledgeSection = screen.getByLabelText(
-        "credentials priviledge section"
-      );
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
+      const priviledgeSection = screen.getByRole("tabpanel", {
+        name: "Secrets",
+      });
 
       await userEvent.type(
         within(priviledgeSection).getByLabelText("Password"),
@@ -201,13 +205,11 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      const priviledgeSection = screen.getByLabelText(
-        "credentials priviledge section"
-      );
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
+      const priviledgeSection = screen.getByRole("tabpanel", {
+        name: "Secrets",
+      });
 
       await userEvent.type(
         within(priviledgeSection).getByLabelText("Password"),
@@ -256,9 +258,7 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
       expect(
         screen.queryAllByRole("button", {
@@ -283,6 +283,63 @@ describe("pages/integrations/variables => credentials", () => {
     });
   });
 
+  describe("create", () => {
+    it("should create new secret", async () => {
+      render(
+        <TestProviders>
+          <ManageVariables />
+        </TestProviders>
+      );
+
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+
+      await userEvent.click(
+        await screen.findByRole(
+          "button",
+          { name: "Add New Secret" },
+          { timeout: 2000 }
+        )
+      );
+
+      const dialog = await screen.findByRole(
+        "dialog",
+        {},
+        {
+          timeout: 20000,
+        }
+      );
+
+      expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
+
+      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_SECRET");
+      await userEvent.type(
+        within(dialog).getByLabelText("Value"),
+        "new secret"
+      );
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Create Secret" })
+      );
+
+      expect(await getToastMessage()).toBe("Secret Saved Successfully");
+
+      await closeAllToasts();
+
+      expect(
+        await screen.findByRole(
+          "row",
+          {
+            name: "{{ SECRET.NEW_SECRET }} new secret",
+          },
+          {
+            timeout: 2000,
+            interval: 100,
+          }
+        )
+      ).toBeInTheDocument();
+    });
+  });
+
   describe("update", () => {
     it("should update secret", async () => {
       render(
@@ -291,9 +348,7 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
       const table = within(
         screen.getByRole("tabpanel", { name: "Secrets" })
@@ -343,61 +398,9 @@ describe("pages/integrations/variables => credentials", () => {
           "{{ SECRET.PAYMENT_API_KEY }}|super-secret__updated",
           "{{ SECRET.MAIL_PASSWORD }}|do-not-share",
           "{{ SECRET.ROOT_PASSWORD }}|confidential",
+          "{{ SECRET.NEW_SECRET }}|new secret",
         ]);
       });
-    });
-  });
-
-  describe("create", () => {
-    it("should create new secret", async () => {
-      render(
-        <TestProviders>
-          <ManageVariables />
-        </TestProviders>
-      );
-
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
-
-      await userEvent.click(
-        await screen.findByRole(
-          "button",
-          { name: "Add New Secret" },
-          { timeout: 2000 }
-        )
-      );
-
-      const dialog = await screen.findByRole("dialog");
-
-      expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
-
-      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_SECRET");
-      await userEvent.type(
-        within(dialog).getByLabelText("Value"),
-        "new secret"
-      );
-
-      await userEvent.click(
-        within(dialog).getByRole("button", { name: "Create Secret" })
-      );
-
-      expect(await getToastMessage()).toBe("Secret Saved Successfully");
-
-      await closeAllToasts();
-
-      expect(
-        await screen.findByRole(
-          "row",
-          {
-            name: "{{ SECRET.NEW_SECRET }} new secret",
-          },
-          {
-            timeout: 2000,
-            interval: 100,
-          }
-        )
-      ).toBeInTheDocument();
     });
   });
 
@@ -409,9 +412,7 @@ describe("pages/integrations/variables => credentials", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
       const table = screen.getByRole("tabpanel", { name: "Secrets" });
 

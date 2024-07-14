@@ -5,7 +5,7 @@ import CreateDashboardWidget from "@/pages/dashboard/[dashboardId]/widget/create
 import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
-import { closeAllToasts, getToastMessage } from "@/tests/utils";
+import { closeAllToasts, getToastMessage, selectCombobox } from "@/tests/utils";
 
 setupApiHandlers();
 
@@ -41,33 +41,21 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       "New Summary Card"
     );
 
-    await userEvent.type(screen.getByLabelText("Type"), "Summary Card");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Type", "Summary Card");
 
-    await userEvent.type(
-      screen.getByLabelText("Link Entity"),
-      "Plural entity-1"
-    );
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Link Entity", "Plural entity-1");
 
-    await userEvent.type(
-      await screen.findByLabelText("Entity Tab"),
-      "Verified Entity View"
-    );
+    await selectCombobox("Width", "3 Units");
 
-    await userEvent.type(screen.getByLabelText("Color"), "green");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Height", "4 Units");
 
-    await userEvent.type(screen.getByLabelText("Icon"), "Download");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Entity Tab", "Verified Entity View");
 
     await userEvent.type(screen.getByLabelText("Script"), "return 1");
 
-    await userEvent.type(screen.getByLabelText("Width"), "3 Units");
-    await userEvent.keyboard("{Enter}");
+    await userEvent.click(screen.getByRole("button", { name: "green" }));
 
-    await userEvent.type(screen.getByLabelText("Height"), "4 Units");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Icon", "Download");
 
     await userEvent.click(
       screen.getByRole("button", { name: "Create Dashboard Widget" })
@@ -89,30 +77,25 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
 
     await userEvent.type(await screen.findByLabelText("Title"), "New Table");
 
-    await userEvent.type(screen.getByLabelText("Type"), "Table");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Type", "Table");
 
-    await userEvent.type(
-      screen.getByLabelText("Link Entity"),
-      "Plural entity-1"
-    );
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Link Entity", "Plural entity-1");
 
-    await userEvent.type(
-      screen.getByLabelText("Entity Tab"),
-      "Verified Entity View"
-    );
+    await selectCombobox("Width", "2 Units");
 
-    await userEvent.type(screen.getByLabelText("Width"), "2 Units");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Entity Tab", "User Entity View");
 
-    await userEvent.type(screen.getByLabelText("Height"), "3 Units");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Height", "3 Units");
 
-    await userEvent.type(screen.getByLabelText("Script"), "return 1");
+    await userEvent.type(screen.getByLabelText("Script"), "return 2");
 
-    expect(screen.queryByLabelText("Color")).not.toBeInTheDocument();
-    expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "green" })
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole("combobox", { name: "Icon" })
+    ).not.toBeInTheDocument();
 
     await userEvent.click(
       screen.getByRole("button", { name: "Create Dashboard Widget" })

@@ -20,12 +20,10 @@ Object.defineProperty(window, "location", {
 });
 
 describe("AppLayout", () => {
-  const pushMock = jest.fn();
-
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should render the content", async () => {
@@ -124,11 +122,9 @@ describe("AppLayout", () => {
         await screen.findByLabelText("Toggle Profile Menu")
       );
 
-      await userEvent.click(
-        await screen.findByRole("link", { name: "My Account" })
-      );
-
-      expect(pushMock).toHaveBeenCalledWith("/account/profile");
+      expect(
+        await screen.findByRole("option", { name: "My Account" })
+      ).toHaveAttribute("href", "/account/profile");
     });
   });
 

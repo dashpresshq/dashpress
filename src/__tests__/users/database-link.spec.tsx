@@ -1,6 +1,3 @@
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/no-container */
-
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -9,7 +6,11 @@ import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
 
-import { getToastMessage } from "../_/utils";
+import {
+  getToastMessage,
+  selectCombobox,
+  waitForSkeletonsToVanish,
+} from "../_/utils";
 
 setupApiHandlers();
 
@@ -25,17 +26,14 @@ describe("pages/users/database-link", () => {
       </TestProviders>
     );
 
-    await userEvent.type(
-      await screen.findByLabelText("Your Users Table"),
-      "entity-2"
-    );
-    await userEvent.keyboard("{Enter}");
+    await waitForSkeletonsToVanish();
 
-    await userEvent.type(
-      screen.getByLabelText("Field Corresponding To Dashpress Usernames"),
+    await selectCombobox("Your Users Table", "entity-2");
+
+    await selectCombobox(
+      "Field Corresponding To Dashpress Usernames",
       "entity-2-string-field"
     );
-    await userEvent.keyboard("{Enter}");
 
     await userEvent.click(
       screen.getByRole("button", { name: "Save Users Link To Database" })
@@ -47,18 +45,20 @@ describe("pages/users/database-link", () => {
   });
 
   it("should persist the link form correctly", async () => {
-    const { container } = render(
+    render(
       <TestProviders>
         <UsersLinkToDatabase />
       </TestProviders>
     );
 
-    expect(container.querySelector(`input[name="table"]`)).toHaveValue(
-      "entity-2"
-    );
+    expect(
+      screen.getByRole("combobox", { name: "Your Users Table" })
+    ).toHaveTextContent("entity-2");
 
-    expect(container.querySelector(`input[name="field"]`)).toHaveValue(
-      "entity-2-string-field"
-    );
+    expect(
+      screen.getByRole("combobox", {
+        name: "Field Corresponding To Dashpress Usernames",
+      })
+    ).toHaveTextContent("entity-2-string-field");
   });
 });

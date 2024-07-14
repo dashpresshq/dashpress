@@ -1,6 +1,5 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useRouter } from "next/router";
 import SortableList, { SortableItem } from "react-easy-sort";
 
 import { ViewStateMachine } from "@/components/app/view-state-machine";
@@ -27,8 +26,6 @@ interface IProps {
 }
 
 export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
-  const router = useRouter();
-
   const { _ } = useLingui();
 
   const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
@@ -58,7 +55,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           id: "done",
           label: msg`Done`,
           systemIcon: "Check",
-          action: () => router.replace(doneLink),
+          action: doneLink,
         },
       ]}
       actionItems={[
@@ -89,14 +86,10 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
                   setting={{
                     delete: () =>
                       deleteDashboardWidgetMutation.mutate(config.id),
-                    setId: () => {
-                      router.push(
-                        NAVIGATION_LINKS.DASHBOARD.WIDGET.UPDATE(
-                          dashboardId,
-                          config.id
-                        )
-                      );
-                    },
+                    setId: NAVIGATION_LINKS.DASHBOARD.WIDGET.UPDATE(
+                      dashboardId,
+                      config.id
+                    ),
                   }}
                 />
               </SortableItem>

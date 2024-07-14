@@ -5,7 +5,7 @@ import UserUpdate from "@/pages/users/[username]/index";
 import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
-import { getToastMessage } from "@/tests/utils";
+import { getToastMessage, selectCombobox } from "@/tests/utils";
 
 setupApiHandlers();
 
@@ -56,7 +56,7 @@ describe("pages/users/[username]/index", () => {
         screen.getByRole("combobox", {
           name: "Role",
         })
-      ).toHaveTextContent("Viewer");
+      ).toHaveValue("Viewer");
     });
 
     it("should update user details", async () => {
@@ -76,8 +76,7 @@ describe("pages/users/[username]/index", () => {
       await userEvent.clear(await screen.findByLabelText("Name"));
       await userEvent.type(screen.getByLabelText("Name"), "Updated Name");
 
-      await userEvent.type(screen.getByLabelText("Role"), "Creator");
-      await userEvent.keyboard("{Enter}");
+      await selectCombobox("Role", "Creator");
 
       await userEvent.click(
         screen.getByRole("button", { name: "Update User" })

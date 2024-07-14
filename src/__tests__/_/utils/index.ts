@@ -1,10 +1,16 @@
-import { screen, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 import userEvent, {
   PointerEventsCheckLevel,
 } from "@testing-library/user-event";
 
 export const closeAllToasts = async () => {
   await userEvent.keyboard("{Escape}");
+};
+
+export const waitForSkeletonsToVanish = async () => {
+  await waitFor(() => {
+    expect(screen.queryAllByRole("progressbar")).toHaveLength(0);
+  });
 };
 
 export const getToastMessage = async () => {
@@ -32,5 +38,13 @@ export const getTableRows = async (widget: HTMLElement) => {
       .map((cell) => cell.textContent.trim())
       .filter(Boolean)
       .join("|");
+  });
+};
+
+export const selectCombobox = async (label: string, value: string) => {
+  await userEvent.click(screen.getByRole("combobox", { name: label }));
+
+  await userEvent.click(screen.getByRole("option", { name: value }), {
+    pointerEventsCheck: PointerEventsCheckLevel.Never,
   });
 };

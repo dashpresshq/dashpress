@@ -17,12 +17,12 @@ export const setupApiHandlers = [
     const reqBody = JSON.stringify(await req.json());
     if (
       [
-        `{"port":8080,"dataSourceType":"postgres","host":"127.0.0.1","user":"root","password":"password","database":"dashpress"}`,
-        `{"port":5432,"dataSourceType":"postgres","connectionString":"some-connection-url"}`,
-        `{"port":8080,"dataSourceType":"mysql","host":"127.0.0.1","user":"root","password":"password","database":"dashpress"}`,
-        `{"port":3306,"dataSourceType":"mysql","connectionString":"some-connection-url"}`,
-        `{"port":8080,"dataSourceType":"mssql","host":"127.0.0.1","user":"root","password":"password","database":"dashpress"}`,
-        `{"port":1433,"dataSourceType":"mssql","connectionString":"some-connection-url"}`,
+        `{"port":8080,"dataSourceType":"postgres","ssl":false,"host":"127.0.0.1","user":"root","password":"password","database":"dashpress"}`,
+        `{"port":5432,"dataSourceType":"postgres","ssl":false,"connectionString":"some-connection-url"}`,
+        `{"port":8080,"dataSourceType":"mysql","ssl":false,"host":"127.0.0.1","user":"root","password":"password","database":"dashpress"}`,
+        `{"port":3306,"dataSourceType":"mysql","ssl":false,"connectionString":"some-connection-url"}`,
+        `{"port":8080,"dataSourceType":"mssql","ssl":false,"host":"127.0.0.1","user":"root","password":"password","database":"dashpress"}`,
+        `{"port":1433,"dataSourceType":"mssql","ssl":false,"connectionString":"some-connection-url"}`,
         `{"dataSourceType":"sqlite","filename":"some-sqlite-file-name"}`,
       ].includes(reqBody)
     ) {

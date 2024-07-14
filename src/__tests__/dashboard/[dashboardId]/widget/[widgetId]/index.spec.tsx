@@ -5,7 +5,12 @@ import UpdateDashboardWidget from "@/pages/dashboard/[dashboardId]/widget/[widge
 import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
-import { closeAllToasts, getToastMessage } from "@/tests/utils";
+import {
+  closeAllToasts,
+  getToastMessage,
+  selectCombobox,
+  waitForSkeletonsToVanish,
+} from "@/tests/utils";
 
 setupApiHandlers();
 
@@ -28,33 +33,23 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
       </TestProviders>
     );
 
+    await waitForSkeletonsToVanish();
+
     await userEvent.type(await screen.findByLabelText("Title"), "Updated");
 
-    await userEvent.type(screen.getByLabelText("Type"), "Summary Card");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Type", "Summary Card");
 
-    await userEvent.type(
-      screen.getByLabelText("Link Entity"),
-      "Plural entity-2"
-    );
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Link Entity", "Plural entity-2");
 
-    await userEvent.type(
-      await screen.findByLabelText("Entity Tab"),
-      "User Entity View"
-    );
-    await userEvent.keyboard("{Enter}");
+    await userEvent.click(screen.getByRole("button", { name: "red" }));
 
-    await userEvent.type(screen.getByLabelText("Color"), "red");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Entity Tab", "User Entity View");
 
     await userEvent.type(screen.getByLabelText("SVG"), "<p>Custom Icon</p>");
 
-    await userEvent.type(screen.getByLabelText("Width"), "3 Units");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Width", "3 Units");
 
-    await userEvent.type(screen.getByLabelText("Height"), "4 Units");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Height", "4 Units");
 
     await userEvent.type(screen.getByLabelText("Script"), "return 1");
 
@@ -87,26 +82,15 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
 
     await userEvent.type(await screen.findByLabelText("Title"), "Updated");
 
-    await userEvent.type(screen.getByLabelText("Type"), "Table");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Type", "Table");
 
-    await userEvent.type(
-      screen.getByLabelText("Link Entity"),
-      "Plural entity-2"
-    );
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Link Entity", "Plural entity-2");
 
-    await userEvent.type(
-      screen.getByLabelText("Entity Tab"),
-      "Verified Entity View"
-    );
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Entity Tab", "Verified Entity View");
 
-    await userEvent.type(screen.getByLabelText("Width"), "1 Unit");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Width", "1 Unit");
 
-    await userEvent.type(screen.getByLabelText("Height"), "2 Units");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Height", "2 Units");
 
     await userEvent.type(screen.getByLabelText("Script"), "return 1");
 

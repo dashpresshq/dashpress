@@ -53,8 +53,8 @@ export const dashboardApiHandlers = [
       if (
         req.params.dashboardId === "test-dashboard-id" &&
         [
-          `{"icon":"Download","title":"New Summary Card","_type":"summary-card","entity":"entity-1","color":"green","script":"return 1","span":"3","height":"4","id":"new_id_1"}`,
-          `{"icon":"ShoppingCart","title":"New Table","_type":"table","entity":"entity-1","span":"2","height":"3","script":"return 1","id":"new_id_2"}`,
+          '{"icon":"Download","title":"New Summary Card","_type":"summary-card","entity":"entity-1","span":"3","height":"4","queryId":"foo","script":"return 1","color":"green","id":"new_id_1"}',
+          `{"icon":"Activity","title":"New Table","_type":"table","entity":"entity-1","span":"2","queryId":"bar","height":"3","script":"return 2","id":"new_id_2"}`,
         ].includes(JSON.stringify(requestBody))
       ) {
         DASHBOARD_WIDGETS.push(requestBody);

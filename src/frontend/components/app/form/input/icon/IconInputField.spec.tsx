@@ -7,6 +7,7 @@ import { Form } from "react-final-form";
 import { TestProviders } from "@/__tests__/_/Provider";
 import { FormButton } from "@/components/app/button/form";
 import { USE_ROUTER_PARAMS } from "@/tests/constants";
+import { selectCombobox } from "@/tests/utils";
 
 import { IconInputField } from ".";
 
@@ -78,8 +79,7 @@ describe("<IconInputField />", () => {
 
     expect(screen.queryByLabelText("SVG")).not.toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText("Icon"), "Credit Card");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Icon", "Credit Card");
 
     await userEvent.click(screen.getByRole("button", { name: "Save" }));
 
@@ -132,8 +132,7 @@ describe("<IconInputField />", () => {
 
     expect(screen.queryByLabelText("SVG")).not.toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText("Icon"), "Credit Card");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Icon", "Credit Card");
 
     await userEvent.click(screen.getByRole("button", { name: "Save" }));
 

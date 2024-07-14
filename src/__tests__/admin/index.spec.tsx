@@ -61,9 +61,8 @@ describe("pages/admin", () => {
       "100%"
     );
 
-    expect(within(widget).getByLabelText("Relative Direction")).toHaveAttribute(
-      "color",
-      "#03d87f"
+    expect(within(widget).getByLabelText("Relative Direction")).toHaveClass(
+      "bg-green-100"
     );
 
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(

@@ -66,12 +66,12 @@ describe("pages/admin/[entity]/config/crud", () => {
         <EntityCrudSettings />
       </TestProviders>
     );
+
     expect(
-      await screen.findByRole("button", {
+      screen.queryByRole("button", {
         name: `Enable ${tab} Functionality`,
-        hidden: true,
       })
-    ).not.toBeVisible();
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("tab", { name: tab }));
 
@@ -81,7 +81,7 @@ describe("pages/admin/[entity]/config/crud", () => {
       await screen.findByRole("button", {
         name: `Enable ${tab} Functionality`,
       })
-    ).toBeVisible();
+    ).toBeInTheDocument();
 
     expect(replaceMock).toHaveBeenCalledWith(
       `/hello-there?foo=bar&tab=${sluggify(tab)}`
@@ -111,7 +111,7 @@ describe("pages/admin/[entity]/config/crud", () => {
       await screen.findByRole("button", {
         name: "Enable Delete Functionality",
       })
-    ).toBeVisible();
+    ).toBeInTheDocument();
 
     expect(
       screen.getByRole("tab", {
@@ -128,9 +128,8 @@ describe("pages/admin/[entity]/config/crud", () => {
     expect(
       screen.queryByRole("button", {
         name: "Enable Delete Functionality",
-        hidden: true,
       })
-    ).not.toBeVisible();
+    ).not.toBeInTheDocument();
 
     expect(
       screen.getByRole("tab", {

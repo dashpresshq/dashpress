@@ -21,8 +21,7 @@ jest.mock("nanoid", () => ({
 describe("pages/admin/settings/dashboard", () => {
   describe("Action Button", () => {
     it("should be able to go to home page on 'Done'", async () => {
-      const replaceMock = jest.fn();
-      useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
       render(
         <TestProviders>
@@ -30,16 +29,14 @@ describe("pages/admin/settings/dashboard", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("button", { name: "Done" })
+      expect(await screen.findByRole("link", { name: "Done" })).toHaveAttribute(
+        "href",
+        "/"
       );
-
-      expect(replaceMock).toHaveBeenCalledWith("/");
     });
 
     it("should be able to go to new widget page", async () => {
-      const pushMock = jest.fn();
-      useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
       render(
         <TestProviders>
@@ -47,13 +44,9 @@ describe("pages/admin/settings/dashboard", () => {
         </TestProviders>
       );
 
-      await userEvent.click(
-        await screen.findByRole("button", { name: "Add New Dashboard Widget" })
-      );
-
-      expect(pushMock).toHaveBeenCalledWith(
-        "/dashboard/__home__widgets/widget/create"
-      );
+      expect(
+        await screen.findByRole("link", { name: "Add New Dashboard Widget" })
+      ).toHaveAttribute("href", "/dashboard/__home__widgets/widget/create");
     });
 
     it("should delete table widget", async () => {
@@ -71,7 +64,9 @@ describe("pages/admin/settings/dashboard", () => {
 
       await confirmDelete();
 
-      expect(await getToastMessage()).toBe("Widget Deleted Successfully");
+      expect(await getToastMessage()).toBe(
+        "Dashboard Widget Deleted Successfully"
+      );
 
       expect(
         screen.queryByLabelText("Foo Table Widget")
@@ -79,8 +74,7 @@ describe("pages/admin/settings/dashboard", () => {
     });
 
     it("should edit summary widget", async () => {
-      const pushMock = jest.fn();
-      useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
       render(
         <TestProviders>
@@ -90,11 +84,10 @@ describe("pages/admin/settings/dashboard", () => {
 
       const widget = await screen.findByLabelText("Bar Card Widget");
 
-      await userEvent.click(
-        within(widget).queryByRole("button", { name: "Edit Dashboard Widget" })
-      );
-
-      expect(pushMock).toHaveBeenCalledWith(
+      expect(
+        within(widget).queryByRole("link", { name: "Edit Dashboard Widget" })
+      ).toHaveAttribute(
+        "href",
         "/dashboard/__home__widgets/widget/summary_card_id_1"
       );
     });

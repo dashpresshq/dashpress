@@ -179,21 +179,20 @@ export function ManageCredentialGroup({
 
   return (
     <Card>
-      <section aria-label={`${group} priviledge section`}>
-        {group === IntegrationsConfigurationGroup.Credentials &&
-          userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
-          revealedCredentials.data === undefined && (
-            <div className="my-3 px-3">
-              <PasswordToReveal isLoading={revealedCredentials.isLoading} />
-            </div>
-          )}
-        {!canManageAction && tableData.data.length > 0 && (
-          <p className="my-2 px-2 text-sm italic">
-            Your account does not have the permission to view secret values or
-            manage them
-          </p>
+      {group === IntegrationsConfigurationGroup.Credentials &&
+        userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
+        revealedCredentials.data === undefined && (
+          <div className="my-3 px-3">
+            <PasswordToReveal isLoading={revealedCredentials.isLoading} />
+          </div>
         )}
-      </section>
+
+      {!canManageAction && tableData.data.length > 0 && (
+        <p className="my-2 px-2 text-sm italic">
+          Your account does not have the permission to view secret values or
+          manage them
+        </p>
+      )}
 
       <FEPaginationTable
         dataEndpoint={dataEndpoint}

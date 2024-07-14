@@ -25,6 +25,7 @@ export function SpectrumColorInputField({
                 spectrum,
               })
             )}
+            aria-label={spectrum}
             type="button"
             onClick={() => formInput.input.onChange(spectrum)}
           >

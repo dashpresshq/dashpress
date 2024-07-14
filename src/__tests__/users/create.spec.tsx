@@ -8,7 +8,7 @@ import { USE_ROUTER_PARAMS } from "@/tests/constants";
 import { TestProviders } from "@/tests/Provider";
 import { setupApiHandlers } from "@/tests/setupApihandlers";
 
-import { getToastMessage } from "../_/utils";
+import { getToastMessage, selectCombobox } from "../_/utils";
 
 setupApiHandlers();
 
@@ -32,9 +32,7 @@ describe("pages/users/create", () => {
     );
     await userEvent.type(screen.getByLabelText("Name"), "Some Name");
 
-    await userEvent.type(await screen.findByLabelText("Role"), "Viewer");
-
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Role", "Viewer");
 
     await userEvent.type(screen.getByLabelText("Password"), "Password");
 

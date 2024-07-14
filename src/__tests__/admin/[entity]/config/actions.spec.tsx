@@ -10,6 +10,7 @@ import {
   confirmDelete,
   getTableRows,
   getToastMessage,
+  selectCombobox,
 } from "@/tests/utils";
 
 setupApiHandlers();
@@ -60,8 +61,7 @@ describe("pages/admin/[entity]/config/actions", () => {
 
     const dialog = screen.getByRole("dialog");
 
-    await userEvent.type(within(dialog).getByLabelText("Trigger"), "On Create");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Trigger", "On Create");
 
     await userEvent.click(
       within(dialog).getByRole("option", { name: "Slack" })
@@ -71,11 +71,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       within(dialog).queryByRole("option", { name: "Non Activated Actions" })
     ).not.toBeInTheDocument();
 
-    await userEvent.type(
-      within(dialog).getByLabelText("Action"),
-      "Send Message"
-    );
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Action", "Send Message");
 
     await userEvent.type(
       await within(dialog).findByLabelText("Slack: Channel"),
@@ -132,17 +128,28 @@ describe("pages/admin/[entity]/config/actions", () => {
 
     const dialog = screen.getByRole("dialog");
     //
+
     expect(
-      within(dialog).getByTestId("react-select__trigger")
+      within(dialog).getByRole("combobox", { name: "Trigger" })
     ).toHaveTextContent("On Create");
 
     expect(
       within(dialog).getByRole("option", { selected: true })
     ).toHaveTextContent("Slack");
 
+    // expect(
+    //   within(dialog).getByTestId("react-select__action")
+    // ).toHaveTextContent("Send Message - slack");
+
+    // await selectCombobox("Action", "Send Message");
+
     expect(
-      within(dialog).getByTestId("react-select__action")
-    ).toHaveTextContent("Send Message - slack");
+      within(dialog).getByRole("combobox", { name: "Action" })
+    ).toHaveTextContent("Send Message");
+
+    expect(
+      within(dialog).getByRole("combobox", { name: "Trigger" })
+    ).toHaveTextContent("On Create");
 
     expect(await within(dialog).findByLabelText("Slack: Channel")).toHaveValue(
       "{ CONSTANTS.SLACK_CHANNEL }}"
@@ -172,13 +179,11 @@ describe("pages/admin/[entity]/config/actions", () => {
 
     const dialog = screen.getByRole("dialog");
 
-    await userEvent.type(within(dialog).getByLabelText("Trigger"), "On Delete");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Trigger", "On Delete");
 
     await userEvent.click(within(dialog).getByRole("option", { name: "SMTP" }));
 
-    await userEvent.type(within(dialog).getByLabelText("Action"), "Send Mail");
-    await userEvent.keyboard("{Enter}");
+    await selectCombobox("Action", "Send Mail");
 
     await userEvent.type(
       await within(dialog).findByLabelText("SMTP: From"),

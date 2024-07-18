@@ -68,6 +68,7 @@ module.exports = {
         "react/no-danger": "off",
         "react/no-unstable-nested-components": "off",
         "import/no-extraneous-dependencies": "off",
+        "import/no-cycle": "off",
         "consistent-return": "off",
         "default-case": "off",
         "react/jsx-props-no-spreading": "off",

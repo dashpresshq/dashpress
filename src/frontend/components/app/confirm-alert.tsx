@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { createStore } from "@/frontend/lib/store";
 
-import { NextPortal } from "./next-portal";
+import { AppBlur } from "./app-blur";
 
 interface IConfirmAlertDetails {
   title: MessageDescriptor;
@@ -51,16 +51,12 @@ export function ConfirmAlert() {
     store.onClose,
   ]);
 
-  if (!title) {
-    return null;
-  }
-
   return (
-    <NextPortal>
+    <AppBlur isOn={!!title}>
       <AlertDialog open={!!title} onOpenChange={onClose}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle> {_(title)}</AlertDialogTitle>
+            <AlertDialogTitle> {title ? _(title) : null}</AlertDialogTitle>
             <AlertDialogDescription>
               {t`Are you sure you want to do this?`}
             </AlertDialogDescription>
@@ -76,6 +72,6 @@ export function ConfirmAlert() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </NextPortal>
+    </AppBlur>
   );
 }

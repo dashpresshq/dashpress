@@ -14,7 +14,7 @@ export const waitForSkeletonsToVanish = async () => {
 };
 
 export const getToastMessage = async () => {
-  return (await within(screen.getByRole("region")).findByRole("status"))
+  return (await within(await screen.findByRole("region")).findByRole("status"))
     .textContent;
 };
 
@@ -46,5 +46,11 @@ export const selectCombobox = async (label: string, value: string) => {
 
   await userEvent.click(screen.getByRole("option", { name: value }), {
     pointerEventsCheck: PointerEventsCheckLevel.Never,
+  });
+};
+
+export const waitPointerEvents = async () => {
+  await waitFor(() => {
+    expect(document.body).toHaveStyle("pointer-events: auto");
   });
 };

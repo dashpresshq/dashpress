@@ -7,7 +7,7 @@ import { cn } from "@/components/utils";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
-import { NextPortal } from "./next-portal";
+import { AppBlur } from "./app-blur";
 
 export interface IProps {
   show: boolean;
@@ -20,12 +20,8 @@ export interface IProps {
 export function OffCanvas({ show, onClose, title, children, size }: IProps) {
   const { _ } = useLingui();
 
-  if (!show) {
-    return null;
-  }
-
   return (
-    <NextPortal>
+    <AppBlur isOn={show}>
       <Sheet open={show} onOpenChange={onClose}>
         <SheetContent
           className={cn("flex w-full flex-col", {
@@ -43,6 +39,6 @@ export function OffCanvas({ show, onClose, title, children, size }: IProps) {
           </ScrollArea>
         </SheetContent>
       </Sheet>
-    </NextPortal>
+    </AppBlur>
   );
 }

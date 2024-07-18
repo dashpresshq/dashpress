@@ -301,13 +301,7 @@ describe("pages/integrations/variables => credentials", () => {
         )
       );
 
-      const dialog = await screen.findByRole(
-        "dialog",
-        {},
-        {
-          timeout: 20000,
-        }
-      );
+      const dialog = await screen.findByRole("dialog");
 
       expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
 

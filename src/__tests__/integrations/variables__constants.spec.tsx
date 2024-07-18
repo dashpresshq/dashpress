@@ -10,6 +10,7 @@ import {
   confirmDelete,
   getTableRows,
   getToastMessage,
+  waitPointerEvents,
 } from "@/tests/utils";
 
 setupApiHandlers();
@@ -63,13 +64,17 @@ describe("pages/integrations/variables => constants", () => {
 
       const dialog = await screen.findByRole("dialog");
 
+      await waitPointerEvents();
+
       expect(within(dialog).getByText("Create Constant")).toBeInTheDocument();
 
       await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_KEY");
       await userEvent.type(within(dialog).getByLabelText("Value"), "new value");
 
       await userEvent.click(
-        within(dialog).getByRole("button", { name: "Create Constant" })
+        within(dialog).getByRole("button", {
+          name: "Create Constant",
+        })
       );
 
       expect(await getToastMessage()).toBe("Constant Saved Successfully");
@@ -118,6 +123,8 @@ describe("pages/integrations/variables => constants", () => {
           name: "Edit Constant",
         })
       );
+
+      await waitPointerEvents();
 
       const dialog = screen.getByRole("dialog");
 

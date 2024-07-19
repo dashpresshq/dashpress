@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 interface IProps {
   children: ReactNode;
@@ -9,6 +9,12 @@ interface IProps {
 const gaussianPortals = ["gaussian-portal-0", "gaussian-portal-1"];
 
 export function AppBlur({ children, isOn }: IProps): JSX.Element {
+  const removeBlur = useCallback(() => {
+    gaussianPortals.forEach((portal) => {
+      document.getElementById(portal)?.classList.remove("gaussian-blur");
+    });
+  }, []);
+
   useEffect(() => {
     if (isOn) {
       gaussianPortals.forEach((portal) => {
@@ -18,10 +24,12 @@ export function AppBlur({ children, isOn }: IProps): JSX.Element {
         document.body.style.pointerEvents = "auto";
       }, 500);
     } else {
-      gaussianPortals.forEach((portal) => {
-        document.getElementById(portal)?.classList.remove("gaussian-blur");
-      });
+      removeBlur();
     }
+
+    return () => {
+      removeBlur();
+    };
   }, [isOn]);
 
   return children as JSX.Element;

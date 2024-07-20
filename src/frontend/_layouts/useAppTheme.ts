@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { useAppConfiguration } from "@/frontend/hooks/configuration/configuration.store";
 
 import { hexToOklch } from "../lib/colors/conversion";
@@ -8,10 +10,16 @@ export const useAppTheme = () => {
 
   usePortalThemes();
 
+  const isClient = typeof window !== "undefined";
+
   const { l, c, h } = hexToOklch(themeColor.data.primary);
 
-  document.documentElement.style.setProperty(
-    "--app-primary",
-    `${l}% ${c} ${h}`
-  );
+  useEffect(() => {
+    if (isClient) {
+      document.documentElement.style.setProperty(
+        "--app-primary",
+        `${l}% ${c} ${h}`
+      );
+    }
+  }, [isClient, themeColor.data.primary]);
 };

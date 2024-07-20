@@ -21,7 +21,6 @@ export function useSetupCheck(config: ISetupCheckConfig[]) {
       hasDbCredentials: undefined,
       hasUsers: undefined,
     },
-    persist: true,
   });
 
   useEffect(() => {

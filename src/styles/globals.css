@@ -17,6 +17,7 @@
   }
 
   [data-theme="light"] {
+    color-scheme: light;
     --dp-primary-text: var(--white);
     --dp-primary: var(--app-primary);
     --dp-primary-alpha-opacity: var(--light-primary-alpha-opacity);
@@ -30,6 +31,7 @@
   }
 
   [data-theme="dark"] {
+    color-scheme: dark;
     --dp-primary: var(--app-primary);
     --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
     --dp-primary-alpha-text: var(--white);

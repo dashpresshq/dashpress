@@ -1,3 +1,4 @@
+import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -6,7 +7,21 @@ import { noop } from "@/shared/lib/noop";
 import { fakeMessageDescriptor } from "@/translations/fake";
 
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
-import type { IApiMutateOptions } from "./types";
+
+export type ToastMessageInput = {
+  description: MessageDescriptor;
+  // action?: { label: MessageDescriptor; action: () => void };
+};
+
+export interface IApiMutateOptions<T, V, R> {
+  dataQueryPath: string;
+  otherEndpoints?: string[];
+  onMutate: (oldData: T | undefined, form: V) => T;
+  mutationFn: (form: V) => Promise<R>;
+  successMessage?: ToastMessageInput;
+  smartSuccessMessage?: (formData: R) => ToastMessageInput;
+  onSuccessActionWithFormData?: (formData: R) => void;
+}
 
 function useApiMutate<T>(endpoint: string) {
   const queryClient = useQueryClient();

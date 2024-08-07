@@ -127,3 +127,4 @@ export function RenderFormInput(props: IRenderFormInputProps) {
   }
 }
 // TODO: Rating Input (for contributors)
+// sliders

@@ -48,11 +48,11 @@ export function FormSearch({
           onChange(e.target.value.toLowerCase());
           setValue(e.target.value);
         }}
-        onBlur={(e) => {
-          if (["listbox", "option"].includes(e.relatedTarget?.role)) {
-            e.target.focus();
-          }
-        }}
+        // onBlur={(e) => {
+        //   if (["listbox", "option"].includes(e.relatedTarget?.role)) {
+        //     e.target.focus();
+        //   }
+        // }}
         placeholder={_(msg`Search`)}
         ref={inputRef}
       />

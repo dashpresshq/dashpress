@@ -130,8 +130,8 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-hover data-[disabled]:pointer-events-none data-[highlighted]:bg-hover data-[disabled]:text-muted",
-      { "!bg-primary-alpha text-primary-alpha-text": selected },
+      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-hover data-[disabled]:pointer-events-none data-[disabled]:text-muted",
+      { "bg-hover": selected },
       className
     )}
     {...props}
@@ -160,6 +160,7 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 export interface ISelectProps {
   options: ISelectData[];
+  // options: ISelectData[] | Record<string, ISelectData[]>;
   onChange: (value: string) => void;
   value: string;
   className?: string;

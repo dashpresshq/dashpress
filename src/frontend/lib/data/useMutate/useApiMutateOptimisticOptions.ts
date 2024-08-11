@@ -1,4 +1,3 @@
-import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -7,11 +6,7 @@ import { noop } from "@/shared/lib/noop";
 import { fakeMessageDescriptor } from "@/translations/fake";
 
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
-
-export type ToastMessageInput = {
-  description: MessageDescriptor;
-  // action?: { label: MessageDescriptor; action: () => void };
-};
+import type { ToastMessageInput } from "./types";
 
 export interface IApiMutateOptions<T, V, R> {
   dataQueryPath: string;

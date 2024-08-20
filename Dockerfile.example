@@ -1,13 +1,13 @@
-FROM node:18-alpine
-
-ENV NODE_ENV=production
-
+FROM node:18-slim  as builder
+WORKDIR /app
 RUN npm install -g dashpress
 
+FROM node:18-slim
+ENV NODE_ENV=production
+COPY --from=builder /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=builder /usr/local/bin /usr/local/bin
 WORKDIR /app
-
 EXPOSE 3000
-
 CMD ["dashpress"]
 
 # Steps to use

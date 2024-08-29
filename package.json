@@ -69,7 +69,7 @@
     "fs-extra": "^10.1.0",
     "idb-keyval": "^6.2.1",
     "jsonwebtoken": "^9.0.2",
-    "knex": "^2.3.0",
+    "knex": "^2.5.1",
     "latest-version": "^7.0.0",
     "microseconds": "^0.2.0",
     "mustache": "^4.2.0",

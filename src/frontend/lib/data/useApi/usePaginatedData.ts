@@ -20,10 +20,9 @@ export function usePaginatedData<T extends Record<string, unknown>>(
 
   return useQuery<PaginatedData<T>>({
     queryKey: getPaginatedDataCachekey(endPoint, dataState),
-    queryFn: async ({ signal }) => {
+    queryFn: async () => {
       return await ApiRequest.GET(
         endPoint + tableDataParamsToQueryString(dataState),
-        signal,
         "Data could not be retrieved"
       );
     },

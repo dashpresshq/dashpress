@@ -38,17 +38,12 @@ const handleRequestError = async (response: Response, errorMessage: string) => {
   throw new ApiRequestError(response.status, error.message || errorMessage);
 };
 
-export async function makeRawRequest(
-  path: string,
-  signal?: AbortSignal,
-  errorMessage?: string
-) {
+export async function makeRawRequest(path: string, errorMessage?: string) {
   const response = await fetch(pathWithBaseUrl(path), {
     method: "GET",
     headers: {
       ...getRequestHeaders(),
     },
-    signal,
   });
 
   await handleRequestError(
@@ -91,8 +86,8 @@ const makeActionRequest = async (
 };
 
 export const ApiRequest = {
-  GET: async (path: string, signal: AbortSignal, errorMessage?: string) => {
-    const response = await makeRawRequest(path, signal, errorMessage);
+  GET: async (path: string, errorMessage?: string) => {
+    const response = await makeRawRequest(path, errorMessage);
     return response.json();
   },
   POST: (path: string, data: unknown) => makeActionRequest("POST", path, data),

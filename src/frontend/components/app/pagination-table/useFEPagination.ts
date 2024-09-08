@@ -22,12 +22,8 @@ export function useFEPagination<T>(
 ): UseQueryResult<PaginatedData<T>> {
   return useQuery<PaginatedData<T>>({
     queryKey: getQueryCachekey(endPoint),
-    queryFn: async ({ signal }) => {
-      return await ApiRequest.GET(
-        endPoint,
-        signal,
-        "Data could not be retrieved"
-      );
+    queryFn: async () => {
+      return await ApiRequest.GET(endPoint, "Data could not be retrieved");
     },
     select: (data: any) => {
       let returnData: T[] = data as unknown as T[];

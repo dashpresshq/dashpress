@@ -16,7 +16,7 @@ export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
   const { data = options.defaultData, ...rest } = useQuery<T>({
     enabled: router.isReady && builtOptions.enabled,
     queryKey: getQueryCachekey(endPoint),
-    queryFn: async ({ signal }) => {
+    queryFn: async () => {
       try {
         if (options.request) {
           return await ApiRequest.ACTION(
@@ -32,7 +32,6 @@ export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
         }
         return await ApiRequest.GET(
           endPoint,
-          signal,
           options.errorMessage ? _(options.errorMessage) : undefined
         );
       } catch (error) {

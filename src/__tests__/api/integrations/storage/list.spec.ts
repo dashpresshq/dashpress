@@ -55,6 +55,60 @@ describe("/api/integrations/storage/list", () => {
         },
         {
           "configurationSchema": {
+            "accessKey": {
+              "label": {
+                "id": "5k6ZTK",
+                "message": "Access Key",
+              },
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "endpoint": {
+              "label": {
+                "id": "FCKppt",
+                "message": "Endpoint",
+              },
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "port": {
+              "label": {
+                "id": "hZ6znB",
+                "message": "Port",
+              },
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "secretKey": {
+              "label": {
+                "id": "E7bgrN",
+                "message": "Secret Key",
+              },
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+          },
+          "key": "minio",
+          "title": "Minio",
+        },
+        {
+          "configurationSchema": {
             "apiKey": {
               "type": "text",
               "validations": [

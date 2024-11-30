@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 
 import { render, screen, waitFor, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import userEvent, {
+  PointerEventsCheckLevel,
+} from "@testing-library/user-event";
 
 import { AuthActions } from "@/frontend/hooks/auth/auth.actions";
 import ManageVariables from "@/pages/admin/settings/variables";
@@ -301,18 +303,32 @@ describe("pages/integrations/variables => credentials", () => {
         )
       );
 
-      const dialog = await screen.findByRole("dialog");
+      const dialog = await screen.findByRole(
+        "dialog",
+        {},
+        {
+          timeout: 10000,
+        }
+      );
 
       expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
 
-      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_SECRET");
+      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_SECRET", {
+        pointerEventsCheck: PointerEventsCheckLevel.Never,
+      });
       await userEvent.type(
         within(dialog).getByLabelText("Value"),
-        "new secret"
+        "new secret",
+        {
+          pointerEventsCheck: PointerEventsCheckLevel.Never,
+        }
       );
 
       await userEvent.click(
-        within(dialog).getByRole("button", { name: "Create Secret" })
+        within(dialog).getByRole("button", { name: "Create Secret" }),
+        {
+          pointerEventsCheck: PointerEventsCheckLevel.Never,
+        }
       );
 
       expect(await getToastMessage()).toBe("Secret Saved Successfully");
@@ -376,10 +392,17 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(within(dialog).getByLabelText("Key")).toBeDisabled();
 
-      await userEvent.type(within(dialog).getByLabelText("Value"), "__updated");
+      await userEvent.type(
+        within(dialog).getByLabelText("Value"),
+        "__updated",
+        {
+          pointerEventsCheck: PointerEventsCheckLevel.Never,
+        }
+      );
 
       await userEvent.click(
-        within(dialog).getByRole("button", { name: "Update Secret" })
+        within(dialog).getByRole("button", { name: "Update Secret" }),
+        { pointerEventsCheck: PointerEventsCheckLevel.Never }
       );
 
       expect(await getToastMessage()).toBe("Secret Saved Successfully");

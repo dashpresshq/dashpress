@@ -8,7 +8,7 @@ describe("/api/integrations/actions/[key]/index", () => {
     const currentStorageKeyValueStoreApiService =
       createKeyValueDomainPersistenceService<string>("current-storage");
 
-    currentStorageKeyValueStoreApiService.clearItem();
+    await currentStorageKeyValueStoreApiService.clearItem();
 
     await setupAllTestData(["users", "credentials"]);
   });

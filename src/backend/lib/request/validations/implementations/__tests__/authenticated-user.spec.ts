@@ -10,8 +10,8 @@ const handler = requestHandler({
 });
 
 describe("Request Validations => authenticatedUserValidationImpl", () => {
-  beforeAll(() => {
-    setupAllTestData(["users"]);
+  beforeAll(async () => {
+    await setupAllTestData(["users"]);
   });
 
   it("should return authenticated user", async () => {

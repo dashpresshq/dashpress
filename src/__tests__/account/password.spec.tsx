@@ -69,6 +69,8 @@ describe("pages/account/password", () => {
       "New Password"
     );
 
+    await closeAllToasts();
+
     await userEvent.click(
       screen.getByRole("button", { name: "Update Password" })
     );

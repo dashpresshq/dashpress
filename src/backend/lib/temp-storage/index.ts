@@ -30,7 +30,7 @@ export class TempStorageApiService {
       return null;
     }
     if (isBefore(new Date(data.expiryDate), new Date())) {
-      this.clearItem(key);
+      await this.clearItem(key);
       return null;
     }
     return JSON.parse(data.data) as T;

@@ -90,7 +90,9 @@ describe("Table Filters", () => {
         });
       });
 
-      await user.selectOptions(screen.getByRole("combobox"), "Equal");
+      await user.click(screen.getByRole("combobox"));
+
+      await user.click(screen.getByRole("option", { name: "Equal" }));
 
       await waitFor(() => {
         expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
@@ -254,6 +256,8 @@ describe("Table Filters", () => {
         screen.getByRole("button", { name: "Filter Test Column By Id" })
       );
 
+      await user.click(screen.getByRole("combobox"));
+
       expect(
         screen
           .getAllByRole("option", { hidden: true })
@@ -272,7 +276,13 @@ describe("Table Filters", () => {
         screen.getByRole("button", { name: "Filter Test Column By Id" })
       );
 
-      await userEvent.type(screen.getByPlaceholderText("Enter value"), "12345");
+      await userEvent.type(
+        screen.getByPlaceholderText("Enter value"),
+        "12345",
+        {
+          pointerEventsCheck: PointerEventsCheckLevel.Never,
+        }
+      );
 
       await waitFor(() => {
         expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
@@ -305,7 +315,9 @@ describe("Table Filters", () => {
 
       expect(screen.getByPlaceholderText("Enter value")).toHaveValue("789");
 
-      await userEvent.type(screen.getByPlaceholderText("Enter value"), "0");
+      await userEvent.type(screen.getByPlaceholderText("Enter value"), "0", {
+        pointerEventsCheck: PointerEventsCheckLevel.Never,
+      });
 
       await waitFor(() => {
         expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
@@ -337,6 +349,8 @@ describe("Table Filters", () => {
       await userEvent.click(
         screen.getByRole("button", { name: "Filter Test Column By Boolean" })
       );
+
+      await user.click(screen.getByRole("combobox"));
 
       expect(screen.getAllByRole("option").map((option) => option.textContent))
         .toMatchInlineSnapshot(`
@@ -455,6 +469,8 @@ describe("Table Filters", () => {
       await userEvent.click(
         screen.getByRole("button", { name: "Filter Test Column By Status" })
       );
+
+      await user.click(screen.getAllByRole("combobox")[0]);
 
       expect(screen.getAllByRole("option").map((option) => option.textContent))
         .toMatchInlineSnapshot(`

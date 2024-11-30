@@ -35,7 +35,7 @@ export const setupAllTestData = async (domains: DomainTypes[]) => {
     ...portalTestData,
   ];
 
-  createCacheService().purge();
+  await createCacheService().purge();
 
   await Promise.all(
     allTestData

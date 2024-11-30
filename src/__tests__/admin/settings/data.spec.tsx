@@ -46,11 +46,9 @@ describe("pages/admin/settings/data", () => {
       expect(await getToastMessage()).toBe(
         "Metadata Columns Saved Successfully"
       );
-
-      await closeAllToasts();
     });
 
-    it("should display updated date values", async () => {
+    it("should display updated metatacolumns values", async () => {
       render(
         <TestProviders>
           <GeneralDataSettings />
@@ -85,6 +83,8 @@ describe("pages/admin/settings/data", () => {
           <GeneralDataSettings />
         </TestProviders>
       );
+
+      await closeAllToasts();
 
       await userEvent.clear(screen.getByLabelText("Format"));
 
@@ -127,6 +127,8 @@ describe("pages/admin/settings/data", () => {
         expect(await getToastMessage()).toBe(
           `Invalid Date FormatPlease go to https://date-fns.org/docs/format to see valid formats`
         );
+
+        await closeAllToasts();
       });
 
       it("should show date format", async () => {

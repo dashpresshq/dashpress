@@ -38,9 +38,7 @@ for (const fileName of files) {
 }
 
 if (errors.length > 0) {
-  console.error(`${errors.length} files not placed in the correct folders`);
-
   console.error(errors.join(","));
 
-  process.exit(1);
+  throw new Error(`${errors.length} files not placed in the correct folders`);
 }

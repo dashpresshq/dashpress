@@ -11,7 +11,7 @@ describe("/api/integrations/storage/[key]/credentials", () => {
     const currentStorageKeyValueStoreApiService =
       createKeyValueDomainPersistenceService<string>("current-storage");
 
-    currentStorageKeyValueStoreApiService.persistItem("s3");
+    await currentStorageKeyValueStoreApiService.persistItem("s3");
 
     await setupAllTestData(["users"]);
     await setupCredentialsTestData({

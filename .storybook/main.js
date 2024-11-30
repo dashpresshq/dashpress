@@ -4,7 +4,7 @@ module.exports = {
   // stories: ['../**/*.stories.@(ts|tsx|js|jsx)'],
   addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration,
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     const assetRule = config.module.rules.find(({ test }) => test.test(".svg"));
     // exclude svg from the default storybook file-loader
     assetRule.exclude = /\.svg$/;

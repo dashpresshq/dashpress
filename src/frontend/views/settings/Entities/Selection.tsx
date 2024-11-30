@@ -58,8 +58,8 @@ export function EntitiesSelection({
           ? {
               orderList: sort.order,
               key: "name",
-              on: (newOrder) => {
-                sort.save(newOrder);
+              on: async (newOrder) => {
+                await sort.save(newOrder);
               },
             }
           : undefined

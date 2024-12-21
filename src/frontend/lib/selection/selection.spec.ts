@@ -3,13 +3,13 @@ import { renderHook } from "@/tests/lib/renderHook";
 import { useStringSelections } from ".";
 
 describe("useStringSelections", () => {
-  it("should default to empty array", async () => {
+  it("should default to empty array", () => {
     const { result } = renderHook(() => useStringSelections(""));
     expect(result.current.allSelections).toEqual([]);
   });
 
   describe("single page", () => {
-    it("should select multiple", async () => {
+    it("should select multiple", () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.selectMutiple(["foo", "bar"]);
@@ -30,7 +30,7 @@ describe("useStringSelections", () => {
       ]);
     });
 
-    it("should set multiple", async () => {
+    it("should set multiple", () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.setMultiple(["foo", "bar"]);
@@ -46,7 +46,7 @@ describe("useStringSelections", () => {
       expect(result.current.allSelections).toEqual(["baz", "quz", "foo"]);
     });
 
-    it("should deSelectMutiple multiple", async () => {
+    it("should deSelectMutiple multiple", () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.selectMutiple(["foo", "bar", "baz", "quz"]);
@@ -68,7 +68,7 @@ describe("useStringSelections", () => {
       expect(result.current.allSelections).toEqual([]);
     });
 
-    it("should select toogle selections", async () => {
+    it("should select toogle selections", () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.toggleSelection("foo");
@@ -86,7 +86,7 @@ describe("useStringSelections", () => {
       expect(result.current.allSelections).toEqual(["foo"]);
     });
 
-    it("should return correct values for isSelected", async () => {
+    it("should return correct values for isSelected", () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.selectMutiple(["foo", "bar"]);
@@ -99,7 +99,7 @@ describe("useStringSelections", () => {
       expect(result.current.isSelected("baz")).toEqual(false);
     });
 
-    it("should clear all", async () => {
+    it("should clear all", () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.selectMutiple(["foo", "bar"]);

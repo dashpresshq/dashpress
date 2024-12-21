@@ -1,7 +1,7 @@
 import { compileTemplateString } from "../templates";
 
 describe("Template service", () => {
-  it("should compiles templates successfully", async () => {
+  it("should compiles templates successfully", () => {
     expect(
       compileTemplateString("{{ name }} is {{ age }}", {
         name: "John",
@@ -16,7 +16,7 @@ describe("Template service", () => {
     ).toEqual("{ name } is 23");
   });
 
-  it("should returns empty string for undefined template", async () => {
+  it("should returns empty string for undefined template", () => {
     expect(
       compileTemplateString("{ name } is {{ age }}", {
         name: "John",
@@ -24,7 +24,7 @@ describe("Template service", () => {
     ).toEqual("{ name } is ");
   });
 
-  it("should compile objects", async () => {
+  it("should compile objects", () => {
     expect(
       compileTemplateString("{{ person.name }}", {
         person: { name: "John" },
@@ -32,7 +32,7 @@ describe("Template service", () => {
     ).toEqual("John");
   });
 
-  it("should return error message", async () => {
+  it("should return error message", () => {
     expect(
       compileTemplateString(undefined, {
         person: { name: "John" },

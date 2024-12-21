@@ -26,7 +26,7 @@ export async function getServerSideProps(
 
 function useLinguiInit(messages: Messages) {
   const router = useRouter();
-  const locale = router.locale || router.defaultLocale!;
+  const locale = router.locale || router.defaultLocale;
   const isClient = typeof window !== "undefined";
 
   if (!isClient && locale !== i18n.locale) {

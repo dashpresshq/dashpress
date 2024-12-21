@@ -43,7 +43,7 @@ export function StorageCredentialsSettings() {
 
   useToastActionQueryError(storageCredentialsConfiguration.error);
 
-  const storageFormConfig: ISchemaFormConfig<{}> = {
+  const storageFormConfig: ISchemaFormConfig<Record<string, unknown>> = {
     label: msg`Storage Key`,
     type: "text",
     selections: storageList.data.map((datum) => ({

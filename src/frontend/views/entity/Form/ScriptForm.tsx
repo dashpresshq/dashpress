@@ -56,7 +56,7 @@ export function ScriptForm({
         onSubmit={async (data) => {
           try {
             const jsString = data[`${BASE_SUFFIX}${field}`] as string;
-            const context: ISchemaFormScriptProps<{}> = {
+            const context: ISchemaFormScriptProps<Record<string, unknown>> = {
               ...evaluateScriptContext,
               action: "test",
               formValues: {},
